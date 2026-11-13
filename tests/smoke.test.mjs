@@ -132,12 +132,12 @@ test("atlante amministrativo con 110 province ISTAT", () => {
   assert.match(script, /toggleMapLayer\(event.currentTarget,"provinces"\)/);
 });
 
-test("110 province giocabili e migrazione dei vecchi salvataggi e migrazione dei vecchi salvataggi", () => {
+test("110 province giocabili e migrazione dei vecchi salvataggi", () => {
   assert.match(html, /110 PROVINCE/);
   assert.equal((html.match(/class="region-outline"/g) || []).length, 20);
   assert.match(script, /data\.regions\.length===12\?legacyRegionNames/);
   assert.match(script, /savedByName\.get\(base\.name\)/);
-  assert.match(script, /armyLocation=armyName\?regions\.findIndex/);
+  assert.match(script, /armyLocation=armyIndex/);
 });
 
 test("WAR ITALY 4.0 usa province reali, confini regionali e migrazione 3.x", () => {
