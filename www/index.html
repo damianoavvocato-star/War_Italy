@@ -1,92 +1,64 @@
 <!doctype html>
-<html lang="it">
-<head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#081629"><title>WAR ITALY</title>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#081629"><title>WAR ITALY · 2035</title>
 <style>
-:root{color-scheme:dark;--navy:#081629;--panel:#10243d;--gold:#d4af37;--muted:#9fb0c5;--green:#3cbd8a}
-*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0%,#18395a 0%,var(--navy) 58%);color:#f4f7fb;font-family:Arial,Helvetica,sans-serif;min-height:100vh}
-.shell{max-width:760px;margin:auto;padding:env(safe-area-inset-top) 18px calc(28px + env(safe-area-inset-bottom))}
-header{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid #29415d}
-.brand{font-weight:900;letter-spacing:3px;color:var(--gold);font-size:18px}.status{font-size:11px;color:var(--green);letter-spacing:1px}
-.hero{text-align:center;padding:42px 8px 24px}.eyebrow{color:var(--gold);letter-spacing:4px;font-size:11px;font-weight:bold}
-h1{font-size:clamp(38px,11vw,64px);line-height:.95;margin:15px 0 12px;letter-spacing:2px}.subtitle{color:#c1cedc;font-size:13px;letter-spacing:2px}
-.map{height:170px;margin:18px 0 24px;border:1px solid #38516b;border-radius:18px;position:relative;overflow:hidden;background:linear-gradient(145deg,#102d45,#0b1c30)}
-.map:before{content:"";position:absolute;inset:-30px;background:repeating-linear-gradient(25deg,transparent 0 27px,#42617a22 28px 29px),repeating-linear-gradient(115deg,transparent 0 42px,#42617a22 43px 44px)}
-.italy{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-18deg);font-size:104px;opacity:.8;filter:drop-shadow(0 0 16px #d4af3766)}
-.maplabel{position:absolute;bottom:13px;left:15px;font-size:10px;color:#c5d2df;letter-spacing:2px}
-.panel{background:linear-gradient(145deg,#122a45,#0c1e33);border:1px solid #2b4561;border-radius:16px;padding:18px;margin:14px 0}
-.panel h2{font-size:14px;letter-spacing:1.5px;margin:0 0 14px;color:var(--gold)}
-button{width:100%;border:0;border-radius:12px;padding:15px;background:linear-gradient(100deg,#d4af37,#f0d77b);color:#172235;font-size:13px;font-weight:900;letter-spacing:1.2px;margin-top:12px;cursor:pointer}
-button:active{transform:scale(.99)}button.secondary{background:#152d47;color:#dce7f2;border:1px solid #3a5571}
-.note{font-size:11px;line-height:1.5;color:var(--muted);text-align:center;margin:17px 8px}
-footer{text-align:center;color:#60758d;font-size:10px;letter-spacing:2px;padding:18px}
-.screen[hidden]{display:none!important}.screen-title{text-align:center;padding:28px 5px 16px}.screen-title h2{font-size:24px;letter-spacing:2px;margin:8px 0;color:#fff}.screen-title p{font-size:12px;color:var(--muted);line-height:1.5}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.card{border:1px solid #29435e;border-radius:13px;padding:14px 12px;background:linear-gradient(145deg,#10243b,#0a1b2e);text-align:left;min-height:130px;cursor:pointer}
-.card.selected{border:2px solid var(--gold);box-shadow:0 0 18px #d4af3730;background:linear-gradient(145deg,#26364a,#10243b)}
-.symbol{font-size:25px;margin-bottom:8px}.card strong{display:block;font-size:13px;line-height:1.3;margin-bottom:6px}.card small{color:var(--muted);font-size:10px;line-height:1.4}
-.detail{border:1px solid #49617b;border-radius:13px;padding:16px;margin-top:14px;background:#0a1b2d}
-.detail h3{color:var(--gold);margin:0 0 8px;font-size:17px}.detail p{color:#c5d2df;font-size:12px;line-height:1.5;margin:7px 0}
-.tag{display:inline-block;border:1px solid #536b82;border-radius:20px;padding:5px 9px;margin:4px 4px 0 0;color:#dce7f2;font-size:10px}
-.actions{display:flex;gap:9px}.actions button{flex:1}.muted{color:var(--muted)}
-@media(max-width:390px){.grid{grid-template-columns:1fr}.card{min-height:unset}.actions{flex-direction:column}}
-</style></head>
-<body><main class="shell">
-<header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE</div></header>
-<section id="home" class="screen">
-<div class="hero"><div class="eyebrow">ITALIA · 2035</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div>
-<div class="map" aria-label="Mappa strategica stilizzata dell'Italia"><div class="italy">🇮🇹</div><div class="maplabel">TEATRO OPERATIVO NAZIONALE</div></div>
-<section class="panel"><h2>QUATTRO FAZIONI · UN SOLO DESTINO</h2><p class="muted" style="font-size:12px;line-height:1.5">Scegli il tuo schieramento e guida l'Italia verso il 2035.</p><button id="start">AVVIA CAMPAGNA</button></section>
-<p class="note">ANTEPRIMA ANDROID · BUILD 0.2.0<br>Selezione fazione interattiva. Le successive funzioni strategiche saranno aggiunte progressivamente.</p>
-</section>
-<section id="selection" class="screen" hidden>
-<div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p>Quattro poteri si contendono il futuro della penisola.<br>Seleziona una fazione per consultarne identità e punti di forza.</p></div>
-<div class="grid" id="factionGrid">
+:root{color-scheme:dark;--bg:#081629;--panel:#10243d;--gold:#d4af37;--muted:#9fb0c5;--line:#29435e;--green:#49c99a;--red:#e17b7b}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% 0%,#18395a 0%,var(--bg) 60%);color:#f4f7fb;font-family:Arial,Helvetica,sans-serif;min-height:100vh}.shell{max-width:820px;margin:auto;padding:env(safe-area-inset-top) 14px calc(24px + env(safe-area-inset-bottom))}header{display:flex;justify-content:space-between;align-items:center;padding:17px 3px;border-bottom:1px solid var(--line)}.brand{font-weight:900;letter-spacing:3px;color:var(--gold)}.status{font-size:10px;color:var(--green);letter-spacing:1px}.screen[hidden]{display:none!important}.hero,.screen-title{text-align:center;padding:34px 8px 18px}.eyebrow{color:var(--gold);letter-spacing:3px;font-size:10px;font-weight:bold}h1{font-size:clamp(38px,11vw,62px);line-height:.98;margin:14px 0}.subtitle{color:#c1cedc;font-size:11px;letter-spacing:1.5px}.panel{background:linear-gradient(145deg,#122a45,#0c1e33);border:1px solid var(--line);border-radius:15px;padding:15px;margin:12px 0}.panel h2{font-size:13px;letter-spacing:1.2px;margin:0 0 11px;color:var(--gold)}p{line-height:1.5}.muted,.note{color:var(--muted);font-size:11px;line-height:1.5}button{border:0;border-radius:11px;padding:14px;background:linear-gradient(100deg,#d4af37,#f0d77b);color:#172235;font-size:12px;font-weight:900;letter-spacing:1px;cursor:pointer}button:disabled{opacity:.4;cursor:not-allowed}.wide{width:100%;margin-top:10px}.secondary{background:#152d47;color:#dce7f2;border:1px solid #3a5571}.actions{display:flex;gap:8px}.actions>*{flex:1}.grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}.card{border:1px solid var(--line);border-radius:12px;padding:12px;background:#0c1e33;text-align:left;min-height:100px;color:#f4f7fb}.card.selected{border:2px solid var(--gold);background:#24364b}.card strong{display:block;font-size:12px;margin:6px 0}.card small{font-size:10px;color:var(--muted)}.symbol{font-size:22px}.detail{background:#0a1b2d;border:1px solid #49617b;border-radius:12px;padding:14px;margin-top:12px}.detail h3{margin:0 0 8px;color:var(--gold)}.tag{display:inline-block;border:1px solid #536b82;border-radius:20px;padding:4px 8px;margin:3px;color:#dce7f2;font-size:9px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin:12px 0}.stat{background:#10243b;border:1px solid var(--line);border-radius:10px;padding:9px 5px;text-align:center}.stat b{display:block;color:var(--gold);font-size:16px}.stat span{font-size:9px;color:var(--muted)}.topline{display:flex;justify-content:space-between;align-items:center;gap:8px}.topline h2{margin:0}.turn{font-size:10px;color:var(--green);font-weight:bold}.region-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.region{min-height:74px;padding:8px 5px;text-align:center;background:#10243b;border:1px solid var(--line);border-radius:9px;color:#eef4fa}.region.selected{border:2px solid var(--gold)}.region .rname{display:block;font-size:10px;font-weight:bold}.region small{font-size:9px;color:var(--muted)}.region.owned{background:#173b3a;border-color:#397e70}.region.enemy{background:#402b35;border-color:#85505c}.region.neutral{background:#182a3e}.maplegend{display:flex;gap:12px;flex-wrap:wrap;font-size:9px;color:var(--muted);margin-top:9px}.dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:4px}.actions-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.actions-grid button{font-size:10px;padding:12px 5px}.log{max-height:120px;overflow:auto;font-size:10px;line-height:1.5;color:#bdcbd9}.log div{border-bottom:1px solid #233a52;padding:5px 0}.unitrow{display:flex;justify-content:space-between;font-size:11px;padding:7px 0;border-bottom:1px solid #233a52}.footer{text-align:center;color:#60758d;font-size:9px;letter-spacing:2px;padding:18px}
+@media(max-width:390px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.region-grid{grid-template-columns:repeat(2,1fr)}.actions{flex-direction:column}}
+</style></head><body><main class="shell">
+<header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE · 2035</div></header>
+<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 0.3.0</p></section>
+<section id="selection" class="screen" hidden><div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p class="muted">Ogni schieramento offre un diverso stile strategico.</p></div><div class="grid" id="factionGrid">
 <button class="card" data-faction="italia"><div class="symbol">🇮🇹</div><strong>Repubblica Italiana</strong><small>Equilibrio · Tecnologia · Diplomazia</small></button>
-<button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Presenza marittima · Mobilità</small></button>
-<button class="card" data-faction="aquila"><div class="symbol">🦅</div><strong>Corporazione Aquila</strong><small>Industria · Robotica · Cyberwarfare</small></button>
-<button class="card" data-faction="alpina"><div class="symbol">🏔️</div><strong>Alleanza Alpina</strong><small>Difesa · Corazzati · Terreno montano</small></button>
-</div>
-<div class="detail" id="factionDetail" aria-live="polite"><h3>Seleziona una fazione</h3><p>La scheda della fazione, i suoi bonus e il livello di difficoltà appariranno qui.</p></div>
-<div class="actions"><button class="secondary" id="backHome">INDIETRO</button><button id="confirm" disabled style="opacity:.45">CONFERMA FAZIONE</button></div>
-<p class="note">La selezione viene mantenuta durante questa sessione. La campagna completa è ancora in sviluppo.</p>
-</section>
-<section id="briefing" class="screen" hidden>
-<div class="screen-title"><div class="eyebrow">DOSSIER STRATEGICO · 2035</div><h2 id="briefingTitle">FAZIONE SELEZIONATA</h2><p>Comando assegnato. Il prossimo passo sarà integrare la mappa operativa e la gestione del primo turno.</p></div>
-<div class="panel"><h2>ORDINE DI MISSIONE</h2><p id="briefingText" style="font-size:13px;line-height:1.6;color:#d5e0eb"></p><div class="tag">ITALIA · 2035</div><div class="tag">CAMPAGNA NAZIONALE</div></div>
-<button id="restart">TORNA ALLA SELEZIONE FAZIONE</button>
-<p class="note">Questa schermata conferma la scelta. Mappa giocabile, economia, diplomazia e combattimenti non sono ancora implementati in questa build.</p>
-</section>
-<footer>WAR ITALY © 2035 · BUILD 0.2.0</footer>
-</main>
+<button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Mobilità · Coste</small></button>
+<button class="card" data-faction="aquila"><div class="symbol">🦅</div><strong>Corporazione Aquila</strong><small>Industria · Robotica · Cyber</small></button>
+<button class="card" data-faction="alpina"><div class="symbol">🏔️</div><strong>Alleanza Alpina</strong><small>Difesa · Corazzati · Montagne</small></button></div><div class="detail" id="factionDetail"><h3>Seleziona una fazione</h3><p class="muted">Consulta i bonus prima di confermare.</p></div><div class="actions"><button class="secondary" id="backHome">INDIETRO</button><button id="confirm" disabled>CONFERMA FAZIONE</button></div></section>
+<section id="briefing" class="screen" hidden><div class="screen-title"><div class="eyebrow">DOSSIER STRATEGICO</div><h2 id="briefingTitle">ORDINE DI MISSIONE</h2><p id="briefingText" class="muted"></p></div><div class="panel"><h2>OBIETTIVO INIZIALE</h2><p class="muted">Metti in sicurezza il territorio di partenza, sviluppa l'economia e amplia la tua influenza. Ogni turno produce entrate e può modificare gli equilibri nazionali.</p><div class="tag">12 MACRO-REGIONI</div><div class="tag">ECONOMIA E PRODUZIONE</div><div class="tag">GESTIONE TURNI</div></div><button class="wide" id="enterGame">ENTRA NEL TEATRO OPERATIVO</button></section>
+<section id="game" class="screen" hidden>
+<div class="topline" style="padding:18px 2px 4px"><div><div class="eyebrow">COMANDO STRATEGICO</div><strong id="playerFaction">FAZIONE</strong></div><div class="turn" id="turnLabel">TURNO 1</div></div>
+<div class="stats"><div class="stat"><b id="euros">8.000</b><span>€ EURO</span></div><div class="stat"><b id="energy">100</b><span>ENERGIA</span></div><div class="stat"><b id="materials">80</b><span>MATERIALI</span></div><div class="stat"><b id="morale">65</b><span>CONSENSO</span></div></div>
+<div class="panel"><div class="topline"><h2>MAPPA STRATEGICA · ITALIA</h2><span class="turn" id="controlCount">1/12 REGIONI</span></div><p class="muted" style="margin:8px 0">Seleziona una macro-regione per consultarne lo stato e le azioni disponibili.</p><div class="region-grid" id="regionGrid"></div><div class="maplegend"><span><i class="dot" style="background:#49c99a"></i>Sotto il tuo controllo</span><span><i class="dot" style="background:#d4af37"></i>Neutrale</span><span><i class="dot" style="background:#e17b7b"></i>Contesa</span></div></div>
+<div class="panel" id="regionPanel"><h2>RAPPORTO TERRITORIALE</h2><p class="muted">Seleziona una regione sulla mappa.</p></div>
+<div class="panel"><h2>GESTIONE NAZIONALE</h2><div class="actions-grid"><button id="build">COSTRUISCI CENTRALE<br>−1.200€ · −15 MAT.</button><button id="recruit">RECLUTA FANTERIA<br>−500€ · −5 MAT.</button><button id="stabilize" class="secondary">PROGRAMMA SOCIALE<br>−500€ · +8 CONSENSO</button><button id="endTurn" class="secondary">CONCLUDI TURNO →</button></div><p class="note">Le azioni aggiornano risorse, produzione e controllo territoriale. I costi vengono verificati prima di ogni operazione.</p></div>
+<div class="panel"><h2>FORZE DISPONIBILI</h2><div id="units"><div class="unitrow"><span>Fanteria</span><b>0</b></div></div></div>
+<div class="panel"><h2>REGISTRO OPERATIVO</h2><div class="log" id="log" aria-live="polite"></div></div>
+<button class="wide secondary" id="quit">TORNA AL MENU</button>
+</section><div class="footer">WAR ITALY © 2035 · BUILD 0.3.0</div></main>
 <script>
-(function(){
-const factions={
-italia:{name:"Repubblica Italiana",symbol:"🇮🇹",summary:"Difendi le istituzioni e ricostruisci la stabilità nazionale.",bonus:"Forza equilibrata, diplomazia e accesso a tecnologie avanzate.",difficulty:"Media",tags:["Difesa nazionale","Diplomazia","Tecnologia"]},
-legione:{name:"Legione Mediterranea",symbol:"⚓",summary:"Estendi la tua influenza e controlla le rotte del Mediterraneo.",bonus:"Mobilità navale, operazioni costiere e presenza marittima.",difficulty:"Medio-alta",tags:["Potenza navale","Mobilità","Controllo costiero"]},
-aquila:{name:"Corporazione Aquila",symbol:"🦅",summary:"Trasforma industria e innovazione nel fulcro del tuo potere.",bonus:"Produzione industriale, robotica e capacità cyber.",difficulty:"Alta",tags:["Industria","Robotica","Cyberwarfare"]},
-alpina:{name:"Alleanza Alpina",symbol:"🏔️",summary:"Rendi le montagne una fortezza e proteggi il Nord.",bonus:"Difesa territoriale, unità corazzate e vantaggi sui terreni montani.",difficulty:"Media",tags:["Fortificazioni","Corazzati","Difesa montana"]}
-};
-let selected=null;
-const $=id=>document.getElementById(id);
-function show(id){["home","selection","briefing"].forEach(x=>$(x).hidden=x!==id);window.scrollTo(0,0)}
-$("start").addEventListener("click",()=>show("selection"));
-$("backHome").addEventListener("click",()=>show("home"));
-$("restart").addEventListener("click",()=>show("selection"));
-document.querySelectorAll(".card").forEach(card=>card.addEventListener("click",()=>{
-selected=card.dataset.faction;
-document.querySelectorAll(".card").forEach(c=>c.classList.toggle("selected",c===card));
-const f=factions[selected];
-$("factionDetail").innerHTML="<h3>"+f.symbol+" "+f.name+"</h3><p>"+f.summary+"</p><p><strong>Punti di forza:</strong> "+f.bonus+"</p><p><strong>Difficoltà:</strong> "+f.difficulty+"</p>"+f.tags.map(t=>'<span class="tag">'+t+'</span>').join("");
-$("confirm").disabled=false;$("confirm").style.opacity="1";
-}));
-$("confirm").addEventListener("click",()=>{
-if(!selected)return;
-const f=factions[selected];
-$("briefingTitle").textContent=f.name.toUpperCase();
-$("briefingText").textContent=f.summary+" "+f.bonus+" La tua fazione è stata selezionata per la campagna Italia 2035.";
-show("briefing");
-});
+(()=>{const $=id=>document.getElementById(id);const factionData={
+italia:{name:"Repubblica Italiana",icon:"🇮🇹",desc:"Difendi le istituzioni e ricostruisci la stabilità nazionale.",bonus:"Equilibrio economico e diplomazia: +10 consenso iniziale.",difficulty:"Media",start:"Lazio"},
+legione:{name:"Legione Mediterranea",icon:"⚓",desc:"Estendi la tua influenza e controlla le rotte del Mediterraneo.",bonus:"Proiezione marittima: +20 energia iniziale.",difficulty:"Medio-alta",start:"Sicilia"},
+aquila:{name:"Corporazione Aquila",icon:"🦅",desc:"Trasforma industria e innovazione nel fulcro del tuo potere.",bonus:"Rete industriale: +20 materiali iniziali.",difficulty:"Alta",start:"Lombardia"},
+alpina:{name:"Alleanza Alpina",icon:"🏔️",desc:"Rendi le montagne una fortezza e proteggi il Nord.",bonus:"Difesa territoriale: +10 materiali e +10 consenso.",difficulty:"Media",start:"Trentino-Alto Adige"}};
+const regions=[
+{name:"Valle d'Aosta",area:"Nord",bonus:"Difesa alpina",income:180,owner:"neutral"},
+{name:"Piemonte",area:"Nord",bonus:"Industria",income:260,owner:"neutral"},
+{name:"Liguria",area:"Nord",bonus:"Porti",income:220,owner:"neutral"},
+{name:"Lombardia",area:"Nord",bonus:"Finanza e industria",income:420,owner:"neutral"},
+{name:"Trentino-Alto Adige",area:"Nord",bonus:"Energia alpina",income:240,owner:"neutral"},
+{name:"Veneto",area:"Nord",bonus:"Logistica",income:320,owner:"neutral"},
+{name:"Emilia-Romagna",area:"Centro",bonus:"Produzione",income:300,owner:"neutral"},
+{name:"Toscana",area:"Centro",bonus:"Ricerca",income:260,owner:"neutral"},
+{name:"Lazio",area:"Centro",bonus:"Istituzioni",income:380,owner:"neutral"},
+{name:"Campania",area:"Sud",bonus:"Cantieristica",income:260,owner:"neutral"},
+{name:"Puglia",area:"Sud",bonus:"Energia",income:230,owner:"neutral"},
+{name:"Sicilia",area:"Isole",bonus:"Rotte mediterranee",income:250,owner:"neutral"}];
+let selected=null,player=null,turn=1,res={euros:8000,energy:100,materials:80,morale:65},units=0,buildings=0,selectedRegion=null,started=false;
+function show(id){["home","selection","briefing","game"].forEach(x=>$(x).hidden=x!==id);window.scrollTo(0,0)}
+function log(msg){const el=$("log"),d=document.createElement("div");d.textContent="T"+turn+" · "+msg;el.prepend(d)}
+function fmt(n){return Math.floor(n).toLocaleString("it-IT")}
+function render(){ $("euros").textContent=fmt(res.euros);$("energy").textContent=fmt(res.energy);$("materials").textContent=fmt(res.materials);$("morale").textContent=fmt(res.morale);$("turnLabel").textContent="TURNO "+turn;$("controlCount").textContent=regions.filter(r=>r.owner==="player").length+"/12 REGIONI";$("playerFaction").textContent=factionData[player].icon+" "+factionData[player].name;
+const grid=$("regionGrid");grid.innerHTML="";regions.forEach((r,i)=>{const b=document.createElement("button");b.className="region "+r.owner+(selectedRegion===i?" selected":"");b.innerHTML='<span class="rname">'+r.name+'</span><small>'+r.area+'</small>';b.addEventListener("click",()=>{selectedRegion=i;render();});grid.appendChild(b)});
+$("units").innerHTML='<div class="unitrow"><span>Fanteria</span><b>'+units+'</b></div><div class="unitrow"><span>Unità di presidio</span><b>'+regions.filter(r=>r.owner==="player").length+'</b></div><div class="unitrow"><span>Infrastrutture energetiche</span><b>'+buildings+'</b></div>';
+const rp=$("regionPanel");if(selectedRegion===null){rp.innerHTML="<h2>RAPPORTO TERRITORIALE</h2><p class='muted'>Seleziona una regione sulla mappa.</p>"}else{const r=regions[selectedRegion],own=r.owner==="player",neutral=r.owner==="neutral";rp.innerHTML='<h2>'+r.name.toUpperCase()+' · '+r.area.toUpperCase()+'</h2><p class="muted">Bonus regionale: '+r.bonus+'. Entrate base: '+r.income+'€ per turno.</p><p><b>Stato:</b> '+(own?"Sotto il tuo controllo":neutral?"Neutrale":"Contesa")+'</p><button class="wide" id="claim" '+(!neutral||res.euros<900||units<1?"disabled":"")+'>'+(own?"REGIONE GIÀ CONTROLLATA":neutral?"STABILISCI PRESENZA · 900€ · 1 FANTERIA":"NON DISPONIBILE")+'</button>';const c=$("claim");if(c)c.addEventListener("click",claimRegion)}}
+function claimRegion(){const r=regions[selectedRegion];if(!r||r.owner!=="neutral"||res.euros<900||units<1)return;res.euros-=900;units--;r.owner="player";res.morale=Math.min(100,res.morale+2);log("Presenza consolidata in "+r.name+".");render()}
+function can(e,m){if(res.euros<e||res.materials<m){log("Risorse insufficienti per completare l'azione.");return false}return true}
+$("start").onclick=()=>show("selection");$("backHome").onclick=()=>show("home");$("quit").onclick=()=>show("home");
+document.querySelectorAll("[data-faction]").forEach(b=>b.onclick=()=>{selected=b.dataset.faction;document.querySelectorAll("[data-faction]").forEach(x=>x.classList.toggle("selected",x===b));const f=factionData[selected];$("factionDetail").innerHTML='<h3>'+f.icon+' '+f.name+'</h3><p>'+f.desc+'</p><p><b>Punto di forza:</b> '+f.bonus+'</p><p><b>Difficoltà:</b> '+f.difficulty+'</p>'; $("confirm").disabled=false});
+$("confirm").onclick=()=>{if(!selected)return;player=selected;const f=factionData[player];$("briefingTitle").textContent=f.name.toUpperCase();$("briefingText").textContent=f.desc+" "+f.bonus+" Punto di partenza: "+f.start+".";show("briefing")};
+$("enterGame").onclick=()=>{if(started){show("game");return}started=true;const f=factionData[player];regions.find(r=>r.name===f.start).owner="player";if(player==="italia")res.morale+=10;if(player==="legione")res.energy+=20;if(player==="aquila")res.materials+=20;if(player==="alpina"){res.materials+=10;res.morale+=10}units=2;selectedRegion=regions.findIndex(r=>r.name===f.start);log("Campagna avviata. Comando assegnato a "+f.name+".");log("Presidio iniziale: "+f.start+".");render();show("game")};
+$("build").onclick=()=>{if(!can(1200,15))return;res.euros-=1200;res.materials-=15;buildings++;res.energy+=15;log("Centrale energetica completata: +15 energia.");render()};
+$("recruit").onclick=()=>{if(!can(500,5))return;res.euros-=500;res.materials-=5;units++;log("Reclutata una nuova unità di fanteria.");render()};
+$("stabilize").onclick=()=>{if(res.euros<500){log("Euro insufficienti per il programma sociale.");return}if(res.morale>=100){log("Consenso già al massimo.");return}res.euros-=500;res.morale=Math.min(100,res.morale+8);log("Programma sociale: consenso aumentato.");render()};
+$("endTurn").onclick=()=>{turn++;const controlled=regions.filter(r=>r.owner==="player");const income=controlled.reduce((s,r)=>s+r.income,0);res.euros+=income;res.energy+=buildings*5+controlled.length*2;res.materials+=Math.max(2,Math.floor(controlled.length*1.5));if(res.morale<35){res.euros=Math.max(0,res.euros-150);log("Instabilità: entrate ridotte.");}log("Fine turno. Entrate: +"+fmt(income)+"€. Produzione aggiornata.");render()};
 })();
 </script></body></html>
