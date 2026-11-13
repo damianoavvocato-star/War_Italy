@@ -75,12 +75,12 @@ test("versione 4.1.0 coerente tra app e pacchetto", () => {
 
 test("logistica con carburante, munizioni, consumo, rifornimento e migrazione salvataggi", () => {
   for (const id of ["fuel", "ammo", "refuel", "supplyStatus"]) assert.match(html, new RegExp('id="' + id + '"'));
-  assert.match(script, /function processLogistics\\(\\)/);
-  assert.match(script, /fuelUse=units\\+commandos/);
-  assert.match(script, /ammoUse=units\\*2/);
+  assert.match(script, /function processLogistics\(\)/);
+  assert.match(script, /fuelUse=units\+commandos/);
+  assert.match(script, /ammoUse=units\*2/);
   assert.match(script, /supplyFuel,supplyAmmo/);
-  assert.match(script, /res=\\{euros:0,energy:0,materials:0,morale:0,fuel:140,ammo:120/);
-  assert.match(script, /processLogistics\\(\\)/);
+  assert.match(script, /res=\{euros:0,energy:0,materials:0,morale:0,fuel:140,ammo:120/);
+  assert.match(script, /processLogistics\(\)/);
 });
 
 test("nomi delle 110 province attivabili con zoom cartografico", () => {
