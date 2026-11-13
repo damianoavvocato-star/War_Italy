@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: war-italy-android-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build-android:
     name: Build debug APK
