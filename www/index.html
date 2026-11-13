@@ -6,7 +6,7 @@
 @media(max-width:390px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.region-grid{grid-template-columns:repeat(2,1fr)}.actions{flex-direction:column}}
 body.large-text{font-size:18px}body.large-text .muted,body.large-text .note{font-size:13px}body.high-contrast{--line:#7894b2;--muted:#d4dfeb}body.high-contrast .panel{background:#102b49;border-color:#7894b2}body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.home-tools{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.tutorial-backdrop{position:fixed;inset:0;z-index:20;background:#020914dd;display:flex;align-items:center;justify-content:center;padding:18px}.tutorial-backdrop[hidden]{display:none!important}.tutorial-card{width:min(100%,520px);background:linear-gradient(145deg,#173451,#0b1c30);border:1px solid var(--gold);border-radius:16px;padding:20px;box-shadow:0 18px 60px #000b}.tutorial-card h2{color:var(--gold);font-size:16px}.tutorial-card p{color:#d6e0eb;line-height:1.6;font-size:14px}.tutorial-count{font-size:10px;color:var(--muted);letter-spacing:1px}.settings-option{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px}.settings-option button{min-width:92px;padding:9px}.home-tools button{font-size:10px;padding:12px 5px}@media(max-width:390px){.home-tools{grid-template-columns:1fr}}\n</style></head><body><main class="shell">
 <header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE · 2035</div></header>
-<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 2.1.0</p></section>
+<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 2.2.0</p></section>
 <section id="selection" class="screen" hidden><div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p class="muted">Ogni schieramento offre un diverso stile strategico.</p></div><div class="grid" id="factionGrid">
 <button class="card" data-faction="italia"><div class="symbol">🇮🇹</div><strong>Repubblica Italiana</strong><small>Equilibrio · Tecnologia · Diplomazia</small></button>
 <button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Mobilità · Coste</small></button>
@@ -57,7 +57,7 @@ body.large-text{font-size:18px}body.large-text .muted,body.large-text .note{font
 <button id="treatySurrender" class="secondary">CHIEDERE LA RESA</button>
 <button id="diplomaticMission" class="secondary">MISSIONE DIPLOMATICA · 250€</button>
 </div></div>
-<div class="detail" id="battleDecision" hidden><h3>ORDINE DI BATTAGLIA</h3><p class="muted" id="battlePreview"></p><div class="actions"><button class="secondary" id="retreatBattle">RITIRATA TATTICA</button><button id="resolveBattle">CONTINUA SCONTRO</button></div></div>
+<div class="detail" id="battleDecision" hidden><h3>ORDINE DI BATTAGLIA</h3><p class="muted" id="battlePreview"></p><p class="note">Scegli la dottrina per questo scontro:</p><div class="actions"><button class="secondary" id="stanceAssault">ASSALTO</button><button class="secondary" id="stanceBalanced">EQUILIBRATA</button><button class="secondary" id="stanceCautious">PRUDENTE</button></div><div class="actions"><button class="secondary" id="retreatBattle">RITIRATA TATTICA</button><button id="resolveBattle">CONTINUA SCONTRO</button></div></div>
 <div class="detail" id="battleReport"><h3>ULTIMO RAPPORTO DI BATTAGLIA</h3><p class="muted" id="battleReportText">Nessuno scontro registrato in questa sessione.</p></div></div>
 <div class="panel"><h2>ROTTE COMMERCIALI MEDITERRANEE</h2><p class="muted">Collega due porti sotto il tuo controllo per ottenere entrate aggiuntive a ogni turno.</p><button id="createRoute" class="secondary wide">ATTIVA ROTTA COMMERCIALE · 1.200€ / 10 MAT.</button><div id="routeStatus" class="note">Nessuna rotta attiva.</div></div>
 <div class="panel"><h2>ARCHIVIO CAMPAGNA</h2><div class="actions"><button id="saveGame" class="secondary">SALVA PARTITA</button><button id="loadGame" class="secondary">CARICA PARTITA</button></div><p class="note">Salvataggio locale sul dispositivo; non sincronizzato con il cloud.</p></div>
@@ -65,7 +65,7 @@ body.large-text{font-size:18px}body.large-text .muted,body.large-text .note{font
 <div class="panel"><h2>ARSENALE · PRODUZIONE UNITÀ</h2><p class="muted">Recluta reparti specializzati per rafforzare le operazioni terrestri, aeree e navali.</p><div class="actions-grid"><button id="buyInfantry">FANTERIA · 500€ / 5 MAT.</button><button id="buyTank">CARRO ARIETE · 2.000€ / 20 MAT.</button><button id="buyAircraft">EUROFIGHTER · 3.500€ / 30 MAT.</button><button id="buyShip">CACCIATORPEDINIERE · 2.500€ / 25 MAT.</button><button id="buyCommando">COL MOSCHIN · 4.000€ / 15 MAT.</button></div><div id="units"></div><button class="wide secondary" id="repairUnits">RIPARA REPARTI</button><p class="note">HP effettivi: fanteria 150 · Ariete 800 · Eurofighter 300 · nave 600 · Col Moschin 100.</p></div>
 <div class="panel"><h2>REGISTRO OPERATIVO</h2><div class="log" id="log" aria-live="polite"></div></div>
 <button class="wide secondary" id="quit">TORNA AL MENU</button>
-</section><div class="footer">WAR ITALY © 2035 · BUILD 2.1.0</div><div class="tutorial-backdrop" id="tutorialOverlay" hidden><div class="tutorial-card" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle"><div class="tutorial-count" id="tutorialCount">GUIDA · 1/6</div><h2 id="tutorialTitle">BENVENUTO, COMANDANTE</h2><p id="tutorialBody">Questa guida ti accompagna nei primi passi di WAR ITALY.</p><div class="actions"><button class="secondary" id="tutorialClose">CHIUDI</button><button class="secondary" id="tutorialBack">INDIETRO</button><button id="tutorialNext">AVANTI</button></div></div></div></main>
+</section><div class="footer">WAR ITALY © 2035 · BUILD 2.2.0</div><div class="tutorial-backdrop" id="tutorialOverlay" hidden><div class="tutorial-card" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle"><div class="tutorial-count" id="tutorialCount">GUIDA · 1/6</div><h2 id="tutorialTitle">BENVENUTO, COMANDANTE</h2><p id="tutorialBody">Questa guida ti accompagna nei primi passi di WAR ITALY.</p><div class="actions"><button class="secondary" id="tutorialClose">CHIUDI</button><button class="secondary" id="tutorialBack">INDIETRO</button><button id="tutorialNext">AVANTI</button></div></div></div></main>
 <script>
 (()=>{const $=id=>document.getElementById(id);const factionData={
 italia:{name:"Repubblica Italiana",icon:"🇮🇹",desc:"Difendi le istituzioni e ricostruisci la stabilità nazionale.",bonus:"Equilibrio economico e diplomazia: +10 consenso iniziale.",difficulty:"Media",start:"Lazio"},
@@ -271,10 +271,18 @@ function prepareAttack(domain){
  const terrain=domain==="land"&&["Valle d'Aosta","Trentino-Alto Adige"].includes(r.name)?1.2:1;
  const effectiveDefense=Math.ceil(defense*terrain);
  const damage=Math.max(1,Math.floor(power*(domain==="air"?.8:domain==="sea"?.9:1)));
- pendingBattle={domain,regionIndex:selectedRegion,region:r.name,power,defense:effectiveDefense,baseDefense:defense,damage,unitKey,terrain,turn};
+ pendingBattle={domain,regionIndex:selectedRegion,region:r.name,power,basePower:power,defense:effectiveDefense,baseDefense:defense,damage,baseDamage:damage,unitKey,terrain,turn,stance:"balanced"};
  $("battlePreview").textContent=r.name+" · "+domain.toUpperCase()+" · Potenza stimata "+power+" contro difesa "+effectiveDefense+". Danno previsto "+damage+". Scegli se impegnare le forze o ordinare la ritirata.";
  $("battleDecision").hidden=false;
  log("Ordine preparato: "+domain.toUpperCase()+" verso "+r.name+". In attesa della decisione del comando.");
+}
+function setBattleStance(stance){
+ if(!pendingBattle)return;
+ const b=pendingBattle;b.stance=stance;
+ const factor=stance==="assault"?1.18:stance==="cautious"?0.90:1;
+ b.power=Math.floor(b.basePower*factor);b.damage=Math.floor(b.baseDamage*factor);
+ $("battlePreview").textContent=b.region+" · "+b.domain.toUpperCase()+" · Dottrina "+({assault:"ASSALTO",balanced:"EQUILIBRATA",cautious:"PRUDENTE"}[stance])+" · Potenza "+b.power+" contro difesa "+b.defense+". Danno previsto "+b.damage+".";
+ log("Dottrina di combattimento selezionata: "+({assault:"assalto",balanced:"equilibrata",cautious:"prudente"}[stance])+".");
 }
 function finishBattle(retreat){
  if(!pendingBattle)return;
@@ -283,7 +291,7 @@ function finishBattle(retreat){
  campaignStats.battles++;
  let result,details,unitDamage=0;
  if(retreat){
-  unitDamage=Math.max(1,Math.ceil(hpMax[b.unitKey]*0.05));
+  unitDamage=Math.max(1,Math.ceil(hpMax[b.unitKey]*(b.stance==="cautious"?0.03:b.stance==="assault"?0.08:0.05)));
   damageUnit(b.unitKey,unitDamage);campaignStats.retreats++;result="RITIRATA TATTICA";
   details="Disimpegno ordinato; perduti "+unitDamage+" HP, nessuna conquista.";
   log("RITIRATA TATTICA da "+r.name+". Reparti preservati; danni da disimpegno: "+unitDamage+" HP.");
@@ -291,12 +299,12 @@ function finishBattle(retreat){
   r.owner="player";r.garrison=120;r.faction=null;r.fortification=0;
   campaignStats.wins++;campaignStats.regionsCaptured++;result="VITTORIA";
   details="Regione conquistata. Perdite proprie: nessuna perdita automatica.";
-  res.morale=Math.min(100,res.morale+4);
+  res.morale=Math.min(100,res.morale+(b.stance==="cautious"?5:4));
   log("VITTORIA "+b.domain.toUpperCase()+": "+r.name+" conquistata. Forza "+b.power+" contro difesa "+b.defense+".");
  }else{
   const remaining=Math.max(0,b.defense-b.damage);
   r.garrison=Math.max(0,remaining-(r.fortification||0)*80);
-  unitDamage=Math.ceil((r.garrison||120)*0.35);
+  unitDamage=Math.ceil((r.garrison||120)*0.35*(b.stance==="assault"?1.4:b.stance==="cautious"?0.7:1));
   damageUnit(b.unitKey,unitDamage);campaignStats.losses++;result="SCONFITTA";
   details="Attacco respinto; "+unitDamage+" HP persi dal reparto "+b.unitKey+". Presidio nemico residuo "+r.garrison+".";
   res.morale=Math.max(0,res.morale-2);
@@ -305,6 +313,9 @@ function finishBattle(retreat){
  lastBattleReport={turn:b.turn,domain:b.domain,region:b.region,result,power:b.power,defense:b.defense,damage:b.damage,unitDamage,details};
  pendingBattle=null;$("battleDecision").hidden=true;updateBattleReport();render();
 }
+$("stanceAssault").addEventListener("click",()=>setBattleStance("assault"));
+$("stanceBalanced").addEventListener("click",()=>setBattleStance("balanced"));
+$("stanceCautious").addEventListener("click",()=>setBattleStance("cautious"));
 $("resolveBattle").addEventListener("click",()=>finishBattle(false));
 $("retreatBattle").addEventListener("click",()=>finishBattle(true));
 $("attackLand").addEventListener("click",()=>prepareAttack("land"));
