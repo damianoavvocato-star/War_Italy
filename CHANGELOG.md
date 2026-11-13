@@ -1,5 +1,13 @@
 # WAR ITALY — Cronologia versioni
 
+## 3.7.0 — Campagna sulle 20 regioni italiane
+
+- Carta ricostruita con i confini ufficiali delle 20 regioni ISTAT, al posto delle precedenti 12 suddivisioni schematiche.
+- Campagna estesa a 20 regioni giocabili con proprietà, redditi, bonus, adiacenze, fronti, porti e movimenti collegati alla nuova geografia.
+- Conservato il livello delle 110 province ISTAT come dettaglio cartografico.
+- Salvataggi precedenti migrati per nome: le 12 vecchie regioni mantengono i propri dati e le 8 nuove regioni partono neutrali.
+
+
 ## 3.6.0 — Atlante provinciale ISTAT
 
 - Integrato il livello cartografico dei confini amministrativi delle 110 province e città metropolitane italiane, derivato dai dati ISTAT 2026.

@@ -25,7 +25,7 @@ test("una sola azione per avvio campagna e fine turno", () => {
   assert.equal((script.match(/\$\(["']enterGame["']\)\.(?:onclick|addEventListener)/g) || []).length, 1);
 });
 
-test("quattro fazioni, dodici regioni e sei tecnologie", () => {
+test("quattro fazioni, venti regioni e sei tecnologie", () => {
   assert.equal((script.match(/name:"(?:Repubblica Italiana|Legione Mediterranea|Corporazione Aquila|Alleanza Alpina)"/g) || []).length, 4);
   assert.equal((script.match(/\{name:"(?:Valle d'Aosta|Piemonte|Liguria|Lombardia|Trentino-Alto Adige|Veneto|Emilia-Romagna|Toscana|Lazio|Campania|Puglia|Sicilia)"/g) || []).length, 12);
   for (const key of ["land", "air", "cyber", "logistics", "renewables", "shield"]) {
@@ -64,14 +64,14 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(html, /viewBox="0 0 100 140"/);
   assert.match(html, /MAR ADRIATICO/);
   assert.match(html, /MAR TIRRENO/);
-  for (let i = 0; i < 12; i++) assert.match(html, new RegExp('id="province-' + i + '"'));
+  for (let i = 0; i < 20; i++) assert.match(html, new RegExp('id="province-' + i + '"'));
   assert.match(script, /province\.setAttribute\("class","province "\+r\.owner\+\(selectedRegion===i\?" selected":""\)\)/);
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 3.6.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 3\.6\.0/);
-  assert.equal(packageJson.version, "3.6.0");
+test("versione 3.7.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 3\.7\.0/);
+  assert.equal(packageJson.version, "3.7.0");
 });
 
 test("atlante multilivello con zoom, pan e livelli cartografici", () => {
@@ -131,4 +131,12 @@ test("atlante amministrativo con 110 province ISTAT", () => {
   assert.match(html, /data-province="Roma"/);
   assert.match(html, /data-province="Cagliari"/);
   assert.match(script, /toggleMapLayer\(event.currentTarget,"provinces"\)/);
+});
+
+test("20 regioni ufficiali giocabili e migrazione dei vecchi salvataggi", () => {
+  assert.match(html, /20 REGIONI GIOCABILI/);
+  assert.equal((html.match(/class="province neutral" id="province-\d+"/g) || []).length, 20);
+  assert.match(script, /data\.regions\.length===12\?legacyRegionNames/);
+  assert.match(script, /savedRegions\.find\(r=>r\.name===base\.name\)/);
+  assert.match(script, /armyLocation=armyName\?regions\.findIndex/);
 });
