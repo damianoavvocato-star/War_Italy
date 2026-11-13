@@ -27,7 +27,7 @@ body.large-text{font-size:18px}body.large-text .muted,body.large-text .note{font
 .map-overlay .port-ring{fill:#173e55;stroke:#f4d98e;stroke-width:.55}
 .map-overlay .port-glyph{fill:none;stroke:#fff0c3;stroke-width:.48;stroke-linecap:round;stroke-linejoin:round}
 .map-overlay .port-layer{opacity:.98}
-.map-overlay.hide-settlements .settlement-layer{display:none}
+.map-overlay.hide-settlements .settlement-layer{display:none}\n.map-overlay .detail-boundaries{fill:none;stroke:#f3e2b6;stroke-width:.42;stroke-dasharray:1.2 .65;stroke-linecap:round;opacity:.92;pointer-events:none}\n.map-overlay.hide-detail .detail-boundaries{display:none}
 .map-overlay.hide-cities .city-layer{display:none}
 .map-compass{pointer-events:none}
 @media(max-width:390px){.map-toolbar{gap:4px}.map-control{padding:7px 8px;font-size:8px}.map-zoom-readout{min-width:45px}}
@@ -94,7 +94,7 @@ select:focus-visible{outline:3px solid #e3bd55;outline-offset:2px}\ninput[type=f
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style></head><body><main class="shell">
 <header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE · 2035</div></header>
-<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">WAR ITALY · BUILD 3.2.0</p></section>
+<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">WAR ITALY · BUILD 3.3.0</p></section>
 <section id="selection" class="screen" hidden><div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p class="muted">Ogni schieramento offre un diverso stile strategico.</p></div><div class="grid" id="factionGrid">
 <button class="card" data-faction="italia"><div class="symbol">🇮🇹</div><strong>Repubblica Italiana</strong><small>Equilibrio · Tecnologia · Diplomazia</small></button>
 <button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Mobilità · Coste</small></button>
@@ -119,6 +119,7 @@ select:focus-visible{outline:3px solid #e3bd55;outline-offset:2px}\ninput[type=f
 <button type="button" class="map-control layer-active" id="mapBordersToggle" aria-pressed="true">CONFINI</button>
 <button type="button" class="map-control layer-active" id="mapCitiesToggle" aria-pressed="true">CITTÀ</button>
 <button type="button" class="map-control layer-active" id="mapSettlementsToggle" aria-pressed="true">INSEDIAMENTI</button>
+<button type="button" class="map-control layer-active" id="mapDetailToggle" aria-pressed="true">DETTAGLIO TERRITORI</button>
 </div><div class="region-grid" id="regionGrid"><div class="map-world" id="mapWorld">
 <svg class="map-overlay" viewBox="0 0 100 140" preserveAspectRatio="none" aria-hidden="true">
 <defs>
@@ -174,6 +175,12 @@ select:focus-visible{outline:3px solid #e3bd55;outline-offset:2px}\ninput[type=f
 <g class="port-marker"><circle class="port-ring" cx="34" cy="129" r="1.7"/><path class="port-glyph" d="M32.8 129h2.4m-2 0 .4 1h1.2l.4-1"/><title>Porto di Palermo</title></g>
 <g class="port-marker"><circle class="port-ring" cx="12" cy="87" r="1.7"/><path class="port-glyph" d="M10.8 87h2.4m-2 0 .4 1h1.2l.4-1"/><title>Porto di Cagliari</title></g>
 </g></g>>
+<g class="detail-boundaries">
+<path d="M20 17L31 20L40 15M23 26L34 28L42 24M17 35L29 37L40 33M20 45L32 46L39 42M25 53L37 54L44 50M31 62L42 64L48 59M35 72L46 72L53 68M39 82L49 82L56 78M42 93L52 94L59 90M45 105L54 104L59 100M48 114L55 112
+M45 17L47 27L55 31M57 14L58 24L68 28M48 39L58 42L68 46M53 52L63 56L73 57M54 66L64 70L72 66M57 81L65 83L70 77M60 96L67 94L72 88M62 108L69 104
+M27 28L24 39L29 48M37 47L39 57L35 66M46 60L49 70L45 79M52 77L55 87L51 97M59 91L62 101L58 111
+M29 119L35 123L42 122M28 126L37 128L45 126"/>
+</g>
 <g class="terrain-detail">
 <path d="M18 18Q32 10 45 17T72 23M16 31Q29 24 43 31T72 39M18 45Q31 39 45 47T72 54M25 60Q38 54 50 64T69 72M31 77Q43 70 55 80T66 91M39 94Q48 87 60 96T58 111"/>
 <path d="M20 21Q30 17 40 22M17 35Q29 29 38 36M25 53Q35 47 44 54M33 69Q43 64 51 72M40 88Q48 82 55 89"/>
@@ -781,6 +788,7 @@ document.getElementById("mapTerrainToggle").addEventListener("click",event=>togg
 document.getElementById("mapBordersToggle").addEventListener("click",event=>toggleMapLayer(event.currentTarget,"borders"));
 document.getElementById("mapCitiesToggle").addEventListener("click",event=>toggleMapLayer(event.currentTarget,"cities"));
 document.getElementById("mapSettlementsToggle").addEventListener("click",event=>toggleMapLayer(event.currentTarget,"settlements"));
+document.getElementById("mapDetailToggle").addEventListener("click",event=>toggleMapLayer(event.currentTarget,"detail"));
 applyMapTransform();
 
 })();
