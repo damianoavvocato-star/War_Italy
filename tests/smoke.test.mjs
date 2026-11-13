@@ -27,7 +27,7 @@ test("una sola azione per avvio campagna e fine turno", () => {
 
 test("quattro fazioni, 110 province e sei tecnologie", () => {
   assert.equal((script.match(/name:"(?:Repubblica Italiana|Legione Mediterranea|Corporazione Aquila|Alleanza Alpina)"/g) || []).length, 4);
-  const regionBlock=script.slice(script.indexOf("const regions=["),script.indexOf("];\\nconst initialRegions"));
+  const regionBlock=script.slice(script.indexOf("const regions=["),script.indexOf("const initialRegions"));
   assert.equal((regionBlock.match(/\\{name:/g) || []).length, 110);
   for (const key of ["land", "air", "cyber", "logistics", "renewables", "shield"]) assert.match(script, new RegExp(key + ":false"));
 });
@@ -69,7 +69,7 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
 });
 
 test("versione 4.0.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 3\.7\.0/);
+  assert.match(html, /BUILD 4\.0\.0/);
   assert.equal(packageJson.version, "4.0.0");
 });
 
