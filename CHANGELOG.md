@@ -1,5 +1,16 @@
 # WAR ITALY — Cronologia versioni
 
+## 4.0.0 — Campagna provinciale completa
+
+- La mappa passa da 20 regioni a 110 province giocabili, con geometrie provinciali derivate dai confini ISTAT 2026.
+- Ogni provincia possiede proprietario, reddito, bonus, presidio, fortificazioni, sviluppo e adiacenze proprie.
+- Le province sono selezionabili direttamente sulla carta; gli ordini terrestri richiedono fronti contigui.
+- Esercito e flotta hanno posizioni sulla mappa e possono muoversi tra province amiche raggiungibili; le vittorie spostano le unità sul territorio conquistato.
+- I confini delle 20 regioni restano disponibili come livello cartografico separato.
+- I salvataggi 3.x (12 o 20 regioni) vengono migrati alle 110 province per nome di regione, distribuendo i presidi e mantenendo i proprietari.
+- Attribuzione: confini ISTAT 2026 redistribuiti con licenza CC BY 4.0 tramite guglielmo/geojson-italy.
+
+
 ## 3.7.0 — Campagna sulle 20 regioni italiane
 
 - Carta ricostruita con i confini ufficiali delle 20 regioni ISTAT, al posto delle precedenti 12 suddivisioni schematiche.
