@@ -153,6 +153,7 @@ const regions=[
 {name:"Campania",area:"Sud",bonus:"Cantieristica",income:260,owner:"neutral"},
 {name:"Puglia",area:"Sud",bonus:"Energia",income:230,owner:"neutral"},
 {name:"Sicilia",area:"Isole",bonus:"Rotte mediterranee",income:250,owner:"neutral"}];
+const initialRegions=regions.map(r=>({...r}));
 let selected=null,player=null,turn=1,res={euros:8000,energy:100,materials:80,morale:65},units=0,tanks=0,aircraft=0,ships=0,commandos=0,buildings=0,selectedRegion=null,started=false;
 let hp={infantry:0,tank:0,aircraft:0,ship:0,commando:0};
 const hpMax={infantry:150,tank:800,aircraft:300,ship:600,commando:100};
@@ -257,7 +258,7 @@ $("buyCommando").onclick=()=>recruit("commando",4000,15);
 $("repairUnits").onclick=()=>{normalizeHP();let points=0;Object.keys(hpMax).forEach(k=>points+=countUnit(k)*hpMax[k]-hp[k]);const mats=Math.ceil(points/100);if(!points){log("Tutte le unità sono già integre.");return;}if(res.euros<points||res.materials<mats){log("Riparazione non possibile: servono "+points+"€ e "+mats+" materiali.");return;}res.euros-=points;res.materials-=mats;Object.keys(hpMax).forEach(k=>hp[k]=countUnit(k)*hpMax[k]);log("Riparati "+points+" HP.");render();};
 
 
-$("start").onclick=()=>show("selection");$("backHome").onclick=()=>show("home");$("quit").onclick=()=>{show("home");$("continueCampaign").hidden=!localStorage.getItem("warItalySave")};$("continueCampaign").onclick=()=>{$("loadGame").click();show("game")};$("continueCampaign").hidden=!localStorage.getItem("warItalySave");
+$("start").onclick=()=>{resetCampaign();show("selection")};$("backHome").onclick=()=>show("home");$("quit").onclick=()=>{show("home");$("continueCampaign").hidden=!localStorage.getItem("warItalySave")};$("continueCampaign").onclick=()=>{$("loadGame").click();show("game")};$("continueCampaign").hidden=!localStorage.getItem("warItalySave");
 const tutorialSteps=[
 ["BENVENUTO, COMANDANTE","WAR ITALY è uno strategico ambientato in Italia nel 2035. Scegli una fazione e guida la tua campagna attraverso diplomazia, economia e conflitti."],
 ["SCEGLI LA FAZIONE","Ogni fazione parte da una regione diversa e riceve un bonus iniziale. Leggi difficoltà e specialità prima di confermare."],
@@ -286,7 +287,7 @@ $("enterGame").onclick=()=>{if(started){show("game");return}started=true;const f
 $("build").onclick=()=>{if(!can(1200,15))return;res.euros-=1200;res.materials-=15;buildings++;res.energy+=15;log("Centrale energetica completata: +15 energia.");render()};
 $("recruit").onclick=()=>{if(!can(500,5))return;res.euros-=500;res.materials-=5;units++;log("Reclutata una nuova unità di fanteria.");render()};
 $("stabilize").onclick=()=>{if(res.euros<500){log("Euro insufficienti per il programma sociale.");return}if(res.morale>=100){log("Consenso già al massimo.");return}res.euros-=500;res.morale=Math.min(100,res.morale+8);log("Programma sociale: consenso aumentato.");render()};
-$("endTurn").onclick=()=>{if(pendingBattle){log("Concludi o annulla l'ordine di battaglia prima di terminare il turno.");return;}turn++;const controlled=regions.filter(r=>r.owner==="player");const tradeBonus=Object.values(rivalTreaties).filter(t=>t&&t.type==="commerciale"&&t.turns>0).length*120;const income=controlled.reduce((s,r)=>s+r.income,0)+seaRoutes.length*220+tradeBonus;res.euros+=income;res.energy+=buildings*5+controlled.length*2;res.materials+=Math.max(2,Math.floor(controlled.length*1.5));researchPoints+=1+(techs.cyber?1:0);if(res.morale<35){res.euros=Math.max(0,res.euros-150);log("Instabilità: entrate ridotte.");}log("Fine turno. Entrate: +"+fmt(income)+"€. Produzione aggiornata.");render()};
+$("endTurn").onclick=()=>{if(pendingBattle){log("Concludi o annulla l'ordine di battaglia prima di terminare il turno.");return;}turn++;const controlled=regions.filter(r=>r.owner==="player");const income=controlled.reduce((s,r)=>s+r.income,0)+seaRoutes.length*220;res.euros+=income;res.energy+=buildings*5+controlled.length*2;res.materials+=Math.max(2,Math.floor(controlled.length*1.5));researchPoints+=1+(techs.cyber?1:0);if(res.morale<35){res.euros=Math.max(0,res.euros-150);log("Instabilità: entrate ridotte.");}log("Fine turno. Entrate: +"+fmt(income)+"€. Produzione aggiornata.");render()};
 
 /* WAR ITALY 0.4.0: combat, rival AI, diplomacy and local save */
 const rivalNames={italia:"Repubblica Italiana",legione:"Legione Mediterranea",aquila:"Corporazione Aquila",alpina:"Alleanza Alpina"};
@@ -295,6 +296,23 @@ let agents=0,counterIntel=0,lastIntelReport=null;
 let diplomaticPrestige=0,diplomaticMissionTurn=0;
 let lastStrategicEvent=null,eventCount=0;
 let seaRoutes=[];
+function resetCampaign(){
+ selected=null;player=null;turn=1;res={euros:8000,energy:100,materials:80,morale:65};
+ units=0;tanks=0;aircraft=0;ships=0;commandos=0;buildings=0;selectedRegion=null;started=false;
+ hp={infantry:0,tank:0,aircraft:0,ship:0,commando:0};
+ regions.splice(0,regions.length,...initialRegions.map(r=>({...r})));
+ researchPoints=0;techs={land:false,air:false,cyber:false,logistics:false,renewables:false,shield:false};
+ missionComplete=false;campaignMission=1;campaignWon=false;campaignLost=false;
+ campaignStats={battles:0,wins:0,losses:0,regionsCaptured:0,retreats:0};
+ pendingBattle=null;lastBattleReport=null;rivalRelations={};rivalTruces={};rivalTreaties={};
+ agents=0;counterIntel=0;lastIntelReport=null;diplomaticPrestige=0;diplomaticMissionTurn=0;
+ lastStrategicEvent=null;eventCount=0;seaRoutes=[];
+ $("log").innerHTML="";$("confirm").disabled=true;
+ $("factionDetail").innerHTML="<h3>Seleziona una fazione</h3><p class='muted'>Consulta i bonus prima di confermare.</p>";
+ document.querySelectorAll("[data-faction]").forEach(b=>b.classList.remove("selected"));
+ $("battleDecision").hidden=true;$("tutorialOverlay").hidden=true;
+}
+
 function setInitialRivals(){
  const starts={italia:["Lombardia","Sicilia","Piemonte"],legione:["Lazio","Liguria","Puglia"],aquila:["Lazio","Veneto","Campania"],alpina:["Lazio","Sicilia","Emilia-Romagna"]};
  const rivals=Object.keys(rivalNames).filter(k=>k!==player);
