@@ -1,5 +1,15 @@
 # WAR ITALY — Cronologia versioni
 
+## 3.4.0 — Fronti contigui e selezione cartografica
+
+- I 12 territori strategici sono ora selezionabili anche toccando direttamente i rispettivi poligoni sulla mappa, oltre ai pulsanti territoriali.
+- Il territorio selezionato viene evidenziato sulla carta e supporta la navigazione da tastiera.
+- Aggiunta una rete esplicita di adiacenza territoriale e visualizzazione dei collegamenti nel rapporto regionale.
+- L'espansione su territori neutrali e le offensive terrestri richiedono ora un fronte contiguo; anche l'IA sceglie espansioni e bersagli coerenti con i propri confini.
+- Corrette sequenze di escape CSS che impedivano ad alcune regole della mappa di essere interpretate correttamente.
+- La mappa mantiene 12 macro-territori: la suddivisione in province amministrative più numerose resta una fase successiva.
+
+
 ## 3.3.0 — Confini territoriali ad alta densità
 
 - Aggiunto un livello cartografico di dettaglio con suddivisioni territoriali interne per dare alla mappa una lettura più vicina a un atlante da campagna strategica.

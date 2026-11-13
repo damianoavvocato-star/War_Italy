@@ -65,13 +65,13 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(html, /MAR ADRIATICO/);
   assert.match(html, /MAR TIRRENO/);
   for (let i = 0; i < 12; i++) assert.match(html, new RegExp('id="province-' + i + '"'));
-  assert.match(script, /province\.setAttribute\("class","province "\+r\.owner\)/);
+  assert.match(script, /province\.setAttribute\("class","province "\+r\.owner\+\(selectedRegion===i\?" selected":""\)\)/);
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 3.3.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 3\.3\.0/);
-  assert.equal(packageJson.version, "3.3.0");
+test("versione 3.4.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 3\.4\.0/);
+  assert.equal(packageJson.version, "3.4.0");
 });
 
 test("atlante multilivello con zoom, pan e livelli cartografici", () => {
@@ -94,4 +94,15 @@ test("atlante multilivello con zoom, pan e livelli cartografici", () => {
   assert.match(html, /toggleMapLayer\(event.currentTarget,"detail"\)/);
   assert.match(html, /MILANO/);
   assert.match(html, /CAGLIARI/);
+});
+
+test("selezione diretta dei territori e fronti contigui", () => {
+  assert.match(html, /id="province-0" role="button" tabindex="0"/);
+  assert.match(script, /mapSvg\.querySelectorAll\("\.province\[id\^='province-'\]"\)/);
+  assert.match(script, /const regionAdjacency=\[\[/);
+  assert.match(script, /function hasAdjacentTerritory\(index,owner,faction=null\)/);
+  assert.match(script, /!hasAdjacentTerritory\(selectedRegion,"player"\)/);
+  assert.match(script, /territorio neutrale collegato al fronte/);
+  assert.match(script, /bersaglio non confina con un tuo territorio/);
+  assert.match(script, /hasAdjacentTerritory\(i,"enemy",rivalNames\[rival\]\)/);
 });
