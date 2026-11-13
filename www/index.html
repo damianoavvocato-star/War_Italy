@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#081629">
+  <title>WAR ITALY</title>
+  <style>
+    :root{color-scheme:dark;--navy:#081629;--panel:#10243d;--gold:#d4af37;--muted:#9fb0c5;--green:#3cbd8a}
+    *{box-sizing:border-box} body{margin:0;background:radial-gradient(ellipse at 50% 0%,#18395a 0%,var(--navy) 58%);color:#f4f7fb;font-family:Arial,Helvetica,sans-serif;min-height:100vh}
+    .shell{max-width:760px;margin:auto;padding:env(safe-area-inset-top) 18px calc(28px + env(safe-area-inset-bottom))}
+    header{display:flex;justify-content:space-between;align-items:center;padding:20px 0;border-bottom:1px solid #29415d}
+    .brand{font-weight:900;letter-spacing:3px;color:var(--gold);font-size:18px}.status{font-size:11px;color:var(--green);letter-spacing:1px}
+    .hero{text-align:center;padding:48px 8px 30px}.eyebrow{color:var(--gold);letter-spacing:4px;font-size:11px;font-weight:bold}
+    h1{font-size:clamp(38px,11vw,64px);line-height:.95;margin:15px 0 12px;letter-spacing:2px}
+    .subtitle{color:#c1cedc;font-size:13px;letter-spacing:2px}
+    .map{height:190px;margin:18px 0 24px;border:1px solid #38516b;border-radius:18px;position:relative;overflow:hidden;background:linear-gradient(145deg,#102d45,#0b1c30)}
+    .map:before{content:"";position:absolute;inset:-30px;background:repeating-linear-gradient(25deg,transparent 0 27px,#42617a22 28px 29px),repeating-linear-gradient(115deg,transparent 0 42px,#42617a22 43px 44px)}
+    .italy{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%) rotate(-18deg);font-size:112px;opacity:.8;filter:drop-shadow(0 0 16px #d4af3766)}
+    .maplabel{position:absolute;bottom:13px;left:15px;font-size:10px;color:#c5d2df;letter-spacing:2px}
+    .panel{background:linear-gradient(145deg,#122a45,#0c1e33);border:1px solid #2b4561;border-radius:16px;padding:18px;margin:14px 0}
+    .panel h2{font-size:14px;letter-spacing:1.5px;margin:0 0 14px;color:var(--gold)}
+    .factions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.faction{padding:13px 10px;border-radius:11px;background:#0a1b2e;border:1px solid #29435e;font-size:12px;text-align:left}
+    .faction strong{display:block;font-size:12px;margin-bottom:5px}.faction span{color:var(--muted);font-size:10px}
+    button{width:100%;border:0;border-radius:12px;padding:16px;background:linear-gradient(100deg,#d4af37,#f0d77b);color:#172235;font-size:14px;font-weight:900;letter-spacing:1.4px;margin-top:12px}
+    button:active{transform:scale(.99)}.note{font-size:11px;line-height:1.5;color:var(--muted);text-align:center;margin:17px 8px}
+    .toast{display:none;margin-top:12px;padding:12px;border:1px solid #3cbd8a;border-radius:10px;color:#a8f0d1;text-align:center;font-size:12px}
+    footer{text-align:center;color:#60758d;font-size:10px;letter-spacing:2px;padding:18px}
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE</div></header>
+    <section class="hero">
+      <div class="eyebrow">ITALIA · 2035</div>
+      <h1>IL FUTURO<br>SI DECIDE ORA</h1>
+      <div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div>
+    </section>
+    <div class="map" aria-label="Mappa strategica stilizzata dell'Italia"><div class="italy">🇮🇹</div><div class="maplabel">TEATRO OPERATIVO NAZIONALE</div></div>
+    <section class="panel">
+      <h2>QUATTRO FAZIONI · UN SOLO DESTINO</h2>
+      <div class="factions">
+        <div class="faction"><strong>Repubblica Italiana</strong><span>Tecnologia · Diplomazia</span></div>
+        <div class="faction"><strong>Legione Mediterranea</strong><span>Flotta · Operazioni costiere</span></div>
+        <div class="faction"><strong>Corporazione Aquila</strong><span>Robotica · Cyberwarfare</span></div>
+        <div class="faction"><strong>Alleanza Alpina</strong><span>Corazzati · Difesa</span></div>
+      </div>
+      <button id="start">AVVIA CAMPAGNA</button>
+      <div class="toast" id="message">La campagna sarà disponibile nella prossima versione giocabile.</div>
+    </section>
+    <p class="note">VERSIONE INIZIALE ANDROID · ANTEPRIMA INTERFACCIA<br>Le funzionalità strategiche e di combattimento saranno aggiunte progressivamente.</p>
+    <footer>WAR ITALY © 2035 · BUILD 0.1.0</footer>
+  </main>
+  <script>
+    document.getElementById('start').addEventListener('click',function(){
+      const box=document.getElementById('message');
+      box.style.display='block';
+      box.textContent='Anteprima iniziale: selezione fazione e campagna in sviluppo.';
+    });
+  </script>
+</body>
+</html>
