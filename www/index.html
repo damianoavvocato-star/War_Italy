@@ -90,7 +90,7 @@ function updateDiplomacyLabel(){
 $("attackSelected").addEventListener("click",()=>{
  const r=regions[selectedRegion];
  if(!r||r.owner!=="enemy"){log("Seleziona una regione controllata da una fazione rivale.");return;}
- if(units<1){log("Non hai fanteria disponibile per l'operazione.");return;}
+ if(units+tanks+aircraft+ships+commandos<1){log("Non hai unità disponibili per l'operazione.");return;}
  const power=units*70+tanks*180+aircraft*140+ships*100+commandos*220+Math.floor(res.morale/5),defense=r.garrison||120;
  if(units>0)units--;else if(tanks>0)tanks--;else if(commandos>0)commandos--;else if(aircraft>0)aircraft--;else if(ships>0)ships--;
  if(power>=defense){r.owner="player";log("Vittoria: "+r.name+" conquistata alle forze di "+r.faction+".");res.morale=Math.min(100,res.morale+4);r.faction=null;}
