@@ -59,6 +59,16 @@ test("menu compatto, salvataggi e sistemi principali presenti", () => {
   }
 });
 
+test("mappa strategica dell'Italia presente e interattiva", () => {
+  assert.match(html, /MAPPA STRATEGICA · ITALIA/);
+  assert.match(html, /viewBox="0 0 100 140"/);
+  assert.match(html, /MAR ADRIATICO/);
+  assert.match(html, /MAR TIRRENO/);
+  for (let i = 0; i < 12; i++) assert.match(html, new RegExp('id="province-' + i + '"'));
+  assert.match(script, /province\.setAttribute\("class","province "\+r\.owner\)/);
+  assert.match(script, /const strategicMapPositions=\[\[/);
+});
+
 test("versione 3.0.0 coerente tra app e pacchetto", () => {
   assert.match(html, /BUILD 3\.0\.0/);
   assert.equal(packageJson.version, "3.0.0");
