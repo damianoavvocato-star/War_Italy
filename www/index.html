@@ -6,7 +6,7 @@
 @media(max-width:390px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.region-grid{grid-template-columns:repeat(2,1fr)}.actions{flex-direction:column}}
 </style></head><body><main class="shell">
 <header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE · 2035</div></header>
-<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 0.9.0</p></section>
+<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 1.1.0</p></section>
 <section id="selection" class="screen" hidden><div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p class="muted">Ogni schieramento offre un diverso stile strategico.</p></div><div class="grid" id="factionGrid">
 <button class="card" data-faction="italia"><div class="symbol">🇮🇹</div><strong>Repubblica Italiana</strong><small>Equilibrio · Tecnologia · Diplomazia</small></button>
 <button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Mobilità · Coste</small></button>
@@ -19,7 +19,8 @@
 <div class="panel"><div class="topline"><h2>MAPPA STRATEGICA · ITALIA</h2><span class="turn" id="controlCount">1/12 REGIONI</span></div><p class="muted" style="margin:8px 0">Seleziona una macro-regione per consultarne lo stato e le azioni disponibili.</p><div class="region-grid" id="regionGrid"></div><div class="maplegend"><span><i class="dot" style="background:#49c99a"></i>Sotto il tuo controllo</span><span><i class="dot" style="background:#d4af37"></i>Neutrale</span><span><i class="dot" style="background:#e17b7b"></i>Contesa</span></div></div>
 <div class="panel" id="regionPanel"><h2>RAPPORTO TERRITORIALE</h2><p class="muted">Seleziona una regione sulla mappa.</p></div>
 
-<div class="panel" id="missionPanel"><div class="topline"><h2>MISSIONE 01 · OPERAZIONE RINASCITA</h2><span class="turn" id="missionState">IN CORSO</span></div><p class="muted">Stabilizza il comando nazionale: controlla almeno 3 regioni e completa una ricerca strategica.</p><div id="missionProgress" class="note">Territori: 1/3 · Tecnologie: 0/1</div></div>
+<div class="panel" id="missionPanel"><div class="topline"><h2 id="missionTitle">MISSIONE 01 · OPERAZIONE RINASCITA</h2><span class="turn" id="missionState">IN CORSO</span></div><p class="muted" id="missionBrief">Stabilizza il comando nazionale: controlla almeno 3 regioni e completa una ricerca strategica.</p><div id="missionProgress" class="note">Territori: 1/3 · Tecnologie: 0/1</div></div>
+<div class="panel"><h2>RAPPORTO MILITARE · STATISTICHE CAMPAGNA</h2><div class="stats"><div class="stat"><b id="statBattles">0</b><span>SCONTRI</span></div><div class="stat"><b id="statWins">0</b><span>VITTORIE</span></div><div class="stat"><b id="statLosses">0</b><span>SCONFITTE</span></div><div class="stat"><b id="statRegions">0</b><span>REGIONI CONQUISTATE</span></div></div><div id="campaignOutcome" class="note">Campagna in corso · 15 missioni</div></div>
 <div class="panel"><h2>CENTRO RICERCA · ALBERO TECNOLOGICO</h2><p class="muted">I punti ricerca si accumulano a ogni turno. Ogni tecnologia può essere sbloccata una sola volta.</p><div class="stats"><div class="stat"><b id="researchPoints">0</b><span>PUNTI RICERCA</span></div><div class="stat"><b id="techCount">0/3</b><span>TECNOLOGIE</span></div><div class="stat"><b id="armyBonus">0%</b><span>DOTTRINA TERRA</span></div><div class="stat"><b id="industryBonus">0%</b><span>EFFICIENZA</span></div></div><div class="actions-grid"><button id="techLand">DOTTRINA TERRESTRE · 3 PR</button><button id="techAir">SUPERIORITÀ AEREA · 3 PR</button><button id="techCyber">RETE CYBER · 3 PR</button></div><div id="techStatus" class="note">Nessuna tecnologia sviluppata.</div></div><div class="panel"><h2>COMBATTIMENTO E DIPLOMAZIA</h2>
 <p class="muted">Seleziona una regione contesa sulla mappa per tentare un'operazione militare. Le unità impiegate possono essere perse.</p>
 <div class="actions-grid"><button id="attackLand">OFFENSIVA TERRESTRE</button><button id="attackAir">OFFENSIVA AEREA</button><button id="attackSea">OFFENSIVA NAVALE</button><button id="diplomacyOffer" class="secondary">PROPOSTA DIPLOMATICA · 300€</button></div><p class="note">Terra: fanteria, Ariete e Col Moschin · Aria: Eurofighter · Mare: cacciatorpediniere, solo su regioni costiere o insulari.</p>
@@ -59,10 +60,50 @@ function normalizeHP(){Object.keys(hpMax).forEach(k=>{if(hp[k]==null)hp[k]=count
 function damageUnit(k,n){hp[k]=Math.max(0,(hp[k]||0)-n);setCount(k,Math.ceil(hp[k]/hpMax[k]));}
 function addUnit(k){setCount(k,countUnit(k)+1);hp[k]=(hp[k]||0)+hpMax[k];}
 let researchPoints=0,techs={land:false,air:false,cyber:false},missionComplete=false;
+let campaignMission=1,campaignWon=false,campaignLost=false;
+let campaignStats={battles:0,wins:0,losses:0,regionsCaptured:0};
+const campaignMissions=[
+{title:"Operazione Rinascita",brief:"Consolida il comando: controlla 3 regioni e sviluppa una tecnologia.",goal:()=>regions.filter(r=>r.owner==="player").length>=3&&Object.values(techs).some(Boolean),progress:()=> "Territori "+regions.filter(r=>r.owner==="player").length+"/3 · Tecnologie "+Object.values(techs).filter(Boolean).length+"/1"},
+{title:"Linea di Stabilità",brief:"Estendi il controllo a 4 regioni italiane.",goal:()=>regions.filter(r=>r.owner==="player").length>=4,progress:()=> "Territori "+regions.filter(r=>r.owner==="player").length+"/4"},
+{title:"Dottrina Nazionale",brief:"Sblocca la Dottrina terrestre.",goal:()=>techs.land,progress:()=> "Dottrina terrestre: "+(techs.land?"completata":"da sviluppare")},
+{title:"Fronte Industriale",brief:"Controlla 5 regioni e costruisci almeno una centrale energetica.",goal:()=>regions.filter(r=>r.owner==="player").length>=5&&buildings>=1,progress:()=> "Territori "+regions.filter(r=>r.owner==="player").length+"/5 · Centrali "+buildings+"/1"},
+{title:"Autostrada del Mare",brief:"Attiva una rotta commerciale mediterranea.",goal:()=>seaRoutes.length>=1,progress:()=> "Rotte commerciali "+seaRoutes.length+"/1"},
+{title:"Supremazia Territoriale",brief:"Controlla almeno 6 regioni.",goal:()=>regions.filter(r=>r.owner==="player").length>=6,progress:()=> "Territori "+regions.filter(r=>r.owner==="player").length+"/6"},
+{title:"Ombrello Aereo",brief:"Sblocca la Superiorità aerea.",goal:()=>techs.air,progress:()=> "Superiorità aerea: "+(techs.air?"completata":"da sviluppare")},
+{title:"Operazione Mare Sicuro",brief:"Controlla 7 regioni e possiedi almeno un cacciatorpediniere.",goal:()=>regions.filter(r=>r.owner==="player").length>=7&&ships>0,progress:()=> "Territori "+regions.filter(r=>r.owner==="player").length+"/7 · Navi "+ships+"/1"},
+{title:"Rete Mediterranea",brief:"Attiva almeno due rotte commerciali.",goal:()=>seaRoutes.length>=2,progress:()=> "Rotte commerciali "+seaRoutes.length+"/2"},
+{title:"Avanzata Strategica",brief:"Controlla 8 regioni e sviluppa la Rete cyber.",goal:()=>regions.filter(r=>r.owner==="player").length>=8&&techs.cyber,progress:()=> "Territori "+regions.filter(r=>r.owner==="player").length+"/8 · Rete cyber "+(techs.cyber?"sbloccata":"da sviluppare")},
+{title:"Forza d'Intervento",brief:"Possiedi almeno 3 carri Ariete e 3 reparti di fanteria.",goal:()=>tanks>=3&&units>=3,progress:()=> "Ariete "+tanks+"/3 · Fanteria "+units+"/3"},
+{title:"Controllo dei Cieli",brief:"Controlla 9 regioni e possiedi almeno due Eurofighter.",goal:()=>regions.filter(r=>r.owner==="player").length>=9&&aircraft>=2,progress:()=> "Territori "+regions.filter(r=>r.owner==="player").length+"/9 · Eurofighter "+aircraft+"/2"},
+{title:"Arsenale Mediterraneo",brief:"Possiedi almeno due cacciatorpediniere e due Col Moschin.",goal:()=>ships>=2&&commandos>=2,progress:()=> "Cacciatorpediniere "+ships+"/2 · Col Moschin "+commandos+"/2"},
+{title:"Ultima Frontiera",brief:"Controlla 10 regioni e attiva tre rotte commerciali.",goal:()=>regions.filter(r=>r.owner==="player").length>=10&&seaRoutes.length>=3,progress:()=> "Territori "+regions.filter(r=>r.owner==="player").length+"/10 · Rotte "+seaRoutes.length+"/3"},
+{title:"Italia 2035",brief:"Unifica tutte le 12 regioni e completa tutte le tecnologie.",goal:()=>regions.every(r=>r.owner==="player")&&Object.values(techs).every(Boolean),progress:()=> "Territori "+regions.filter(r=>r.owner==="player").length+"/12 · Tecnologie "+Object.values(techs).filter(Boolean).length+"/3"}
+];
 function show(id){["home","selection","briefing","game"].forEach(x=>$(x).hidden=x!==id);window.scrollTo(0,0)}
 function log(msg){const el=$("log"),d=document.createElement("div");d.textContent="T"+turn+" · "+msg;el.prepend(d)}
 function fmt(n){return Math.floor(n).toLocaleString("it-IT")}
-function renderMission(){const count=regions.filter(r=>r.owner==="player").length;missionComplete=missionComplete||(count>=3&&Object.values(techs).some(Boolean));$("missionState").textContent=missionComplete?"COMPLETATA":"IN CORSO";$("missionProgress").textContent="Territori: "+Math.min(count,3)+"/3 · Tecnologie: "+(Object.values(techs).some(Boolean)?1:0)+"/1"+(missionComplete?" · OBIETTIVO RAGGIUNTO":"");$("researchPoints").textContent=researchPoints;$("techCount").textContent=Object.values(techs).filter(Boolean).length+"/3";$("armyBonus").textContent=techs.land?"25%":"0%";$("industryBonus").textContent=techs.cyber?"15%":"0%";$("techStatus").textContent=Object.entries(techs).filter(x=>x[1]).map(x=>({land:"Dottrina terrestre",air:"Superiorità aerea",cyber:"Rete cyber"}[x[0]])).join(" · ")||"Nessuna tecnologia sviluppata.";[["Land","land"],["Air","air"],["Cyber","cyber"]].forEach(x=>{$("tech"+x[0]).disabled=techs[x[1]]||researchPoints<3;});}
+function renderMission(){
+ const owned=regions.filter(r=>r.owner==="player").length;
+ if(!campaignWon&&!campaignLost&&owned===0){campaignLost=true;log("CAMPAGNA FALLITA: non controlli più alcuna regione.");}
+ const mission=campaignMissions[Math.min(campaignMission-1,14)];
+ if(!campaignWon&&!campaignLost&&mission.goal()){
+  missionComplete=true;
+  if(campaignMission===15){campaignWon=true;log("VITTORIA TOTALE: Italia unificata. Campagna completata!");}
+  else{log("MISSIONE "+String(campaignMission).padStart(2,"0")+" COMPLETATA: "+mission.title+".");campaignMission++;missionComplete=false;}
+ }
+ const current=campaignMissions[Math.min(campaignMission-1,14)];
+ $("missionTitle").textContent="MISSIONE "+String(campaignMission).padStart(2,"0")+" · "+current.title.toUpperCase();
+ $("missionBrief").textContent=current.brief;
+ $("missionState").textContent=campaignWon?"VITTORIA":campaignLost?"SCONFITTA": "IN CORSO";
+ $("missionProgress").textContent=campaignWon?"Tutte le 15 missioni completate.":campaignLost?"La tua fazione è stata estromessa da tutte le regioni.":current.progress();
+ $("researchPoints").textContent=researchPoints;$("techCount").textContent=Object.values(techs).filter(Boolean).length+"/3";
+ $("armyBonus").textContent=techs.land?"25%":"0%";$("industryBonus").textContent=techs.cyber?"15%":"0%";
+ $("techStatus").textContent=Object.entries(techs).filter(x=>x[1]).map(x=>({land:"Dottrina terrestre",air:"Superiorità aerea",cyber:"Rete cyber"}[x[0]])).join(" · ")||"Nessuna tecnologia sviluppata.";
+ [["Land","land"],["Air","air"],["Cyber","cyber"]].forEach(x=>{$("tech"+x[0]).disabled=techs[x[1]]||researchPoints<3||campaignWon||campaignLost;});
+ $("statBattles").textContent=campaignStats.battles;$("statWins").textContent=campaignStats.wins;$("statLosses").textContent=campaignStats.losses;$("statRegions").textContent=campaignStats.regionsCaptured;
+ $("campaignOutcome").textContent=campaignWon?"VITTORIA · Italia unificata nel 2035":campaignLost?"SCONFITTA · Campagna terminata":"Missione "+campaignMission+"/15 · "+(15-campaignMission)+" missioni successive";
+ $("endTurn").disabled=campaignWon||campaignLost;
+}
 function research(key,label){if(techs[key])return;if(researchPoints<3){log("Punti ricerca insufficienti: ne servono 3.");return;}researchPoints-=3;techs[key]=true;log("Ricerca completata: "+label+".");render();}
 $("techLand").addEventListener("click",()=>research("land","Dottrina terrestre"));$("techAir").addEventListener("click",()=>research("air","Superiorità aerea"));$("techCyber").addEventListener("click",()=>research("cyber","Rete cyber"));
 function render(){ $("euros").textContent=fmt(res.euros);$("energy").textContent=fmt(res.energy);$("materials").textContent=fmt(res.materials);$("morale").textContent=fmt(res.morale);$("turnLabel").textContent="TURNO "+turn;$("controlCount").textContent=regions.filter(r=>r.owner==="player").length+"/12 REGIONI";$("playerFaction").textContent=factionData[player].icon+" "+factionData[player].name;
@@ -130,16 +171,19 @@ function executeAttack(domain){
  if(!available){log("Non disponi di unità idonee per questa offensiva.");return;}
  power=Math.floor(power*(1+Math.max(0,res.morale-50)/250));
  if(techs.cyber)power=Math.floor(power*1.1);
+ campaignStats.battles++;
  const defense=(r.garrison||120)+(r.fortification||0)*80;
  const terrain=domain==="land"&&["Valle d'Aosta","Trentino-Alto Adige"].includes(r.name)?1.2:1;
  const effectiveDefense=Math.ceil(defense*terrain);
  const damage=Math.max(1,Math.floor(power*(domain==="air"?.8:domain==="sea"?.9:1)));
  if(damage>=effectiveDefense){
   r.owner="player";r.garrison=120;r.faction=null;r.fortification=0;
+  campaignStats.wins++;campaignStats.regionsCaptured++;
   log("VITTORIA "+domain.toUpperCase()+": "+r.name+" conquistata. Forza "+power+" contro difesa "+effectiveDefense+".");
   res.morale=Math.min(100,res.morale+4);
  }else{
   r.garrison=Math.max(0,effectiveDefense-damage);loss();
+  campaignStats.losses++;
   log("Scontro "+domain.toUpperCase()+" a "+r.name+": difesa nemica ridotta da "+defense+" a "+r.garrison+". Una unità impiegata è stata persa.");
   res.morale=Math.max(0,res.morale-2);
  }
@@ -169,13 +213,13 @@ $("diplomacyOffer").addEventListener("click",()=>{
  updateDiplomacyLabel();render();
 });
 $("saveGame").addEventListener("click",()=>{
- try{localStorage.setItem("warItalySave",JSON.stringify({player,turn,res,units,tanks,aircraft,ships,commandos,hp,buildings,selectedRegion,regions,rivalRelations,rivalTruces,seaRoutes,started,researchPoints,techs,missionComplete}));log("Campagna salvata su questo dispositivo.");}
+ try{localStorage.setItem("warItalySave",JSON.stringify({player,turn,res,units,tanks,aircraft,ships,commandos,hp,buildings,selectedRegion,regions,rivalRelations,rivalTruces,seaRoutes,started,researchPoints,techs,missionComplete,campaignMission,campaignWon,campaignLost,campaignStats}));log("Campagna salvata su questo dispositivo.");}
  catch(e){log("Salvataggio locale non disponibile.");}
 });
 $("loadGame").addEventListener("click",()=>{
  try{const s=JSON.parse(localStorage.getItem("warItalySave")||"null");if(!s){log("Nessun salvataggio trovato.");return;}
  player=s.player;turn=s.turn;res=s.res;units=s.units||0;tanks=s.tanks||0;aircraft=s.aircraft||0;ships=s.ships||0;commandos=s.commandos||0;hp=s.hp||{infantry:units*150,tank:tanks*800,aircraft:aircraft*300,ship:ships*600,commando:commandos*100};buildings=s.buildings;selectedRegion=s.selectedRegion;
- regions.splice(0,regions.length,...s.regions);rivalRelations=s.rivalRelations||{};rivalTruces=s.rivalTruces||{};seaRoutes=s.seaRoutes||[];started=s.started;researchPoints=s.researchPoints||0;techs=s.techs||{land:false,air:false,cyber:false};missionComplete=!!s.missionComplete;
+ regions.splice(0,regions.length,...s.regions);rivalRelations=s.rivalRelations||{};rivalTruces=s.rivalTruces||{};seaRoutes=s.seaRoutes||[];started=s.started;researchPoints=s.researchPoints||0;techs=s.techs||{land:false,air:false,cyber:false};missionComplete=!!s.missionComplete;campaignMission=s.campaignMission||1;campaignWon=!!s.campaignWon;campaignLost=!!s.campaignLost;campaignStats=s.campaignStats||{battles:0,wins:0,losses:0,regionsCaptured:0};
  render();updateDiplomacyLabel();log("Campagna caricata correttamente.");
  }catch(e){log("Il salvataggio non è leggibile.");}
 });
