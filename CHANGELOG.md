@@ -1,5 +1,12 @@
 # WAR ITALY — Cronologia versioni
 
+## 3.2.0 — Città e porti del teatro operativo
+
+- Aggiunti 12 riferimenti urbani distinti ed eliminata la duplicazione del marker di Milano.
+- Aggiunti 8 marker portuali con simboli nautici e tooltip: Genova, Venezia, Trieste, Civitavecchia, Napoli, Bari, Palermo e Cagliari.
+- Introdotto il livello indipendente INSEDIAMENTI per mostrare o nascondere città e porti senza alterare terreno e confini.
+- Migliorata la leggibilità dei nomi urbani.
+
 ## 3.1.0 — Atlante strategico multilivello
 
 - Introdotto un livello cartografico indipendente per gestire mappa e segnalini territoriali come un unico teatro operativo.
