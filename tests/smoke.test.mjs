@@ -1,3 +1,4 @@
+import { readFileSync } from "node:fs";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
@@ -6,6 +7,7 @@ const html = readFileSync(new URL("../www/index.html", import.meta.url), "utf8")
 const scriptMatch = html.match(/<script[^>]*>([\s\S]*?)<\/script>/i);
 assert.ok(scriptMatch, "script principale del gioco presente");
 const script = scriptMatch[1];
+const packageJson = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8"));
 
 test("JavaScript di gioco valido", () => {
   assert.doesNotThrow(() => new Function(script));
@@ -56,4 +58,9 @@ test("menu compatto, salvataggi e sistemi principali presenti", () => {
   for (const id of ["saveGame", "loadGame", "attackLand", "diplomacyOffer", "endTurn", "build"]) {
     assert.match(html, new RegExp('id="' + id + '"'));
   }
+});
+
+test("versione 3.0.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 3\\.0\\.0/);
+  assert.equal(packageJson.version, "3.0.0");
 });
