@@ -41,6 +41,14 @@ test("difficoltà campagna configurabile, bilanciata e salvata", () => {
   assert.match(script, /difficulty=\["easy","standard","hard"\]\.includes\(s\.difficulty\)/);
 });
 
+test("backup JSON esportabili e importazioni validate", () => {
+  assert.match(html, /id="exportSave"/);
+  assert.match(html, /id="importSave"/);
+  assert.match(script, /function validateSaveData\(data\)/);
+  assert.match(script, /if\(!validateSaveData\(data\)\)/);
+  assert.match(script, /URL\.createObjectURL\(blob\)/);
+});
+
 test("menu compatto, salvataggi e sistemi principali presenti", () => {
   for (const tab of ["overview", "military", "economy", "research", "system"]) {
     assert.match(html, new RegExp('data-menu-tab="' + tab + '"'));
