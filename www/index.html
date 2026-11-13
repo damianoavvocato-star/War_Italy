@@ -6,7 +6,7 @@
 @media(max-width:390px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.region-grid{grid-template-columns:repeat(2,1fr)}.actions{flex-direction:column}}
 </style></head><body><main class="shell">
 <header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE · 2035</div></header>
-<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 0.3.0</p></section>
+<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 0.4.0</p></section>
 <section id="selection" class="screen" hidden><div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p class="muted">Ogni schieramento offre un diverso stile strategico.</p></div><div class="grid" id="factionGrid">
 <button class="card" data-faction="italia"><div class="symbol">🇮🇹</div><strong>Repubblica Italiana</strong><small>Equilibrio · Tecnologia · Diplomazia</small></button>
 <button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Mobilità · Coste</small></button>
@@ -18,11 +18,17 @@
 <div class="stats"><div class="stat"><b id="euros">8.000</b><span>€ EURO</span></div><div class="stat"><b id="energy">100</b><span>ENERGIA</span></div><div class="stat"><b id="materials">80</b><span>MATERIALI</span></div><div class="stat"><b id="morale">65</b><span>CONSENSO</span></div></div>
 <div class="panel"><div class="topline"><h2>MAPPA STRATEGICA · ITALIA</h2><span class="turn" id="controlCount">1/12 REGIONI</span></div><p class="muted" style="margin:8px 0">Seleziona una macro-regione per consultarne lo stato e le azioni disponibili.</p><div class="region-grid" id="regionGrid"></div><div class="maplegend"><span><i class="dot" style="background:#49c99a"></i>Sotto il tuo controllo</span><span><i class="dot" style="background:#d4af37"></i>Neutrale</span><span><i class="dot" style="background:#e17b7b"></i>Contesa</span></div></div>
 <div class="panel" id="regionPanel"><h2>RAPPORTO TERRITORIALE</h2><p class="muted">Seleziona una regione sulla mappa.</p></div>
+
+<div class="panel"><h2>COMBATTIMENTO E DIPLOMAZIA</h2>
+<p class="muted">Seleziona una regione contesa sulla mappa per tentare un'operazione militare. Le unità impiegate possono essere perse.</p>
+<div class="actions-grid"><button id="attackSelected">ATTACCA REGIONE SELEZIONATA</button><button id="diplomacyOffer" class="secondary">PROPOSTA DIPLOMATICA · 300€</button></div>
+<div id="diplomacyStatus" class="note">Nessun accordo attivo.</div></div>
+<div class="panel"><h2>ARCHIVIO CAMPAGNA</h2><div class="actions"><button id="saveGame" class="secondary">SALVA PARTITA</button><button id="loadGame" class="secondary">CARICA PARTITA</button></div><p class="note">Salvataggio locale sul dispositivo; non sincronizzato con il cloud.</p></div>
 <div class="panel"><h2>GESTIONE NAZIONALE</h2><div class="actions-grid"><button id="build">COSTRUISCI CENTRALE<br>−1.200€ · −15 MAT.</button><button id="recruit">RECLUTA FANTERIA<br>−500€ · −5 MAT.</button><button id="stabilize" class="secondary">PROGRAMMA SOCIALE<br>−500€ · +8 CONSENSO</button><button id="endTurn" class="secondary">CONCLUDI TURNO →</button></div><p class="note">Le azioni aggiornano risorse, produzione e controllo territoriale. I costi vengono verificati prima di ogni operazione.</p></div>
 <div class="panel"><h2>FORZE DISPONIBILI</h2><div id="units"><div class="unitrow"><span>Fanteria</span><b>0</b></div></div></div>
 <div class="panel"><h2>REGISTRO OPERATIVO</h2><div class="log" id="log" aria-live="polite"></div></div>
 <button class="wide secondary" id="quit">TORNA AL MENU</button>
-</section><div class="footer">WAR ITALY © 2035 · BUILD 0.3.0</div></main>
+</section><div class="footer">WAR ITALY © 2035 · BUILD 0.4.0</div></main>
 <script>
 (()=>{const $=id=>document.getElementById(id);const factionData={
 italia:{name:"Repubblica Italiana",icon:"🇮🇹",desc:"Difendi le istituzioni e ricostruisci la stabilità nazionale.",bonus:"Equilibrio economico e diplomazia: +10 consenso iniziale.",difficulty:"Media",start:"Lazio"},
@@ -60,5 +66,61 @@ $("build").onclick=()=>{if(!can(1200,15))return;res.euros-=1200;res.materials-=1
 $("recruit").onclick=()=>{if(!can(500,5))return;res.euros-=500;res.materials-=5;units++;log("Reclutata una nuova unità di fanteria.");render()};
 $("stabilize").onclick=()=>{if(res.euros<500){log("Euro insufficienti per il programma sociale.");return}if(res.morale>=100){log("Consenso già al massimo.");return}res.euros-=500;res.morale=Math.min(100,res.morale+8);log("Programma sociale: consenso aumentato.");render()};
 $("endTurn").onclick=()=>{turn++;const controlled=regions.filter(r=>r.owner==="player");const income=controlled.reduce((s,r)=>s+r.income,0);res.euros+=income;res.energy+=buildings*5+controlled.length*2;res.materials+=Math.max(2,Math.floor(controlled.length*1.5));if(res.morale<35){res.euros=Math.max(0,res.euros-150);log("Instabilità: entrate ridotte.");}log("Fine turno. Entrate: +"+fmt(income)+"€. Produzione aggiornata.");render()};
+
+/* WAR ITALY 0.4.0: combat, rival AI, diplomacy and local save */
+const rivalNames={italia:"Repubblica Italiana",legione:"Legione Mediterranea",aquila:"Corporazione Aquila",alpina:"Alleanza Alpina"};
+let rivalRelations={},rivalTruces={};
+function setInitialRivals(){
+ const starts={italia:["Lombardia","Sicilia","Piemonte"],legione:["Lazio","Liguria","Puglia"],aquila:["Lazio","Veneto","Campania"],alpina:["Lazio","Sicilia","Emilia-Romagna"]};
+ const rivals=Object.keys(rivalNames).filter(k=>k!==player);
+ (starts[player]||[]).forEach((name,i)=>{const r=regions.find(x=>x.name===name);if(r&&r.owner!=="player"){r.owner="enemy";r.faction=rivalNames[rivals[i]];r.garrison=120+i*25;}});
+ rivals.forEach(k=>{if(rivalRelations[k]===undefined)rivalRelations[k]=0;});
+}
+function updateDiplomacyLabel(){
+ const active=Object.keys(rivalTruces).filter(k=>rivalTruces[k]>0);
+ $("diplomacyStatus").textContent=active.length?active.map(k=>rivalNames[k]+": patto per "+rivalTruces[k]+" turni").join(" · "):"Nessun accordo attivo.";
+}
+$("attackSelected").addEventListener("click",()=>{
+ const r=regions[selectedRegion];
+ if(!r||r.owner!=="enemy"){log("Seleziona una regione controllata da una fazione rivale.");return;}
+ if(units<1){log("Non hai fanteria disponibile per l'operazione.");return;}
+ const power=units*70+Math.floor(res.morale/5),defense=r.garrison||120;
+ units--;
+ if(power>=defense){r.owner="player";log("Vittoria: "+r.name+" conquistata alle forze di "+r.faction+".");res.morale=Math.min(100,res.morale+4);r.faction=null;}
+ else{log("Offensiva respinta a "+r.name+". Una unità è stata persa.");res.morale=Math.max(0,res.morale-4);}
+ render();
+});
+$("diplomacyOffer").addEventListener("click",()=>{
+ const rival=Object.keys(rivalNames).find(k=>k!==player&&(rivalTruces[k]||0)===0);
+ if(!rival){log("Tutte le fazioni rivali hanno già un accordo temporaneo.");return;}
+ if(res.euros<300){log("Servono 300€ per avviare il negoziato.");return;}
+ res.euros-=300;rivalRelations[rival]=(rivalRelations[rival]||0)+20;rivalTruces[rival]=3;
+ log("Accordo diplomatico temporaneo siglato con "+rivalNames[rival]+".");
+ updateDiplomacyLabel();render();
+});
+$("saveGame").addEventListener("click",()=>{
+ try{localStorage.setItem("warItalySave",JSON.stringify({player,turn,res,units,buildings,selectedRegion,regions,rivalRelations,rivalTruces,started}));log("Campagna salvata su questo dispositivo.");}
+ catch(e){log("Salvataggio locale non disponibile.");}
+});
+$("loadGame").addEventListener("click",()=>{
+ try{const s=JSON.parse(localStorage.getItem("warItalySave")||"null");if(!s){log("Nessun salvataggio trovato.");return;}
+ player=s.player;turn=s.turn;res=s.res;units=s.units;buildings=s.buildings;selectedRegion=s.selectedRegion;
+ regions.splice(0,regions.length,...s.regions);rivalRelations=s.rivalRelations||{};rivalTruces=s.rivalTruces||{};started=s.started;
+ render();updateDiplomacyLabel();log("Campagna caricata correttamente.");
+ }catch(e){log("Il salvataggio non è leggibile.");}
+});
+$("enterGame").addEventListener("click",()=>{if(started){setInitialRivals();render();}else{setInitialRivals();render();}updateDiplomacyLabel();});
+$("endTurn").addEventListener("click",()=>{
+ Object.keys(rivalTruces).forEach(k=>{if(rivalTruces[k]>0)rivalTruces[k]--;});
+ const rivals=Object.keys(rivalNames).filter(k=>k!==player&&(rivalTruces[k]||0)===0);
+ const free=regions.filter(r=>r.owner==="neutral");
+ if(free.length&&rivals.length&&Math.random()<0.65){
+  const k=rivals[Math.floor(Math.random()*rivals.length)],r=free[Math.floor(Math.random()*free.length)];
+  r.owner="enemy";r.faction=rivalNames[k];r.garrison=100+turn*8;
+  log(rivalNames[k]+" ha esteso la propria influenza in "+r.name+".");
+ }
+ updateDiplomacyLabel();render();
+});
+
 })();
 </script></body></html>
