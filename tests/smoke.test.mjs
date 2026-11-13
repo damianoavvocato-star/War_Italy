@@ -68,9 +68,9 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 4.1.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 4\.1\.0/);
-  assert.equal(packageJson.version, "4.1.0");
+test("versione 4.2.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 4\.2\.0/);
+  assert.equal(packageJson.version, "4.2.0");
 });
 
 test("logistica con carburante, munizioni, consumo, rifornimento e migrazione salvataggi", () => {
