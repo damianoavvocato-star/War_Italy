@@ -32,6 +32,15 @@ test("quattro fazioni, dodici regioni e sei tecnologie", () => {
   }
 });
 
+test("difficoltà campagna configurabile, bilanciata e salvata", () => {
+  for (const level of ["easy", "standard", "hard"]) {
+    assert.match(html, new RegExp('option value="' + level + '"'));
+  }
+  assert.match(script, /difficultyFactor=difficulty==="hard"/);
+  assert.match(script, /JSON.stringify\(\{player,difficulty,turn,res/);
+  assert.match(script, /difficulty=\["easy","standard","hard"\]\.includes\(s\.difficulty\)/);
+});
+
 test("menu compatto, salvataggi e sistemi principali presenti", () => {
   for (const tab of ["overview", "military", "economy", "research", "system"]) {
     assert.match(html, new RegExp('data-menu-tab="' + tab + '"'));
