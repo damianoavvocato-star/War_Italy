@@ -128,7 +128,7 @@ input[type=file]::file-selector-button{border:0;border-radius:8px;padding:8px 10
 <button type="button" class="map-control layer-active" id="mapSettlementsToggle" aria-pressed="true">INSEDIAMENTI</button>
 <button type="button" class="map-control layer-active" id="mapDetailToggle" aria-pressed="true">DETTAGLIO TERRITORI</button>
 </div><div class="region-grid" id="regionGrid"><div class="map-world" id="mapWorld">
-<svg class="map-overlay" viewBox="0 0 100 140" preserveAspectRatio="none" aria-hidden="true">
+<svg class="map-overlay" viewBox="0 0 100 140" preserveAspectRatio="none" role="group" aria-label="Carta interattiva dei territori italiani">
 <defs>
  <linearGradient id="italyLand" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#a5a17a"/><stop offset=".48" stop-color="#778668"/><stop offset="1" stop-color="#4f6b5c"/></linearGradient>
  <pattern id="mapGrain" width="5" height="5" patternUnits="userSpaceOnUse"><path d="M0 4L5 1M-1 1L2 0" stroke="#d8c99b" stroke-width=".16" opacity=".3"/></pattern>
@@ -680,7 +680,7 @@ function rivalAI(){
  const rivals=Object.keys(rivalNames).filter(k=>k!==player&&(rivalTruces[k]||0)===0);
  if(!rivals.length)return;
  const countOwned=k=>regions.filter(r=>r.owner==="enemy"&&r.faction===rivalNames[k]).length;
- const free=regions.filter((r,i)=>r.owner==="neutral"&&hasAdjacentTerritory(i,"enemy",rivalNames[rival]));
+ const free=regions.filter(r=>r.owner==="neutral");
  const rival=rivals.slice().sort((a,b)=>{
   const sa=rivalStrategy[a],sb=rivalStrategy[b];
   return (countOwned(a)-Math.min(3,sa.strength*1.5))-(countOwned(b)-Math.min(3,sb.strength*1.5));
@@ -689,7 +689,7 @@ function rivalAI(){
  const difficultyFactor=difficulty==="hard"?1.25:difficulty==="easy"?0.8:1;
  const own=regions.filter(r=>r.owner==="enemy"&&r.faction===rivalNames[rival]);
  const scoreRegion=r=>(strategy.areas.includes(r.area)?42:0)+(strategy.priority.includes(r.bonus)?48:0)+(r.income||0)/18+(r.coastal&&strategy.style==="marittima"?35:0);
- const preferredFree=free.slice().sort((a,b)=>scoreRegion(b)-scoreRegion(a));
+ const preferredFree=free.filter(r=>hasAdjacentTerritory(regions.indexOf(r),"enemy",rivalNames[rival])).sort((a,b)=>scoreRegion(b)-scoreRegion(a));
  const ownWeak=own.slice().sort((a,b)=>((a.garrison||0)+(a.fortification||0)*80)-((b.garrison||0)+(b.fortification||0)*80));
  const playerTargets=regions.filter((r,i)=>r.owner==="player"&&hasAdjacentTerritory(i,"enemy",rivalNames[rival])).sort((a,b)=>{
   const preference=r=>strategy.areas.includes(r.area)?24:0;

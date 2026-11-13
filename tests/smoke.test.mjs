@@ -104,5 +104,5 @@ test("selezione diretta dei territori e fronti contigui", () => {
   assert.match(script, /!hasAdjacentTerritory\(selectedRegion,"player"\)/);
   assert.match(script, /territorio neutrale collegato al fronte/);
   assert.match(script, /bersaglio non confina con un tuo territorio/);
-  assert.match(script, /hasAdjacentTerritory\(i,"enemy",rivalNames\[rival\]\)/);
+  assert.match(script, /free\.filter\(r=>hasAdjacentTerritory\(regions\.indexOf\(r\),"enemy",rivalNames\[rival\]\)\)/);
 });
