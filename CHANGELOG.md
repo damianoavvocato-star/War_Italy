@@ -1,5 +1,14 @@
 # WAR ITALY — Cronologia versioni
 
+## 3.5.0 — Unità schierate e movimento operativo
+
+- L'esercito nazionale ha ora una posizione sulla mappa e un marker selezionabile.
+- È possibile spostare l'esercito tra territori amici contigui; le offensive terrestri e le annessioni neutrali richiedono la presenza dell'esercito sul fronte adiacente.
+- Le flotte hanno una posizione cartografica, un marker dedicato e ordini di schieramento/spostamento tra porti amici collegati via mare.
+- Le vittorie terrestri e navali spostano l'unità operativa nel territorio conquistato.
+- Le posizioni di esercito e flotta sono incluse nei salvataggi; i vecchi salvataggi ricevono una posizione iniziale compatibile.
+
+
 ## 3.4.0 — Fronti contigui e selezione cartografica
 
 - I 12 territori strategici sono ora selezionabili anche toccando direttamente i rispettivi poligoni sulla mappa, oltre ai pulsanti territoriali.

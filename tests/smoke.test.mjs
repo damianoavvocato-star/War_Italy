@@ -69,9 +69,9 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 3.4.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 3\.4\.0/);
-  assert.equal(packageJson.version, "3.4.0");
+test("versione 3.5.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 3\.5\.0/);
+  assert.equal(packageJson.version, "3.5.0");
 });
 
 test("atlante multilivello con zoom, pan e livelli cartografici", () => {
@@ -105,4 +105,18 @@ test("selezione diretta dei territori e fronti contigui", () => {
   assert.match(script, /territorio neutrale collegato al fronte/);
   assert.match(script, /bersaglio non confina con un tuo territorio/);
   assert.match(script, /free\.filter\(r=>hasAdjacentTerritory\(regions\.indexOf\(r\),"enemy",rivalNames\[rival\]\)\)/);
+});
+
+test("eserciti e flotte schierati, spostabili e salvati", () => {
+  assert.match(html, /class="army-marker"/);
+  assert.match(html, /class="fleet-marker"/);
+  assert.match(html, /id="moveArmy"/);
+  assert.match(html, /id="moveFleet"/);
+  assert.match(script, /function canMoveArmyTo\(index\)/);
+  assert.match(script, /function canMoveFleetTo\(index\)/);
+  assert.match(script, /function moveArmyToSelected\(\)/);
+  assert.match(script, /function moveFleetToSelected\(\)/);
+  assert.match(script, /armyLocation,fleetLocation,regions/);
+  assert.match(script, /s\.armyLocation/);
+  assert.match(script, /armyLocation=b\.regionIndex/);
 });
