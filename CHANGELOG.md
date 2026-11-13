@@ -1,5 +1,12 @@
 # WAR ITALY — Cronologia versioni
 
+## 4.3.0 — Sala tattica e battaglie ambientali
+- Nuova sala tattica con terreno, meteo e copertura per ogni offensiva.
+- Montagne e centri urbani rafforzano la difesa; pioggia e nebbia influenzano le operazioni aeree.
+- La copertura riduce le perdite durante sconfitte e ritirate; il rapporto registra le condizioni dello scontro.
+- Nessuna modifica distruttiva ai salvataggi precedenti.
+
+
 ## 4.2.0 — Guerra e logistica
 
 - Introdotte due risorse operative: carburante e munizioni, con depositi fino a 300 unità.
