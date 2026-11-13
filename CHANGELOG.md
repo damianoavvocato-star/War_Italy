@@ -1,5 +1,14 @@
 # WAR ITALY — Cronologia versioni
 
+## 3.0.1 — Ripristino della mappa strategica italiana
+
+- Ripristinata la mappa geografica della penisola italiana, con Sardegna e Sicilia.
+- Aggiunti dodici territori regionali visualizzati direttamente sulla carta.
+- Colori territoriali dinamici per regioni controllate, neutrali e contese.
+- Inseriti riferimenti geografici, città principali, rotte e dettagli topografici in stile mappa strategica classica.
+- Le dodici regioni restano selezionabili e collegate ai rapporti territoriali e alle azioni di campagna.
+- Aggiunti controlli automatici per verificare presenza, province e aggiornamento dei colori della mappa.
+
 ## 3.0.0 — Edizione strategica completa
 
 - Interfaccia tattica rinnovata e menu mobile compatto in cinque categorie.
@@ -12,28 +21,3 @@
 - Tre slot manuali, salvataggio automatico e backup JSON esportabili/importabili con validazione.
 - Corretto il doppio avanzamento del turno e unificato l'avvio della campagna.
 - Suite di test automatici e build Android serializzata in GitHub Actions.
-
-## 2.9.0 — Backup portatili e protezione dei salvataggi
-
-- Aggiunta l'esportazione della campagna in un file JSON.
-- Aggiunta l'importazione di un backup nello slot selezionato.
-- I backup importati vengono validati prima del caricamento.
-- Aggiunti test automatici per importazione, esportazione e validazione.
-
-## 2.8.0 — Difficoltà e intelligenza delle fazioni
-
-- Aggiunti tre livelli di difficoltà selezionabili prima della campagna.
-- Risorse iniziali e fazioni rivali bilanciate in base alla difficoltà.
-- Difficoltà salvata e ripristinata con la partita.
-
-## 2.7.0 — Stabilità e affidabilità
-
-- Eliminata la doppia esecuzione del comando Fine turno.
-- Unificato l'avvio della campagna.
-- Inizializzate tutte le sei tecnologie.
-- Aggiunti test automatici e controlli in GitHub Actions.
-
-## 2.6.0 — Interfaccia e campagna
-
-- Restyling dell'interfaccia tattica e ottimizzazione mobile.
-- Menu di comando compatto in cinque categorie.
