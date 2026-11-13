@@ -101,17 +101,17 @@ test("selezione diretta dei territori e fronti contigui", () => {
   assert.match(script, /mapSvg\.querySelectorAll\("\.province\[id\^='province-'\]"\)/);
   assert.match(script, /const regionAdjacency=\[\[/);
   assert.match(script, /function hasAdjacentTerritory\(index,owner,faction=null\)/);
-  assert.match(script, /!hasAdjacentTerritory\(selectedRegion,"player"\)/);
+  assert.match(script, /armyLocation===null\|\|!\(\(regionAdjacency\[armyLocation\]\|\|\[\]\)\.includes\(selectedRegion\)\)/);
   assert.match(script, /territorio neutrale collegato al fronte/);
-  assert.match(script, /bersaglio non confina con un tuo territorio/);
+  assert.match(script, /l\\u2019esercito deve trovarsi in un territorio confinante/);
   assert.match(script, /free\.filter\(r=>hasAdjacentTerritory\(regions\.indexOf\(r\),"enemy",rivalNames\[rival\]\)\)/);
 });
 
 test("eserciti e flotte schierati, spostabili e salvati", () => {
-  assert.match(html, /class="army-marker"/);
-  assert.match(html, /class="fleet-marker"/);
-  assert.match(html, /id="moveArmy"/);
-  assert.match(html, /id="moveFleet"/);
+  assert.match(script, /marker\.className="army-marker"/);
+  assert.match(script, /marker\.className="fleet-marker"/);
+  assert.match(script, /id="moveArmy"/);
+  assert.match(script, /id="moveFleet"/);
   assert.match(script, /function canMoveArmyTo\(index\)/);
   assert.match(script, /function canMoveFleetTo\(index\)/);
   assert.match(script, /function moveArmyToSelected\(\)/);
