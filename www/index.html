@@ -162,7 +162,7 @@ function setCount(k,n){if(k==="infantry")units=n;else if(k==="tank")tanks=n;else
 function normalizeHP(){Object.keys(hpMax).forEach(k=>{if(hp[k]==null)hp[k]=countUnit(k)*hpMax[k];hp[k]=Math.max(0,Math.min(hp[k],countUnit(k)*hpMax[k]));setCount(k,Math.min(countUnit(k),Math.ceil(hp[k]/hpMax[k])));});}
 function damageUnit(k,n){hp[k]=Math.max(0,(hp[k]||0)-n);setCount(k,Math.ceil(hp[k]/hpMax[k]));}
 function addUnit(k){setCount(k,countUnit(k)+1);hp[k]=(hp[k]||0)+hpMax[k];}
-let researchPoints=0,techs={land:false,air:false,cyber:false},missionComplete=false;
+let researchPoints=0,techs={land:false,air:false,cyber:false,logistics:false,renewables:false,shield:false},missionComplete=false;
 let campaignMission=1,campaignWon=false,campaignLost=false;
 let campaignStats={battles:0,wins:0,losses:0,regionsCaptured:0,retreats:0};
 let pendingBattle=null,lastBattleReport=null;
@@ -283,11 +283,11 @@ applySettings();
 
 document.querySelectorAll("[data-faction]").forEach(b=>b.onclick=()=>{selected=b.dataset.faction;document.querySelectorAll("[data-faction]").forEach(x=>x.classList.toggle("selected",x===b));const f=factionData[selected];$("factionDetail").innerHTML='<h3>'+f.icon+' '+f.name+'</h3><p>'+f.desc+'</p><p><b>Punto di forza:</b> '+f.bonus+'</p><p><b>Difficoltà:</b> '+f.difficulty+'</p>'; $("confirm").disabled=false});
 $("confirm").onclick=()=>{if(!selected)return;player=selected;const f=factionData[player];$("briefingTitle").textContent=f.name.toUpperCase();$("briefingText").textContent=f.desc+" "+f.bonus+" Punto di partenza: "+f.start+".";show("briefing")};
-$("enterGame").onclick=()=>{if(started){show("game");return}started=true;const f=factionData[player];regions.find(r=>r.name===f.start).owner="player";if(player==="italia")res.morale+=10;if(player==="legione")res.energy+=20;if(player==="aquila")res.materials+=20;if(player==="alpina"){res.materials+=10;res.morale+=10}units=2;tanks=0;aircraft=0;ships=0;commandos=0;hp={infantry:300,tank:0,aircraft:0,ship:0,commando:0};selectedRegion=regions.findIndex(r=>r.name===f.start);log("Campagna avviata. Comando assegnato a "+f.name+".");log("Presidio iniziale: "+f.start+".");render();show("game")};
+$("enterGame").onclick=()=>{if(started){show("game");return}started=true;const f=factionData[player];regions.find(r=>r.name===f.start).owner="player";if(player==="italia")res.morale+=10;if(player==="legione")res.energy+=20;if(player==="aquila")res.materials+=20;if(player==="alpina"){res.materials+=10;res.morale+=10}units=2;tanks=0;aircraft=0;ships=0;commandos=0;hp={infantry:300,tank:0,aircraft:0,ship:0,commando:0};selectedRegion=regions.findIndex(r=>r.name===f.start);setInitialRivals();log("Campagna avviata. Comando assegnato a "+f.name+".");log("Presidio iniziale: "+f.start+".");render();updateDiplomacyLabel();show("game")};
 $("build").onclick=()=>{if(!can(1200,15))return;res.euros-=1200;res.materials-=15;buildings++;res.energy+=15;log("Centrale energetica completata: +15 energia.");render()};
 $("recruit").onclick=()=>{if(!can(500,5))return;res.euros-=500;res.materials-=5;units++;log("Reclutata una nuova unità di fanteria.");render()};
 $("stabilize").onclick=()=>{if(res.euros<500){log("Euro insufficienti per il programma sociale.");return}if(res.morale>=100){log("Consenso già al massimo.");return}res.euros-=500;res.morale=Math.min(100,res.morale+8);log("Programma sociale: consenso aumentato.");render()};
-$("endTurn").onclick=()=>{if(pendingBattle){log("Concludi o annulla l'ordine di battaglia prima di terminare il turno.");return;}turn++;const controlled=regions.filter(r=>r.owner==="player");const income=controlled.reduce((s,r)=>s+r.income,0)+seaRoutes.length*220;res.euros+=income;res.energy+=buildings*5+controlled.length*2;res.materials+=Math.max(2,Math.floor(controlled.length*1.5));researchPoints+=1+(techs.cyber?1:0);if(res.morale<35){res.euros=Math.max(0,res.euros-150);log("Instabilità: entrate ridotte.");}log("Fine turno. Entrate: +"+fmt(income)+"€. Produzione aggiornata.");render()};
+
 
 /* WAR ITALY 0.4.0: combat, rival AI, diplomacy and local save */
 const rivalNames={italia:"Repubblica Italiana",legione:"Legione Mediterranea",aquila:"Corporazione Aquila",alpina:"Alleanza Alpina"};
@@ -533,7 +533,7 @@ $("loadGame").addEventListener("click",()=>{
  render();updateDiplomacyLabel();$("saveSlotStatus").textContent="Slot "+slot+" caricato · Turno "+turn+" · "+factionData[player].name+".";log("Campagna caricata dallo slot "+slot+".");
  }catch(e){log("Il salvataggio non è leggibile.");}
 });
-$("enterGame").addEventListener("click",()=>{if(started){setInitialRivals();render();}else{setInitialRivals();render();}updateDiplomacyLabel();});
+
 const rivalStrategy={
  italia:{areas:["Centro","Nord"],priority:["Istituzioni","Finanza e industria"],style:"equilibrata",strength:1.0},
  legione:{areas:["Isole","Sud"],priority:["Porti","Rotte mediterranee","Cantieristica"],style:"marittima",strength:1.08},
