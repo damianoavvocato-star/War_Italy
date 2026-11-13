@@ -22,6 +22,13 @@ body.large-text{font-size:18px}body.large-text .muted,body.large-text .note{font
 .map-overlay .hide-terrain .terrain-detail,.map-overlay.hide-terrain .terrain-detail,.map-overlay.hide-terrain .mountain,.map-overlay.hide-terrain .mountain-shadow{display:none}
 .map-overlay.hide-borders .border-lines{display:none}
 .map-overlay.hide-cities .city-layer{display:none}
+.map-overlay .city-label{font-size:2.45px;letter-spacing:.08px}
+.map-overlay .city-dot{fill:#ffe49a;stroke:#332b1d;stroke-width:.55}
+.map-overlay .port-ring{fill:#173e55;stroke:#f4d98e;stroke-width:.55}
+.map-overlay .port-glyph{fill:none;stroke:#fff0c3;stroke-width:.48;stroke-linecap:round;stroke-linejoin:round}
+.map-overlay .port-layer{opacity:.98}
+.map-overlay.hide-settlements .settlement-layer{display:none}
+.map-overlay.hide-cities .city-layer{display:none}
 .map-compass{pointer-events:none}
 @media(max-width:390px){.map-toolbar{gap:4px}.map-control{padding:7px 8px;font-size:8px}.map-zoom-readout{min-width:45px}}
 /* WAR ITALY 2.6 · interfaccia tattica rinnovata */
@@ -87,7 +94,7 @@ select:focus-visible{outline:3px solid #e3bd55;outline-offset:2px}\ninput[type=f
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style></head><body><main class="shell">
 <header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE · 2035</div></header>
-<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">WAR ITALY · BUILD 3.1.0</p></section>
+<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">WAR ITALY · BUILD 3.2.0</p></section>
 <section id="selection" class="screen" hidden><div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p class="muted">Ogni schieramento offre un diverso stile strategico.</p></div><div class="grid" id="factionGrid">
 <button class="card" data-faction="italia"><div class="symbol">🇮🇹</div><strong>Repubblica Italiana</strong><small>Equilibrio · Tecnologia · Diplomazia</small></button>
 <button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Mobilità · Coste</small></button>
@@ -111,6 +118,7 @@ select:focus-visible{outline:3px solid #e3bd55;outline-offset:2px}\ninput[type=f
 <button type="button" class="map-control layer-active" id="mapTerrainToggle" aria-pressed="true">TERRENO</button>
 <button type="button" class="map-control layer-active" id="mapBordersToggle" aria-pressed="true">CONFINI</button>
 <button type="button" class="map-control layer-active" id="mapCitiesToggle" aria-pressed="true">CITTÀ</button>
+<button type="button" class="map-control layer-active" id="mapSettlementsToggle" aria-pressed="true">INSEDIAMENTI</button>
 </div><div class="region-grid" id="regionGrid"><div class="map-world" id="mapWorld">
 <svg class="map-overlay" viewBox="0 0 100 140" preserveAspectRatio="none" aria-hidden="true">
 <defs>
@@ -141,17 +149,31 @@ select:focus-visible{outline:3px solid #e3bd55;outline-offset:2px}\ninput[type=f
 <path class="coast-detail" d="M18 16L27 8L42 5L55 7L68 13L76 23L73 30L79 38L76 47L84 55L91 62L87 67L78 66L73 62L69 72L64 84L59 96L56 108L51 118"/>
 <path class="route" d="M27 20L34 37L28 53L39 69L47 84L52 101L47 114 M57 22L67 42L72 57L77 63"/>
 <path class="sea-route" d="M14 86Q2 108 31 125 M74 52Q96 73 68 103"/>
-<g><g class="city-layer"><circle class="city-dot" cx="43" cy="34" r="1.5"/><text class="city-label" x="45" y="33">MILANO</text><circle class="city-dot" cx="48" cy="82" r="1.7"/><text class="city-label" x="50" y="81">ROMA</text><circle class="city-dot" cx="49" cy="101" r="1.4"/><text class="city-label" x="51" y="100">NAPOLI</text><circle class="city-dot" cx="66" cy="41" r="1.3"/><text class="city-label" x="68" y="40">VENEZIA</text><circle class="city-dot" cx="34" cy="127" r="1.2"/><text class="city-label" x="36" y="127">PALERMO</text>
-<circle class="city-dot" cx="27" cy="20" r="1"/><text class="city-label" x="29" y="19">AOSTA</text>
-<circle class="city-dot" cx="29" cy="39" r="1"/><text class="city-label" x="31" y="38">TORINO</text>
-<circle class="city-dot" cx="42" cy="28" r="1"/><text class="city-label" x="44" y="27">MILANO</text>
-<circle class="city-dot" cx="59" cy="25" r="1"/><text class="city-label" x="61" y="24">TRENTO</text>
-<circle class="city-dot" cx="70" cy="38" r="1"/><text class="city-label" x="72" y="37">TRIESTE</text>
-<circle class="city-dot" cx="41" cy="58" r="1"/><text class="city-label" x="43" y="57">BOLOGNA</text>
-<circle class="city-dot" cx="39" cy="77" r="1"/><text class="city-label" x="41" y="76">FIRENZE</text>
-<circle class="city-dot" cx="57" cy="116" r="1"/><text class="city-label" x="59" y="115">BARI</text>
-<circle class="city-dot" cx="29" cy="103" r="1"/><text class="city-label" x="31" y="102">CAGLIARI</text>
-</g></g>
+<g class="settlement-layer">
+<g class="city-layer">
+<g class="city-marker"><circle class="city-dot" cx="27" cy="20" r="1.15"/><text class="city-label" x="29" y="19">AOSTA</text></g>
+<g class="city-marker"><circle class="city-dot" cx="29" cy="39" r="1.15"/><text class="city-label" x="31" y="38">TORINO</text></g>
+<g class="city-marker"><circle class="city-dot" cx="43" cy="30" r="1.5"/><text class="city-label" x="45" y="29">MILANO</text></g>
+<g class="city-marker"><circle class="city-dot" cx="59" cy="25" r="1.15"/><text class="city-label" x="61" y="24">TRENTO</text></g>
+<g class="city-marker"><circle class="city-dot" cx="70" cy="38" r="1.15"/><text class="city-label" x="72" y="37">TRIESTE</text></g>
+<g class="city-marker"><circle class="city-dot" cx="41" cy="58" r="1.15"/><text class="city-label" x="43" y="57">BOLOGNA</text></g>
+<g class="city-marker"><circle class="city-dot" cx="39" cy="77" r="1.15"/><text class="city-label" x="41" y="76">FIRENZE</text></g>
+<g class="city-marker"><circle class="city-dot" cx="48" cy="82" r="1.7"/><text class="city-label" x="50" y="81">ROMA</text></g>
+<g class="city-marker"><circle class="city-dot" cx="49" cy="101" r="1.4"/><text class="city-label" x="51" y="100">NAPOLI</text></g>
+<g class="city-marker"><circle class="city-dot" cx="57" cy="116" r="1.15"/><text class="city-label" x="59" y="115">BARI</text></g>
+<g class="city-marker"><circle class="city-dot" cx="34" cy="127" r="1.3"/><text class="city-label" x="36" y="127">PALERMO</text></g>
+<g class="city-marker"><circle class="city-dot" cx="13" cy="84" r="1.15"/><text class="city-label" x="15" y="83">CAGLIARI</text></g>
+</g>
+<g class="port-layer">
+<g class="port-marker"><circle class="port-ring" cx="24" cy="48" r="1.7"/><path class="port-glyph" d="M22.8 48h2.4m-2 0 .4 1h1.2l.4-1"/><title>Porto di Genova</title></g>
+<g class="port-marker"><circle class="port-ring" cx="43" cy="35" r="1.7"/><path class="port-glyph" d="M41.8 35h2.4m-2 0 .4 1h1.2l.4-1"/><title>Porto di Venezia</title></g>
+<g class="port-marker"><circle class="port-ring" cx="67" cy="44" r="1.7"/><path class="port-glyph" d="M65.8 44h2.4m-2 0 .4 1h1.2l.4-1"/><title>Porto di Trieste</title></g>
+<g class="port-marker"><circle class="port-ring" cx="47" cy="87" r="1.7"/><path class="port-glyph" d="M45.8 87h2.4m-2 0 .4 1h1.2l.4-1"/><title>Porto di Civitavecchia</title></g>
+<g class="port-marker"><circle class="port-ring" cx="51" cy="103" r="1.7"/><path class="port-glyph" d="M49.8 103h2.4m-2 0 .4 1h1.2l.4-1"/><title>Porto di Napoli</title></g>
+<g class="port-marker"><circle class="port-ring" cx="58" cy="115" r="1.7"/><path class="port-glyph" d="M56.8 115h2.4m-2 0 .4 1h1.2l.4-1"/><title>Porto di Bari</title></g>
+<g class="port-marker"><circle class="port-ring" cx="34" cy="129" r="1.7"/><path class="port-glyph" d="M32.8 129h2.4m-2 0 .4 1h1.2l.4-1"/><title>Porto di Palermo</title></g>
+<g class="port-marker"><circle class="port-ring" cx="12" cy="87" r="1.7"/><path class="port-glyph" d="M10.8 87h2.4m-2 0 .4 1h1.2l.4-1"/><title>Porto di Cagliari</title></g>
+</g></g>>
 <g class="terrain-detail">
 <path d="M18 18Q32 10 45 17T72 23M16 31Q29 24 43 31T72 39M18 45Q31 39 45 47T72 54M25 60Q38 54 50 64T69 72M31 77Q43 70 55 80T66 91M39 94Q48 87 60 96T58 111"/>
 <path d="M20 21Q30 17 40 22M17 35Q29 29 38 36M25 53Q35 47 44 54M33 69Q43 64 51 72M40 88Q48 82 55 89"/>
@@ -758,6 +780,7 @@ function toggleMapLayer(button,klass){
 document.getElementById("mapTerrainToggle").addEventListener("click",event=>toggleMapLayer(event.currentTarget,"terrain"));
 document.getElementById("mapBordersToggle").addEventListener("click",event=>toggleMapLayer(event.currentTarget,"borders"));
 document.getElementById("mapCitiesToggle").addEventListener("click",event=>toggleMapLayer(event.currentTarget,"cities"));
+document.getElementById("mapSettlementsToggle").addEventListener("click",event=>toggleMapLayer(event.currentTarget,"settlements"));
 applyMapTransform();
 
 })();
