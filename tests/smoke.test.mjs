@@ -101,7 +101,8 @@ test("selezione diretta dei territori e fronti contigui", () => {
   assert.match(script, /mapSvg\.querySelectorAll\("\.province\[id\^='province-'\]"\)/);
   assert.match(script, /const regionAdjacency=\[\[/);
   assert.match(script, /function hasAdjacentTerritory\(index,owner,faction=null\)/);
-  assert.match(script, /armyLocation===null\|\|!\(\(regionAdjacency\[armyLocation\]\|\|\[\]\)\.includes\(selectedRegion\)\)/);
+  assert.match(script, /armyLocation===null/);
+  assert.match(script, /regionAdjacency\[armyLocation\].includes\(selectedRegion\)/);
   assert.match(script, /territorio neutrale collegato al fronte/);
   assert.match(script, /l\\u2019esercito deve trovarsi in un territorio confinante/);
   assert.match(script, /free\.filter\(r=>hasAdjacentTerritory\(regions\.indexOf\(r\),"enemy",rivalNames\[rival\]\)\)/);
