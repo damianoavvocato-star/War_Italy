@@ -150,3 +150,9 @@ test("WAR ITALY 4.0 usa province reali, confini regionali e migrazione 3.x", () 
   assert.match(script, /110 PROVINCE/);
   assert.match(html, /id="mapRegionsToggle"/);
 });
+
+test("l'esercito può essere ridislocato dopo la perdita di una provincia", () => {
+  assert.match(script, /armyLocation===null\?\(units\+tanks\+commandos>0\)/);
+  assert.match(script, /SCHIERA ESERCITO QUI/);
+  assert.match(script, /const lostIndex=regions\.indexOf\(target\)/);
+});
