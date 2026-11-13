@@ -237,7 +237,7 @@ $("techLand").addEventListener("click",()=>research("land","Dottrina terrestre")
 $("techLogistics").addEventListener("click",()=>research("logistics","Logistica avanzata",4));
 $("techRenewables").addEventListener("click",()=>research("renewables","Rete energetica",4));
 $("techShield").addEventListener("click",()=>research("shield","Scudo cyber",4));
-const strategicMapPositions=[[25,18],[27,34],[27,53],[44,28],[64,20],[69,39],[49,53],[35,68],[48,82],[51,99],[78,57],[38,91]];
+const strategicMapPositions=[[25,13],[27,26],[27,38],[44,20],[64,14],[69,29],[49,38],[35,49],[48,59],[51,71],[78,41],[38,91]];
 function render(){ updateBattleReport();updateEventPanel();updateIntelPanel();$("euros").textContent=fmt(res.euros);$("energy").textContent=fmt(res.energy);$("materials").textContent=fmt(res.materials);$("morale").textContent=fmt(res.morale);$("turnLabel").textContent="TURNO "+turn;$("controlCount").textContent=regions.filter(r=>r.owner==="player").length+"/12 REGIONI";$("playerFaction").textContent=factionData[player].icon+" "+factionData[player].name;$("difficultyLabel").textContent=({easy:"FACILE",standard:"STANDARD",hard:"DIFFICILE"}[difficulty]||"STANDARD");
 const ownedRegions=regions.filter(r=>r.owner==="player");
 const incomeForecast=ownedRegions.reduce((sum,r)=>sum+(r.income||0),0)+seaRoutes.length*220;
