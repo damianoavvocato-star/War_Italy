@@ -125,7 +125,7 @@ test("atlante amministrativo con 110 province ISTAT", () => {
   assert.match(html, /id="mapProvincesToggle"/);
   assert.match(html, /Confini amministrativi provinciali: ISTAT 2026/);
   assert.match(html, /class="province-layer"/);
-  assert.equal((html.match(/class="province neutral" id="province-\\d+"/g) || []).length, 110);
+  assert.equal((html.match(/class="province neutral" id="province-\d+"/g) || []).length, 110);
   assert.match(html, /data-province="Torino"/);
   assert.match(html, /data-province="Roma"/);
   assert.match(html, /data-province="Cagliari"/);
@@ -134,7 +134,7 @@ test("atlante amministrativo con 110 province ISTAT", () => {
 
 test("20 regioni ufficiali giocabili e migrazione dei vecchi salvataggi", () => {
   assert.match(html, /110 PROVINCE/);
-  assert.equal((html.match(/class="province neutral" id="province-\d+"/g) || []).length, 20);
+  assert.equal((html.match(/class="region-outline"/g) || []).length, 20);
   assert.match(script, /data\.regions\.length===12\?legacyRegionNames/);
   assert.match(script, /savedRegions\.find\(r=>r\.name===base\.name\)/);
   assert.match(script, /armyLocation=armyName\?regions\.findIndex/);
