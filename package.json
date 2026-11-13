@@ -4,7 +4,8 @@
   "private": true,
   "description": "WAR ITALY - strategia, diplomazia, guerra e futuro",
   "scripts": {
-    "android:sync": "cap sync android"
+    "android:sync": "cap sync android",
+    "test": "node --test"
   },
   "dependencies": {
     "@capacitor/android": "6.2.0",
