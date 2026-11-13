@@ -69,13 +69,13 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 3.2.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 3\.2\.0/);
-  assert.equal(packageJson.version, "3.2.0");
+test("versione 3.3.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 3\.3\.0/);
+  assert.equal(packageJson.version, "3.3.0");
 });
 
 test("atlante multilivello con zoom, pan e livelli cartografici", () => {
-  for (const id of ["mapWorld", "mapZoomIn", "mapZoomOut", "mapZoomReadout", "mapReset", "mapTerrainToggle", "mapBordersToggle", "mapCitiesToggle", "mapSettlementsToggle"]) {
+  for (const id of ["mapWorld", "mapZoomIn", "mapZoomOut", "mapZoomReadout", "mapReset", "mapTerrainToggle", "mapBordersToggle", "mapCitiesToggle", "mapSettlementsToggle", "mapDetailToggle"]) {
     assert.match(html, new RegExp('id="' + id + '"'));
   }
   assert.match(html, /mapZoom=Math\.max\(1,Math\.min\(2\.6,next\)\)/);
@@ -90,6 +90,8 @@ test("atlante multilivello con zoom, pan e livelli cartografici", () => {
   assert.match(html, /Porto di Trieste/);
   assert.match(html, /Porto di Cagliari/);
   assert.match(html, /toggleMapLayer\(event.currentTarget,"settlements"\)/);
+  assert.match(html, /class="detail-boundaries"/);
+  assert.match(html, /toggleMapLayer\(event.currentTarget,"detail"\)/);
   assert.match(html, /MILANO/);
   assert.match(html, /CAGLIARI/);
 });
