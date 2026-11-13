@@ -69,7 +69,7 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
 });
 
 test("versione 4.3.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 4\\.3\\.0/);
+  assert.match(html, /BUILD 4\.3\.0/);
   assert.equal(packageJson.version, "4.3.0");
 });
 
