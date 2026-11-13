@@ -1,5 +1,13 @@
 # WAR ITALY — Cronologia versioni
 
+## 3.6.0 — Atlante provinciale ISTAT
+
+- Integrato il livello cartografico dei confini amministrativi delle 110 province e città metropolitane italiane, derivato dai dati ISTAT 2026.
+- Aggiunto il comando PROVINCE ISTAT per mostrare o nascondere il livello provinciale senza interferire con gli altri livelli.
+- I confini sono semplificati per mantenere fluida la visualizzazione su smartphone e sono sovrapposti alla mappa strategica esistente.
+- Attribuzione della fonte geografica: ISTAT, redistribuzione CC BY 4.0 tramite guglielmo/geojson-italy.
+
+
 ## 3.5.0 — Unità schierate e movimento operativo
 
 - L'esercito nazionale ha ora una posizione sulla mappa e un marker selezionabile.

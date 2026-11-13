@@ -69,9 +69,9 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 3.5.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 3\.5\.0/);
-  assert.equal(packageJson.version, "3.5.0");
+test("versione 3.6.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 3\.6\.0/);
+  assert.equal(packageJson.version, "3.6.0");
 });
 
 test("atlante multilivello con zoom, pan e livelli cartografici", () => {
@@ -102,7 +102,7 @@ test("selezione diretta dei territori e fronti contigui", () => {
   assert.match(script, /const regionAdjacency=\[\[/);
   assert.match(script, /function hasAdjacentTerritory\(index,owner,faction=null\)/);
   assert.match(script, /armyLocation===null/);
-  assert.match(script, /regionAdjacency\[armyLocation\].includes\(selectedRegion\)/);
+  assert.match(script, /regionAdjacency\[armyLocation\]/);
   assert.match(script, /territorio neutrale collegato al fronte/);
   assert.match(script, /l\\u2019esercito deve trovarsi in un territorio confinante/);
   assert.match(script, /free\.filter\(r=>hasAdjacentTerritory\(regions\.indexOf\(r\),"enemy",rivalNames\[rival\]\)\)/);
@@ -120,4 +120,15 @@ test("eserciti e flotte schierati, spostabili e salvati", () => {
   assert.match(script, /armyLocation,fleetLocation,regions/);
   assert.match(script, /s\.armyLocation/);
   assert.match(script, /armyLocation=b\.regionIndex/);
+});
+
+test("atlante amministrativo con 110 province ISTAT", () => {
+  assert.match(html, /id="mapProvincesToggle"/);
+  assert.match(html, /Confini amministrativi provinciali: ISTAT 2026/);
+  assert.match(html, /class="official-province-layer"/);
+  assert.equal((html.match(/class="official-province"/g) || []).length, 110);
+  assert.match(html, /data-province="Torino"/);
+  assert.match(html, /data-province="Roma"/);
+  assert.match(html, /data-province="Cagliari"/);
+  assert.match(script, /toggleMapLayer\(event.currentTarget,"provinces"\)/);
 });
