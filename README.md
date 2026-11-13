@@ -1,17 +1,32 @@
-# WAR ITALY
+# WAR ITALY · 2035
 
-Progetto di strategia e simulazione geopolitica ambientato in Italia nel 2035.
+**Strategia · Diplomazia · Guerra · Futuro**
 
-## Stack iniziale
+WAR ITALY è un gioco strategico per browser e Android ambientato in un'Italia alternativa del 2035.
+
+## Funzionalità attuali
+- Quattro fazioni giocabili con bonus e punti di partenza differenti.
+- Mappa strategica con 12 macro-regioni italiane.
+- Economia, risorse, sviluppo regionale e infrastrutture.
+- Reclutamento, riparazione unità, combattimento e rapporti di battaglia.
+- Sei tecnologie, missioni progressive ed eventi strategici.
+- Diplomazia, trattati, intelligence e fazioni rivali con IA.
+- Salvataggi locali con più slot e ripresa della campagna.
+- Interfaccia mobile con menu di comando compatto, impostazioni di accessibilità e guida integrata.
+
+## Tecnologia
 - HTML, CSS e JavaScript
-- Capacitor 6
+- Capacitor 6.2.0
 - Android
-- GitHub Actions per la compilazione automatica dell'APK
+- GitHub Actions per anteprima web e compilazione APK
 
-## Generare l'APK
-Ogni push sul branch `main` avvia il workflow **WAR ITALY Android APK**. È possibile avviare una build manualmente dalla scheda Actions con **Run workflow**.
+## Anteprima web
+https://damianoavvocato-star.github.io/War_Italy/
 
-Al termine, scaricare l'artifact **WAR-ITALY-debug-APK** dalla pagina della run.
+## Generare e scaricare l'APK
+Ogni push su `main` avvia il workflow Android. Al termine della compilazione, apri la run GitHub Actions e scarica l'artifact **WAR-ITALY-debug-APK**.
 
-## Stato
-La prima build è una shell Android con schermata iniziale. Campagna, combattimento RTS, IA, salvataggi e contenuti completi sono ancora da implementare.
+Workflow: https://github.com/damianoavvocato-star/War_Italy/actions
+
+## Nota sui salvataggi
+I salvataggi sono conservati nella memoria locale del browser/dispositivo. Per non perderli, usa gli slot di salvataggio e non cancellare i dati dell'app.
