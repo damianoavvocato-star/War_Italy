@@ -1,5 +1,14 @@
 # WAR ITALY — Cronologia versioni
 
+## 4.2.0 — Guerra e logistica
+
+- Introdotte due risorse operative: carburante e munizioni, con depositi fino a 300 unità.
+- Consumo a ogni turno calcolato in base a fanteria, commando, carri, aviazione e flotta; produzione sostenuta dalle province controllate e potenziata dalla ricerca Logistica avanzata.
+- Le offensive terrestri, aeree e navali verificano le scorte prima di aprire un ordine e consumano rifornimenti quando la battaglia viene risolta o viene ordinata la ritirata.
+- Aggiunta l’azione RIFORNISCI FORZE per acquistare scorte; carenza di risorse segnalata nel registro operativo.
+- Migrazione automatica dei salvataggi precedenti con valori iniziali di carburante e munizioni.
+
+
 ## 4.1.0 — Atlante strategico evoluto
 
 - Aggiunto il livello NOMI PROVINCE: mostra le etichette provinciali quando attivato e lo zoom raggiunge almeno il 160%.
