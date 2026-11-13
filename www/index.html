@@ -6,7 +6,7 @@
 @media(max-width:390px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.region-grid{grid-template-columns:repeat(2,1fr)}.actions{flex-direction:column}}
 </style></head><body><main class="shell">
 <header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE · 2035</div></header>
-<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 0.7.0</p></section>
+<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 0.8.0</p></section>
 <section id="selection" class="screen" hidden><div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p class="muted">Ogni schieramento offre un diverso stile strategico.</p></div><div class="grid" id="factionGrid">
 <button class="card" data-faction="italia"><div class="symbol">🇮🇹</div><strong>Repubblica Italiana</strong><small>Equilibrio · Tecnologia · Diplomazia</small></button>
 <button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Mobilità · Coste</small></button>
@@ -29,7 +29,7 @@
 <div class="panel"><h2>ARSENALE · PRODUZIONE UNITÀ</h2><p class="muted">Recluta reparti specializzati per rafforzare le operazioni terrestri, aeree e navali.</p><div class="actions-grid"><button id="buyInfantry">FANTERIA · 500€ / 5 MAT.</button><button id="buyTank">CARRO ARIETE · 2.000€ / 20 MAT.</button><button id="buyAircraft">EUROFIGHTER · 3.500€ / 30 MAT.</button><button id="buyShip">CACCIATORPEDINIERE · 2.500€ / 25 MAT.</button><button id="buyCommando">COL MOSCHIN · 4.000€ / 15 MAT.</button></div><div id="units"></div><p class="note">Fanteria 150 HP · Ariete 800 HP · Eurofighter 300 HP · Cacciatorpediniere 600 HP · Col Moschin 100 HP.</p></div>
 <div class="panel"><h2>REGISTRO OPERATIVO</h2><div class="log" id="log" aria-live="polite"></div></div>
 <button class="wide secondary" id="quit">TORNA AL MENU</button>
-</section><div class="footer">WAR ITALY © 2035 · BUILD 0.7.0</div></main>
+</section><div class="footer">WAR ITALY © 2035 · BUILD 0.8.0</div></main>
 <script>
 (()=>{const $=id=>document.getElementById(id);const factionData={
 italia:{name:"Repubblica Italiana",icon:"🇮🇹",desc:"Difendi le istituzioni e ricostruisci la stabilità nazionale.",bonus:"Equilibrio economico e diplomazia: +10 consenso iniziale.",difficulty:"Media",start:"Lazio"},
@@ -59,8 +59,16 @@ $("techLand").addEventListener("click",()=>research("land","Dottrina terrestre")
 function render(){ $("euros").textContent=fmt(res.euros);$("energy").textContent=fmt(res.energy);$("materials").textContent=fmt(res.materials);$("morale").textContent=fmt(res.morale);$("turnLabel").textContent="TURNO "+turn;$("controlCount").textContent=regions.filter(r=>r.owner==="player").length+"/12 REGIONI";$("playerFaction").textContent=factionData[player].icon+" "+factionData[player].name;
 const grid=$("regionGrid");grid.innerHTML="";regions.forEach((r,i)=>{const b=document.createElement("button");b.className="region "+r.owner+(selectedRegion===i?" selected":"");b.innerHTML='<span class="rname">'+r.name+'</span><small>'+r.area+'</small>';b.addEventListener("click",()=>{selectedRegion=i;render();});grid.appendChild(b)});
 $("units").innerHTML=[["Fanteria",units,"150 HP"],["Carro Ariete",tanks,"800 HP"],["Eurofighter",aircraft,"300 HP"],["Cacciatorpediniere",ships,"600 HP"],["Col Moschin",commandos,"100 HP"],["Presidi territoriali",regions.filter(r=>r.owner==="player").length,""],["Centrali energetiche",buildings,""]].map(x=>'<div class="unitrow"><span>'+x[0]+' <small class="muted">'+x[2]+'</small></span><b>'+x[1]+'</b></div>').join("");
-renderMission();const rp=$("regionPanel");if(selectedRegion===null){rp.innerHTML="<h2>RAPPORTO TERRITORIALE</h2><p class='muted'>Seleziona una regione sulla mappa.</p>"}else{const r=regions[selectedRegion],own=r.owner==="player",neutral=r.owner==="neutral";rp.innerHTML='<h2>'+r.name.toUpperCase()+' · '+r.area.toUpperCase()+'</h2><p class="muted">Bonus regionale: '+r.bonus+'. Entrate base: '+r.income+'€ per turno.</p><p><b>Stato:</b> '+(own?"Sotto il tuo controllo":neutral?"Neutrale":"Contesa")+'</p><button class="wide" id="claim" '+(!neutral||res.euros<900||units<1?"disabled":"")+'>'+(own?"REGIONE GIÀ CONTROLLATA":neutral?"STABILISCI PRESENZA · 900€ · 1 FANTERIA":"NON DISPONIBILE")+'</button>';const c=$("claim");if(c)c.addEventListener("click",claimRegion)}}
+renderMission();const rp=$("regionPanel");if(selectedRegion===null){rp.innerHTML="<h2>RAPPORTO TERRITORIALE</h2><p class='muted'>Seleziona una regione sulla mappa.</p>"}else{const r=regions[selectedRegion],own=r.owner==="player",neutral=r.owner==="neutral";const fort=r.fortification||0;rp.innerHTML='<h2>'+r.name.toUpperCase()+' · '+r.area.toUpperCase()+'</h2><p class="muted">Bonus regionale: '+r.bonus+'. Entrate base: '+r.income+'€ per turno.</p><p><b>Stato:</b> '+(own?"Sotto il tuo controllo":neutral?"Neutrale":"Contesa")+'</p><p><b>Fortificazioni:</b> '+fort+'/2 · <b>Presidio nemico:</b> '+(r.owner==="enemy"?(r.garrison||0):"—")+'</p><button class="wide" id="claim" '+(!neutral||res.euros<900||units<1?"disabled":"")+'>'+(own?"REGIONE GIÀ CONTROLLATA":neutral?"STABILISCI PRESENZA · 900€ · 1 FANTERIA":"NON DISPONIBILE")+'</button><button class="wide secondary" id="fortify" '+(!own||fort>=2||res.euros<1000||res.materials<10?"disabled":"")+'>'+(fort>=2?"FORTIFICAZIONI AL MASSIMO":"COSTRUISCI FORTIFICAZIONE · 1.000€ · 10 MAT.")+'</button>';const c=$("claim");if(c)c.addEventListener("click",claimRegion);const fb=$("fortify");if(fb)fb.addEventListener("click",()=>fortifyRegion(selectedRegion))}}
 function claimRegion(){const r=regions[selectedRegion];if(!r||r.owner!=="neutral"||res.euros<900||units<1)return;res.euros-=900;units--;r.owner="player";res.morale=Math.min(100,res.morale+2);log("Presenza consolidata in "+r.name+".");render()}
+function fortifyRegion(index){
+ const r=regions[index];if(!r||r.owner!=="player")return;
+ r.fortification=r.fortification||0;
+ if(r.fortification>=2||res.euros<1000||res.materials<10){log("Risorse insufficienti o fortificazioni già al massimo.");return;}
+ res.euros-=1000;res.materials-=10;r.fortification++;
+ log("Fortificazione livello "+r.fortification+" completata a "+r.name+". Difesa regionale +80.");
+ render();
+}
 function can(e,m){if(res.euros<e||res.materials<m){log("Risorse insufficienti per completare l'azione.");return false}return true}
 function recruit(type,costE,costM){if(!can(costE,costM))return;res.euros-=costE;res.materials-=costM;if(type==="infantry")units++;if(type==="tank")tanks++;if(type==="aircraft")aircraft++;if(type==="ship")ships++;if(type==="commando")commandos++;log("Nuova unità prodotta: "+({infantry:"Fanteria",tank:"Carro Ariete",aircraft:"Eurofighter",ship:"Cacciatorpediniere",commando:"Col Moschin"}[type])+".");render()}
 $("buyInfantry").onclick=()=>recruit("infantry",500,5);
@@ -110,12 +118,12 @@ function executeAttack(domain){
  if(!available){log("Non disponi di unità idonee per questa offensiva.");return;}
  power=Math.floor(power*(1+Math.max(0,res.morale-50)/250));
  if(techs.cyber)power=Math.floor(power*1.1);
- const defense=r.garrison||120;
+ const defense=(r.garrison||120)+(r.fortification||0)*80;
  const terrain=domain==="land"&&["Valle d'Aosta","Trentino-Alto Adige"].includes(r.name)?1.2:1;
  const effectiveDefense=Math.ceil(defense*terrain);
  const damage=Math.max(1,Math.floor(power*(domain==="air"?.8:domain==="sea"?.9:1)));
  if(damage>=effectiveDefense){
-  r.owner="player";r.garrison=0;r.faction=null;
+  r.owner="player";r.garrison=0;r.faction=null;r.fortification=0;
   log("VITTORIA "+domain.toUpperCase()+": "+r.name+" conquistata. Forza "+power+" contro difesa "+effectiveDefense+".");
   res.morale=Math.min(100,res.morale+4);
  }else{
@@ -154,7 +162,7 @@ $("endTurn").addEventListener("click",()=>{
  const free=regions.filter(r=>r.owner==="neutral");
  if(free.length&&rivals.length&&Math.random()<0.75){
   const k=rivals[0];const preferred=free.slice().sort((a,b)=>b.income-a.income);const r=preferred.find(x=>x.area===(k==="alpina"?"Nord":k==="legione"?"Isole":k==="aquila"?"Nord":"Centro"))||preferred[0];
-  r.owner="enemy";r.faction=rivalNames[k];r.garrison=110+turn*12;
+  r.owner="enemy";r.faction=rivalNames[k];r.garrison=110+turn*12;r.fortification=0;
   log(rivalNames[k]+" ha esteso la propria influenza in "+r.name+".");
  }
  updateDiplomacyLabel();render();
