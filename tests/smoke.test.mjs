@@ -68,17 +68,17 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 4.0.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 4\.0\.0/);
+test("versione 4.1.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 4\.1\.0/);
   assert.equal(packageJson.version, "4.1.0");
 });
 
 test("nomi delle 110 province attivabili con zoom cartografico", () => {
   assert.match(html, /id="mapProvinceLabelsToggle"/);
   assert.match(script, /provinceLabelLayer/);
-  assert.match(script, /provinceLabelsEnabled&&mapZoom>=1\\.6/);
+  assert.match(script, /provinceLabelsEnabled&&mapZoom>=1\.6/);
   assert.match(script, /data-province/);
-  assert.match(script, /updateProvinceLabels\\(\\)/);
+  assert.match(script, /updateProvinceLabels\(\)/);
 });
 
 test("atlante multilivello con zoom, pan e livelli cartografici", () => {
