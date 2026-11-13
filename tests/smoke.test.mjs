@@ -28,7 +28,7 @@ test("una sola azione per avvio campagna e fine turno", () => {
 test("quattro fazioni, 110 province e sei tecnologie", () => {
   assert.equal((script.match(/name:"(?:Repubblica Italiana|Legione Mediterranea|Corporazione Aquila|Alleanza Alpina)"/g) || []).length, 4);
   const regionBlock=script.slice(script.indexOf("const regions=["),script.indexOf("const initialRegions"));
-  assert.equal((regionBlock.match(/\\{name:/g) || []).length, 110);
+  assert.equal((regionBlock.match(/\{name:/g) || []).length, 110);
   for (const key of ["land", "air", "cyber", "logistics", "renewables", "shield"]) assert.match(script, new RegExp(key + ":false"));
 });
 
@@ -132,11 +132,11 @@ test("atlante amministrativo con 110 province ISTAT", () => {
   assert.match(script, /toggleMapLayer\(event.currentTarget,"provinces"\)/);
 });
 
-test("20 regioni ufficiali giocabili e migrazione dei vecchi salvataggi", () => {
+test("110 province giocabili e migrazione dei vecchi salvataggi e migrazione dei vecchi salvataggi", () => {
   assert.match(html, /110 PROVINCE/);
   assert.equal((html.match(/class="region-outline"/g) || []).length, 20);
   assert.match(script, /data\.regions\.length===12\?legacyRegionNames/);
-  assert.match(script, /savedRegions\.find\(r=>r\.name===base\.name\)/);
+  assert.match(script, /savedByName\.get\(base\.name\)/);
   assert.match(script, /armyLocation=armyName\?regions\.findIndex/);
 });
 
