@@ -69,8 +69,17 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
 });
 
 test("versione 4.3.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 4\.2\.0/);
+  assert.match(html, /BUILD 4\\.3\\.0/);
   assert.equal(packageJson.version, "4.3.0");
+});
+
+test("battaglie tattiche con terreno, copertura e meteo", () => {
+  for (const id of ["battleTerrain", "battleWeather", "battleCover", "battleTacticalInfo"]) assert.match(html, new RegExp('id="' + id + '"'));
+  assert.match(script, /const terrainName=mountain\?/);
+  assert.match(script, /const coverFactor=domain==="land"/);
+  assert.match(script, /const weather=\["SERENO","PIOGGIA","NEBBIA"\]/);
+  assert.match(script, /\*b\.coverFactor/);
+  assert.match(script, /b\.terrainName/);
 });
 
 test("logistica con carburante, munizioni, consumo, rifornimento e migrazione salvataggi", () => {
