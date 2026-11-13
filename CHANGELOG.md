@@ -1,5 +1,15 @@
 # WAR ITALY — Cronologia versioni
 
+## 3.1.0 — Atlante strategico multilivello
+
+- Introdotto un livello cartografico indipendente per gestire mappa e segnalini territoriali come un unico teatro operativo.
+- Aggiunti controlli di zoom progressivo fino al 260%, trascinamento della mappa e comando di ricentratura.
+- Aggiunti livelli attivabili separatamente per terreno, confini e città.
+- Arricchiti i dettagli topografici con rilievi montuosi, curve di livello stilizzate e direttrici stradali.
+- Aumentata la densità dei riferimenti urbani: Aosta, Torino, Milano, Trento, Trieste, Bologna, Firenze, Roma, Napoli, Bari, Palermo e Cagliari.
+- Conservata l'integrazione con le dodici regioni e il controllo dinamico delle fazioni.
+
+
 ## 3.0.1 — Ripristino della mappa strategica italiana
 
 - Ripristinata la mappa geografica della penisola italiana, con Sardegna e Sicilia.
