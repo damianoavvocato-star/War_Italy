@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 
 const html = readFileSync(new URL("../www/index.html", import.meta.url), "utf8");
-const scriptMatch = html.match(/<script[^>]*>([\\s\\S]*?)<\\/script>/i);
+const scriptMatch = html.match(/<script[^>]*>([\s\S]*?)<\/script>/i);
 assert.ok(scriptMatch, "script principale del gioco presente");
 const script = scriptMatch[1];
 
@@ -12,21 +12,21 @@ test("JavaScript di gioco valido", () => {
 });
 
 test("ID HTML univoci e riferimenti DOM risolti", () => {
-  const ids = [...html.matchAll(/\\bid=["']([^"']+)["']/g)].map((m) => m[1]);
+  const ids = [...html.matchAll(/\bid=["']([^"']+)["']/g)].map((m) => m[1]);
   assert.equal(new Set(ids).size, ids.length, "non devono esserci ID duplicati");
-  const refs = [...script.matchAll(/\\$\\(["']([^"']+)["']\\)/g)].map((m) => m[1]);
+  const refs = [...script.matchAll(/\$\(["']([^"']+)["']\)/g)].map((m) => m[1]);
   const missing = [...new Set(refs.filter((id) => !ids.includes(id)))];
   assert.deepEqual(missing, [], "tutti i riferimenti DOM devono esistere");
 });
 
 test("una sola azione per avvio campagna e fine turno", () => {
-  assert.equal((script.match(/\\$\\(["']endTurn["']\\)\\.(?:onclick|addEventListener)/g) || []).length, 1);
-  assert.equal((script.match(/\\$\\(["']enterGame["']\\)\\.(?:onclick|addEventListener)/g) || []).length, 1);
+  assert.equal((script.match(/\$\(["']endTurn["']\)\.(?:onclick|addEventListener)/g) || []).length, 1);
+  assert.equal((script.match(/\$\(["']enterGame["']\)\.(?:onclick|addEventListener)/g) || []).length, 1);
 });
 
 test("quattro fazioni, dodici regioni e sei tecnologie", () => {
   assert.equal((script.match(/name:"(?:Repubblica Italiana|Legione Mediterranea|Corporazione Aquila|Alleanza Alpina)"/g) || []).length, 4);
-  assert.equal((script.match(/\\{name:"(?:Valle d'Aosta|Piemonte|Liguria|Lombardia|Trentino-Alto Adige|Veneto|Emilia-Romagna|Toscana|Lazio|Campania|Puglia|Sicilia)"/g) || []).length, 12);
+  assert.equal((script.match(/\{name:"(?:Valle d'Aosta|Piemonte|Liguria|Lombardia|Trentino-Alto Adige|Veneto|Emilia-Romagna|Toscana|Lazio|Campania|Puglia|Sicilia)"/g) || []).length, 12);
   for (const key of ["land", "air", "cyber", "logistics", "renewables", "shield"]) {
     assert.match(script, new RegExp(key + ":false"));
   }
