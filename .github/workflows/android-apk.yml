@@ -32,12 +32,12 @@ jobs:
           node <<'NODE'
           const fs = require('node:fs');
           const html = fs.readFileSync('www/index.html', 'utf8');
-          const script = html.match(/<script>([\\s\\S]*?)<\\/script>/);
+          const script = html.match(/<script>([\s\S]*?)<\/script>/);
           if (!script) throw new Error('Script di gioco non trovato');
           fs.writeFileSync('/tmp/war-italy.js', script[1]);
-          const ids = [...html.matchAll(/\\bid=["']([^"']+)["']/g)].map(m => m[1]);
+          const ids = [...html.matchAll(/\bid=["']([^"']+)["']/g)].map(m => m[1]);
           const duplicates = ids.filter((id, i) => ids.indexOf(id) !== i);
-          const refs = [...script[1].matchAll(/\\$\\(["']([^"']+)["']\\)/g)].map(m => m[1]);
+          const refs = [...script[1].matchAll(/\$\(["']([^"']+)["']\)/g)].map(m => m[1]);
           const missing = [...new Set(refs.filter(id => !ids.includes(id)))];
           if (duplicates.length) throw new Error('ID HTML duplicati: ' + [...new Set(duplicates)].join(', '));
           if (missing.length) throw new Error('Riferimenti DOM senza elemento: ' + missing.join(', '));
