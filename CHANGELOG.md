@@ -1,5 +1,13 @@
 # WAR ITALY — Cronologia versioni
 
+## 2.8.0 — Difficoltà e intelligenza delle fazioni
+
+- Aggiunti tre livelli di difficoltà selezionabili prima della campagna: Facile, Standard e Difficile.
+- Le risorse iniziali e il consenso cambiano in base alla difficoltà.
+- Le fazioni rivali ricevono presidi e forza offensiva coerenti con il livello scelto.
+- La difficoltà viene salvata e ripristinata quando si carica una partita.
+- Aggiunti test automatici per la configurazione e la persistenza della difficoltà.
+
 ## 2.7.0 — Stabilità e affidabilità
 
 - Eliminata la doppia esecuzione del comando Fine turno.
