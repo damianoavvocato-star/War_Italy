@@ -37,7 +37,7 @@ body.large-text{font-size:18px}body.large-text .muted,body.large-text .note{font
 .map-overlay.hide-detail .detail-boundaries{display:none}
 .map-overlay .official-province{fill:none;stroke:#f5e7c5;stroke-width:.19;stroke-linejoin:round;stroke-linecap:round;opacity:.78;pointer-events:none}
 .map-overlay.hide-provinces .province-layer .province{stroke:transparent}
-.map-overlay .region-outline{fill:none;stroke:#f3dba0;stroke-width:.42;stroke-dasharray:1.4 .8;opacity:.9;pointer-events:none}
+.map-overlay .region-outline{fill:none;stroke:#f3dba0;stroke-width:.42;stroke-dasharray:1.4 .8;opacity:.9;pointer-events:none}.province-label-layer{display:none;pointer-events:none}.map-overlay.show-province-labels .province-label-layer{display:block}.province-label-layer text{fill:#fff3c8;font:1.55px Arial,sans-serif;font-weight:900;text-anchor:middle;paint-order:stroke;stroke:#182719;stroke-width:.48px;stroke-linejoin:round;letter-spacing:-.08px}
 .map-overlay.hide-regions .region-outline-layer{display:none}
 .map-overlay.hide-cities .city-layer{display:none}
 .map-compass{pointer-events:none}
@@ -107,7 +107,7 @@ input[type=file]::file-selector-button{border:0;border-radius:8px;padding:8px 10
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style></head><body><main class="shell">
 <header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE · 2035</div></header>
-<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">WAR ITALY · BUILD 4.0.0</p></section>
+<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">WAR ITALY · BUILD 4.1.0</p></section>
 <section id="selection" class="screen" hidden><div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p class="muted">Ogni schieramento offre un diverso stile strategico.</p></div><div class="grid" id="factionGrid">
 <button class="card" data-faction="italia"><div class="symbol">🇮🇹</div><strong>Repubblica Italiana</strong><small>Equilibrio · Tecnologia · Diplomazia</small></button>
 <button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Mobilità · Coste</small></button>
@@ -135,6 +135,7 @@ input[type=file]::file-selector-button{border:0;border-radius:8px;padding:8px 10
 <button type="button" class="map-control layer-active" id="mapDetailToggle" aria-pressed="true">DETTAGLIO TERRITORI</button>
 <button type="button" class="map-control layer-active" id="mapProvincesToggle" aria-pressed="true">CONFINI PROVINCE</button>
 <button type="button" class="map-control layer-active" id="mapRegionsToggle" aria-pressed="true">CONFINI REGIONI</button>
+<button type="button" class="map-control" id="mapProvinceLabelsToggle" aria-pressed="false">NOMI PROVINCE</button>
 </div><div class="region-grid" id="regionGrid"><div class="map-world" id="mapWorld">
 <svg class="map-overlay" viewBox="0 0 100 140" preserveAspectRatio="none" role="group" aria-label="Carta interattiva dei territori italiani">
 <defs>
@@ -1063,10 +1064,32 @@ document.querySelectorAll("#gameCommandNav [data-menu-tab]").forEach(button=>but
 setCommandTab("overview");
 /* Navigazione cartografica: zoom progressivo, trascinamento e livelli indipendenti. */
 const mapGrid=document.getElementById("regionGrid"),mapWorld=document.getElementById("mapWorld"),mapSvg=mapWorld.querySelector(".map-overlay");
-let mapZoom=1,mapPanX=0,mapPanY=0,mapDrag=null;
+let mapZoom=1,mapPanX=0,mapPanY=0,mapDrag=null,provinceLabelsEnabled=false;
+const provinceLabelLayer=document.createElementNS("http://www.w3.org/2000/svg","g");
+provinceLabelLayer.setAttribute("class","province-label-layer");
+provinceLabelLayer.setAttribute("aria-hidden","true");
+strategicMapPositions.forEach((position,index)=>{
+ const provincePath=mapSvg.querySelector("#province-"+index);
+ if(!provincePath)return;
+ const label=document.createElementNS("http://www.w3.org/2000/svg","text");
+ label.setAttribute("x",String(position[0]));label.setAttribute("y",String(position[1]));
+ label.textContent=provincePath.getAttribute("data-province")||"";
+ provinceLabelLayer.appendChild(label);
+});
+mapSvg.appendChild(provinceLabelLayer);
+function updateProvinceLabels(){
+ mapSvg.classList.toggle("show-province-labels",provinceLabelsEnabled&&mapZoom>=1.6);
+}
+document.getElementById("mapProvinceLabelsToggle").addEventListener("click",event=>{
+ provinceLabelsEnabled=!provinceLabelsEnabled;
+ event.currentTarget.setAttribute("aria-pressed",String(provinceLabelsEnabled));
+ event.currentTarget.classList.toggle("layer-active",provinceLabelsEnabled);
+ updateProvinceLabels();
+});
 function applyMapTransform(){
  mapWorld.style.transform="translate("+mapPanX+"px,"+mapPanY+"px) scale("+mapZoom+")";
  document.getElementById("mapZoomReadout").textContent=Math.round(mapZoom*100)+"%";
+ updateProvinceLabels();
 }
 function setMapZoom(next){mapZoom=Math.max(1,Math.min(2.6,next));applyMapTransform();}
 document.getElementById("mapZoomIn").addEventListener("click",()=>setMapZoom(mapZoom+.2));

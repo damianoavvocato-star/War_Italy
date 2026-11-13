@@ -1,5 +1,12 @@
 # WAR ITALY — Cronologia versioni
 
+## 4.1.0 — Atlante strategico evoluto
+
+- Aggiunto il livello NOMI PROVINCE: mostra le etichette provinciali quando attivato e lo zoom raggiunge almeno il 160%.
+- Le etichette derivano dai nomi già presenti nei 110 poligoni e seguono zoom e trascinamento della mappa.
+- Il livello è indipendente dagli altri controlli e non modifica proprietà, adiacenze o salvataggi.
+
+
 ## 4.0.0 — Campagna provinciale completa
 
 - La mappa passa da 20 regioni a 110 province giocabili, con geometrie provinciali derivate dai confini ISTAT 2026.
