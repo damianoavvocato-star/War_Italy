@@ -68,19 +68,19 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 4.2.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 4\.2\.0/);
-  assert.equal(packageJson.version, "4.2.0");
+test("versione 4.1.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 4\.1\.0/);
+  assert.equal(packageJson.version, "4.1.0");
 });
 
 test("logistica con carburante, munizioni, consumo, rifornimento e migrazione salvataggi", () => {
   for (const id of ["fuel", "ammo", "refuel", "supplyStatus"]) assert.match(html, new RegExp('id="' + id + '"'));
-  assert.match(script, /function processLogistics\(\)/);
-  assert.match(script, /fuelUse=units\+commandos/);
-  assert.match(script, /ammoUse=units\*2/);
+  assert.match(script, /function processLogistics\\(\\)/);
+  assert.match(script, /fuelUse=units\\+commandos/);
+  assert.match(script, /ammoUse=units\\*2/);
   assert.match(script, /supplyFuel,supplyAmmo/);
-  assert.match(script, /res=\{euros:0,energy:0,materials:0,morale:0,fuel:140,ammo:120/);
-  assert.match(script, /processLogistics\(\)/);
+  assert.match(script, /res=\\{euros:0,energy:0,materials:0,morale:0,fuel:140,ammo:120/);
+  assert.match(script, /processLogistics\\(\\)/);
 });
 
 test("nomi delle 110 province attivabili con zoom cartografico", () => {
@@ -121,7 +121,7 @@ test("selezione diretta dei territori e fronti contigui", () => {
   assert.match(script, /armyLocation===null/);
   assert.match(script, /regionAdjacency\[armyLocation\]/);
   assert.match(script, /territorio neutrale collegato al fronte/);
-  assert.match(script, /l\u2019esercito deve trovarsi in un territorio confinante/);
+  assert.match(script, /l\\u2019esercito deve trovarsi in un territorio confinante/);
   assert.match(script, /free\.filter\(r=>hasAdjacentTerritory\(regions\.indexOf\(r\),"enemy",rivalNames\[rival\]\)\)/);
 });
 
