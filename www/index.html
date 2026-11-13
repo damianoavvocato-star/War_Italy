@@ -6,7 +6,7 @@
 @media(max-width:390px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.region-grid{grid-template-columns:repeat(2,1fr)}.actions{flex-direction:column}}
 body.large-text{font-size:18px}body.large-text .muted,body.large-text .note{font-size:13px}body.high-contrast{--line:#7894b2;--muted:#d4dfeb}body.high-contrast .panel{background:#102b49;border-color:#7894b2}body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.home-tools{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:10px}.tutorial-backdrop{position:fixed;inset:0;z-index:20;background:#020914dd;display:flex;align-items:center;justify-content:center;padding:18px}.tutorial-backdrop[hidden]{display:none!important}.tutorial-card{width:min(100%,520px);background:linear-gradient(145deg,#173451,#0b1c30);border:1px solid var(--gold);border-radius:16px;padding:20px;box-shadow:0 18px 60px #000b}.tutorial-card h2{color:var(--gold);font-size:16px}.tutorial-card p{color:#d6e0eb;line-height:1.6;font-size:14px}.tutorial-count{font-size:10px;color:var(--muted);letter-spacing:1px}.settings-option{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line);font-size:12px}.settings-option button{min-width:92px;padding:9px}.home-tools button{font-size:10px;padding:12px 5px}@media(max-width:390px){.home-tools{grid-template-columns:1fr}}\n</style></head><body><main class="shell">
 <header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE · 2035</div></header>
-<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 1.8.0</p></section>
+<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">PROTOTIPO GIOCABILE · BUILD 1.9.0</p></section>
 <section id="selection" class="screen" hidden><div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p class="muted">Ogni schieramento offre un diverso stile strategico.</p></div><div class="grid" id="factionGrid">
 <button class="card" data-faction="italia"><div class="symbol">🇮🇹</div><strong>Repubblica Italiana</strong><small>Equilibrio · Tecnologia · Diplomazia</small></button>
 <button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Mobilità · Coste</small></button>
@@ -64,7 +64,7 @@ body.large-text{font-size:18px}body.large-text .muted,body.large-text .note{font
 <div class="panel"><h2>ARSENALE · PRODUZIONE UNITÀ</h2><p class="muted">Recluta reparti specializzati per rafforzare le operazioni terrestri, aeree e navali.</p><div class="actions-grid"><button id="buyInfantry">FANTERIA · 500€ / 5 MAT.</button><button id="buyTank">CARRO ARIETE · 2.000€ / 20 MAT.</button><button id="buyAircraft">EUROFIGHTER · 3.500€ / 30 MAT.</button><button id="buyShip">CACCIATORPEDINIERE · 2.500€ / 25 MAT.</button><button id="buyCommando">COL MOSCHIN · 4.000€ / 15 MAT.</button></div><div id="units"></div><button class="wide secondary" id="repairUnits">RIPARA REPARTI</button><p class="note">HP effettivi: fanteria 150 · Ariete 800 · Eurofighter 300 · nave 600 · Col Moschin 100.</p></div>
 <div class="panel"><h2>REGISTRO OPERATIVO</h2><div class="log" id="log" aria-live="polite"></div></div>
 <button class="wide secondary" id="quit">TORNA AL MENU</button>
-</section><div class="footer">WAR ITALY © 2035 · BUILD 1.8.0</div><div class="tutorial-backdrop" id="tutorialOverlay" hidden><div class="tutorial-card" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle"><div class="tutorial-count" id="tutorialCount">GUIDA · 1/6</div><h2 id="tutorialTitle">BENVENUTO, COMANDANTE</h2><p id="tutorialBody">Questa guida ti accompagna nei primi passi di WAR ITALY.</p><div class="actions"><button class="secondary" id="tutorialClose">CHIUDI</button><button class="secondary" id="tutorialBack">INDIETRO</button><button id="tutorialNext">AVANTI</button></div></div></div></main>
+</section><div class="footer">WAR ITALY © 2035 · BUILD 1.9.0</div><div class="tutorial-backdrop" id="tutorialOverlay" hidden><div class="tutorial-card" role="dialog" aria-modal="true" aria-labelledby="tutorialTitle"><div class="tutorial-count" id="tutorialCount">GUIDA · 1/6</div><h2 id="tutorialTitle">BENVENUTO, COMANDANTE</h2><p id="tutorialBody">Questa guida ti accompagna nei primi passi di WAR ITALY.</p><div class="actions"><button class="secondary" id="tutorialClose">CHIUDI</button><button class="secondary" id="tutorialBack">INDIETRO</button><button id="tutorialNext">AVANTI</button></div></div></div></main>
 <script>
 (()=>{const $=id=>document.getElementById(id);const factionData={
 italia:{name:"Repubblica Italiana",icon:"🇮🇹",desc:"Difendi le istituzioni e ricostruisci la stabilità nazionale.",bonus:"Equilibrio economico e diplomazia: +10 consenso iniziale.",difficulty:"Media",start:"Lazio"},
@@ -414,26 +414,68 @@ function strategicEvent(){
 function rivalAI(){
  const rivals=Object.keys(rivalNames).filter(k=>k!==player&&(rivalTruces[k]||0)===0);
  if(!rivals.length)return;
+ const countOwned=k=>regions.filter(r=>r.owner==="enemy"&&r.faction===rivalNames[k]).length;
  const free=regions.filter(r=>r.owner==="neutral");
- if(free.length){
-  const rival=rivals.slice().sort((a,b)=>regions.filter(r=>r.owner==="enemy"&&r.faction===rivalNames[a]).length-regions.filter(r=>r.owner==="enemy"&&r.faction===rivalNames[b]).length)[0];
-  const strategy=rivalStrategy[rival];
-  const chosen=free.map(r=>({r,score:(strategy.areas.includes(r.area)?35:0)+(strategy.priority.includes(r.bonus)?45:0)+r.income/20+Math.random()*12})).sort((a,b)=>b.score-a.score)[0].r;
+ const rival=rivals.slice().sort((a,b)=>{
+  const sa=rivalStrategy[a],sb=rivalStrategy[b];
+  return (countOwned(a)-Math.min(3,sa.strength*1.5))-(countOwned(b)-Math.min(3,sb.strength*1.5));
+ })[0];
+ const strategy=rivalStrategy[rival];
+ const own=regions.filter(r=>r.owner==="enemy"&&r.faction===rivalNames[rival]);
+ const scoreRegion=r=>(strategy.areas.includes(r.area)?42:0)+(strategy.priority.includes(r.bonus)?48:0)+(r.income||0)/18+(r.coastal&&strategy.style==="marittima"?35:0);
+ const preferredFree=free.slice().sort((a,b)=>scoreRegion(b)-scoreRegion(a));
+ const ownWeak=own.slice().sort((a,b)=>((a.garrison||0)+(a.fortification||0)*80)-((b.garrison||0)+(b.fortification||0)*80));
+ const playerTargets=regions.filter(r=>r.owner==="player").sort((a,b)=>{
+  const preference=r=>strategy.areas.includes(r.area)?24:0;
+  return (a.garrison||90)+(a.fortification||0)*80-preference(a)-((b.garrison||90)+(b.fortification||0)*80-preference(b));
+ });
+ const canExpand=preferredFree.length>0;
+ const canAttack=playerTargets.length>0;
+ const roll=Math.random();
+ let action="consolidamento";
+ if(strategy.style==="marittima")action=canExpand&&roll<0.62?"espansione":canAttack&&roll<0.88?"offensiva":"consolidamento";
+ else if(strategy.style==="industriale")action=canExpand&&roll<0.35?"espansione":canAttack&&roll<0.55?"offensiva":"industria";
+ else if(strategy.style==="difensiva")action=canExpand&&roll<0.28?"espansione":canAttack&&roll<0.48?"offensiva":"fortificazione";
+ else action=canExpand&&roll<0.48?"espansione":canAttack&&roll<0.70?"offensiva":"stabilizzazione";
+ if(!canExpand&&action==="espansione")action=canAttack?"offensiva":"consolidamento";
+ if(!canAttack&&action==="offensiva")action=canExpand?"espansione":"consolidamento";
+ if(action==="espansione"){
+  const chosen=preferredFree[0];
   chosen.owner="enemy";chosen.faction=rivalNames[rival];chosen.garrison=100+turn*9;chosen.fortification=0;
-  log(rivalNames[rival]+" ha occupato "+chosen.name+" secondo la propria dottrina "+strategy.style+".");
- }
- const activeEnemies=rivals.filter(k=>regions.some(r=>r.owner==="enemy"&&r.faction===rivalNames[k]));
- const targets=regions.filter(r=>r.owner==="player").sort((a,b)=>((a.garrison||90)+(a.fortification||0)*80)-((b.garrison||90)+(b.fortification||0)*80));
- if(!activeEnemies.length||!targets.length||Math.random()>0.42)return;
- const rival=activeEnemies.slice().sort((a,b)=>regions.filter(r=>r.owner==="enemy"&&r.faction===rivalNames[b]).length-regions.filter(r=>r.owner==="enemy"&&r.faction===rivalNames[a]).length)[0];
- const strategy=rivalStrategy[rival],target=targets[0];
- const attack=Math.floor((82+turn*8+Math.random()*35)*strategy.strength);
- const defense=(target.garrison||90)+(target.fortification||0)*80;
- if(attack>=defense){
-  target.owner="enemy";target.faction=rivalNames[rival];target.garrison=Math.max(65,Math.floor(attack-defense+85));target.fortification=0;
-  res.morale=Math.max(0,res.morale-5);log("OFFENSIVA RIVALE "+strategy.style.toUpperCase()+": "+rivalNames[rival]+" conquista "+target.name+".");
- }else{
-  target.garrison=Math.max(40,defense-attack);log("DIFESA RIUSCITA a "+target.name+": respinta l'offensiva di "+rivalNames[rival]+". Presidio "+target.garrison+".");
+  log(rivalNames[rival]+" ha ampliato il controllo su "+chosen.name+" con dottrina "+strategy.style+".");
+ }else if(action==="offensiva"){
+  const target=playerTargets[0];
+  const domainBonus=strategy.style==="marittima"&&["Liguria","Veneto","Lazio","Campania","Puglia","Sicilia"].includes(target.name)?1.18:1;
+  const attack=Math.floor((78+turn*7+Math.random()*38)*strategy.strength*domainBonus);
+  const defense=(target.garrison||90)+(target.fortification||0)*80;
+  if(attack>=defense){
+   target.owner="enemy";target.faction=rivalNames[rival];target.garrison=Math.max(65,Math.floor(attack-defense+85));target.fortification=0;
+   res.morale=Math.max(0,res.morale-5);
+   log("OFFENSIVA "+strategy.style.toUpperCase()+": "+rivalNames[rival]+" conquista "+target.name+".");
+  }else{
+   target.garrison=Math.max(40,defense-attack);
+   log("DIFESA RIUSCITA a "+target.name+": respinta l'offensiva di "+rivalNames[rival]+".");
+  }
+ }else if(action==="fortificazione"||action==="consolidamento"||action==="stabilizzazione"){
+  if(ownWeak.length){
+   const target=ownWeak[0];
+   target.fortification=Math.min(2,(target.fortification||0)+1);
+   target.garrison=Math.min(420,(target.garrison||100)+35);
+   if(strategy.style==="difensiva")log("DOTTRINA ALPINA: "+rivalNames[rival]+" fortifica "+target.name+" e rafforza il presidio.");
+   else log(rivalNames[rival]+" consolida "+target.name+" e rafforza le difese.");
+  }else if(canExpand){
+   const chosen=preferredFree[0];chosen.owner="enemy";chosen.faction=rivalNames[rival];chosen.garrison=100+turn*9;chosen.fortification=0;
+   log(rivalNames[rival]+" avvia la propria espansione su "+chosen.name+".");
+  }
+ }else if(action==="industria"){
+  if(ownWeak.length){
+   const target=ownWeak.slice().sort((a,b)=>(b.income||0)-(a.income||0))[0];
+   target.garrison=Math.min(450,(target.garrison||100)+55);
+   log("DOTTRINA INDUSTRIALE: "+rivalNames[rival]+" investe nella sicurezza produttiva di "+target.name+".");
+  }else if(canExpand){
+   const chosen=preferredFree[0];chosen.owner="enemy";chosen.faction=rivalNames[rival];chosen.garrison=100+turn*9;chosen.fortification=0;
+   log(rivalNames[rival]+" amplia la propria base industriale in "+chosen.name+".");
+  }
  }
 }
 $("endTurn").addEventListener("click",()=>{
