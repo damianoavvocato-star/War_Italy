@@ -21,6 +21,9 @@ jobs:
         with:
           node-version: 20
 
+      - name: Run automated game smoke tests
+        run: npm test
+
       - name: Set up Java
         uses: actions/setup-java@v4
         with:
