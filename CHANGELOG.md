@@ -1,5 +1,13 @@
 # WAR ITALY — Cronologia versioni
 
+## 3.3.0 — Confini territoriali ad alta densità
+
+- Aggiunto un livello cartografico di dettaglio con suddivisioni territoriali interne per dare alla mappa una lettura più vicina a un atlante da campagna strategica.
+- Introdotto il comando DETTAGLIO TERRITORI, indipendente dagli altri livelli cartografici.
+- Le suddivisioni sono una prima rappresentazione stilizzata: non vengono ancora trattate come province giocabili né modificano le regole della campagna.
+- Conservati i dodici territori giocabili esistenti per evitare incompatibilità con i salvataggi e con la logica economica/diplomatica.
+
+
 ## 3.2.0 — Città e porti del teatro operativo
 
 - Aggiunti 12 riferimenti urbani distinti ed eliminata la duplicazione del marker di Milano.
