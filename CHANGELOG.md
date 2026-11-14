@@ -1,5 +1,13 @@
 # WAR ITALY — Cronologia versioni
 
+## 4.5.0 — Economia nazionale, industria e infrastrutture
+- Aggiunto un bilancio di turno con entrate territoriali e commerciali, spese militari e civili, saldo, PIL annualizzato e occupazione stimata.
+- L’energia viene prodotta e consumata in base a centrali, tecnologie, infrastrutture e forze schierate; le carenze prolungate incidono sul consenso.
+- Ogni provincia controllata può ospitare fino a tre livelli di distretto industriale e infrastrutture.
+- I distretti aumentano le entrate e i posti di lavoro; le infrastrutture migliorano redditività e stabilità locale.
+- Nuovi campi economici e bilanci sono salvati; i salvataggi 4.x ricevono valori iniziali compatibili.
+
+
 ## 4.4.0 — Diplomazia, stabilità e rivolte
 - Potenziato il Consiglio diplomatico con indicatori di stabilità nazionale, province in tensione, alleanze e sanzioni attive.
 - Le alleanze richiedono relazioni positive o reputazione diplomatica; i pacchetti di sanzioni durano tre turni e riducono la pressione offensiva/espansionistica della fazione colpita.

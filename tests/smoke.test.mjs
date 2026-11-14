@@ -68,11 +68,34 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 4.4.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 4\.4\.0/);
-  assert.equal(packageJson.version, "4.4.0");
+test("versione 4.5.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 4\.5\.0/);
+  assert.equal(packageJson.version, "4.5.0");
 });
 
+
+
+test("economia 4.5: bilancio, occupazione, energia, industria e infrastrutture", () => {
+  for (const id of ["nationalGDP", "budgetIncome", "budgetExpenses", "budgetBalance", "employmentRate", "energyBalance", "economyStatus"]) {
+    assert.match(html, new RegExp('id="' + id + '"'));
+  }
+  assert.match(script, /function calculateEconomySnapshot\(\)/);
+  assert.match(script, /function processEconomyTurn\(\)/);
+  assert.match(script, /function buildIndustryAtSelected\(\)/);
+  assert.match(script, /function upgradeInfrastructureAtSelected\(\)/);
+  assert.match(script, /industryLevels\*130/);
+  assert.match(script, /processEconomyTurn\(\)/);
+  assert.match(html, /id="buildIndustry"/);
+  assert.match(html, /id="upgradeInfrastructure"/);
+});
+
+test("salvataggi economici retrocompatibili con regioni 4.x", () => {
+  assert.match(script, /economyLedger,agents/);
+  assert.match(script, /economyLedger=s\.economyLedger/);
+  assert.match(script, /industry:Number\.isFinite\(direct\.industry\)/);
+  assert.match(script, /infrastructure:Number\.isFinite\(direct\.infrastructure\)/);
+  assert.match(script, /industry:0,infrastructure:0/);
+});
 
 test("diplomazia 4.4: alleanze condizionate, sanzioni e stato geopolitico", () => {
   for (const id of ["nationalStability", "unrestCount", "sanctionsCount", "allianceCount", "geopoliticsStatus", "treatySanctions", "liftSanctions"]) {
