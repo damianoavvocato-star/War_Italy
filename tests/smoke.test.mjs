@@ -114,7 +114,7 @@ test("stabilità provinciale, programma civile e rivolte con migrazione compatib
   assert.match(script, /function stabilizeSelectedProvince\(\)/);
   assert.match(script, /if\(r\.stability<=18&&Math\.random\(\)</);
   assert.match(script, /r\.owner=neighbor\?"enemy":"neutral"/);
-  assert.match(script, /rivalSanctions,agents/);
+  assert.match(script, /rivalSanctions,economyLedger,agents/);
   assert.match(script, /rivalSanctions=s\.rivalSanctions\|\|\{\}/);
   assert.match(script, /stability:Number\.isFinite\(direct\.stability\)/);
   assert.match(script, /stability:Number\.isFinite\(old\.stability\)/);
