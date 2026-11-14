@@ -83,7 +83,7 @@ test("economia 4.5: bilancio, occupazione, energia, industria e infrastrutture",
   assert.match(script, /function processEconomyTurn\(\)/);
   assert.match(script, /function buildIndustryAtSelected\(\)/);
   assert.match(script, /function upgradeInfrastructureAtSelected\(\)/);
-  assert.match(script, /industryLevels\*130/);
+  assert.match(script, /\(r\.industry\|\|0\)\*130/);
   assert.match(script, /processEconomyTurn\(\)/);
   assert.match(html, /id="buildIndustry"/);
   assert.match(html, /id="upgradeInfrastructure"/);
