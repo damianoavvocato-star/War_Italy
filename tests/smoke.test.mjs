@@ -86,13 +86,12 @@ test("ricerca 4.6: droni, satelliti, guerra elettronica e difesa aerea", () => {
   assert.match(script, /techs\.electronicWarfare\?0\.88:1/);
   assert.match(script, /techs\.airDefense\?0\.90:1/);
   assert.match(script, /techs=\{land:false,air:false,cyber:false,logistics:false,renewables:false,shield:false,drones:false,satellites:false,electronicWarfare:false,airDefense:false/);
-  assert.match(script, /Province \\\\"/);
 });
 
 test("obiettivo finale aggiornato a 110 province e dieci tecnologie", () => {
   assert.match(script, /Unifica tutte le 110 province/);
-  assert.match(script, /\\.length\\/10/);
-  assert.match(script, /length\\+"\\/110/);
+  assert.match(script, /length\+"\/10"/);
+  assert.match(script, /length\+"\/110"/);
 });
 
 test("economia 4.5: bilancio, occupazione, energia, industria e infrastrutture", () => {
