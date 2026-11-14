@@ -91,7 +91,7 @@ test("ricerca 4.6: droni, satelliti, guerra elettronica e difesa aerea", () => {
 test("obiettivo finale aggiornato a 110 province e dieci tecnologie", () => {
   assert.match(script, /Unifica tutte le 110 province/);
   assert.match(script, /length\+"\/10"/);
-  assert.match(script, /length\+"\/110"/);
+  assert.match(script, /length\+"\/110 · Tecnologie/);
 });
 
 test("economia 4.5: bilancio, occupazione, energia, industria e infrastrutture", () => {
