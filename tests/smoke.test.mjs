@@ -68,9 +68,34 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 4.3.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 4\.3\.0/);
-  assert.equal(packageJson.version, "4.3.0");
+test("versione 4.4.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 4\.4\.0/);
+  assert.equal(packageJson.version, "4.4.0");
+});
+
+
+test("diplomazia 4.4: alleanze condizionate, sanzioni e stato geopolitico", () => {
+  for (const id of ["nationalStability", "unrestCount", "sanctionsCount", "allianceCount", "geopoliticsStatus", "treatySanctions", "liftSanctions"]) {
+    assert.match(html, new RegExp('id="' + id + '"'));
+  }
+  assert.match(script, /function imposeSanctions\(\)/);
+  assert.match(script, /function liftSanctions\(\)/);
+  assert.match(script, /type==="alleanza"&&\(rivalRelations\[key\]\|\|0\)<20&&diplomaticPrestige<25/);
+  assert.match(script, /rivalSanctions\[rival\]/);
+  assert.match(script, /sanctionsCount/);
+});
+
+test("stabilità provinciale, programma civile e rivolte con migrazione compatibile", () => {
+  assert.match(script, /function getNationalStability\(\)/);
+  assert.match(script, /function processStabilityTurn\(\)/);
+  assert.match(script, /function stabilizeSelectedProvince\(\)/);
+  assert.match(script, /if\(r\.stability<=18&&Math\.random\(\)</);
+  assert.match(script, /r\.owner=neighbor\?"enemy":"neutral"/);
+  assert.match(script, /rivalSanctions,agents/);
+  assert.match(script, /rivalSanctions=s\.rivalSanctions\|\|\{\}/);
+  assert.match(script, /stability:Number\.isFinite\(direct\.stability\)/);
+  assert.match(script, /stability:Number\.isFinite\(old\.stability\)/);
+  assert.match(html, /id="stabilizeProvince"/);
 });
 
 test("battaglie tattiche con terreno, copertura e meteo", () => {

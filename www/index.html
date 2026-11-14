@@ -107,7 +107,7 @@ input[type=file]::file-selector-button{border:0;border-radius:8px;padding:8px 10
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 </style></head><body><main class="shell">
 <header><div class="brand">WAR ITALY</div><div class="status">● SISTEMA ONLINE · 2035</div></header>
-<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">WAR ITALY · BUILD 4.3.0</p></section>
+<section id="home" class="screen"><div class="hero"><div class="eyebrow">SIMULATORE STRATEGICO · ITALIA</div><h1>IL FUTURO<br>SI DECIDE ORA</h1><div class="subtitle">STRATEGIA · DIPLOMAZIA · GUERRA · FUTURO</div></div><div class="panel" style="text-align:center"><div style="font-size:76px">🇮🇹</div><h2>TEATRO OPERATIVO NAZIONALE</h2><p class="muted">Quattro poteri si contendono il futuro della penisola. Scegli la tua fazione, gestisci le risorse e consolida il controllo delle regioni.</p><button class="wide" id="start">AVVIA CAMPAGNA</button><button class="wide secondary" id="continueCampaign" hidden>CONTINUA CAMPAGNA SALVATA</button><div class="home-tools"><button class="secondary" id="openTutorial">GUIDA AL GIOCO</button><button class="secondary" id="openSettings">IMPOSTAZIONI</button></div></div><div class="panel" id="settingsPanel" hidden><h2>IMPOSTAZIONI DI VISUALIZZAZIONE</h2><div class="settings-option"><span>Testo più grande</span><button class="secondary" id="toggleTextSize">DISATTIVATO</button></div><div class="settings-option"><span>Contrasto elevato</span><button class="secondary" id="toggleContrast">DISATTIVATO</button></div><div class="settings-option"><span>Riduci animazioni</span><button class="secondary" id="toggleMotion">DISATTIVATO</button></div><p class="note">Le preferenze vengono conservate su questo dispositivo.</p><button class="wide secondary" id="closeSettings">CHIUDI IMPOSTAZIONI</button></div><p class="note" style="text-align:center">WAR ITALY · BUILD 4.4.0</p></section>
 <section id="selection" class="screen" hidden><div class="screen-title"><div class="eyebrow">CAMPAGNA · ITALIA 2035</div><h2>SCEGLI LA TUA FAZIONE</h2><p class="muted">Ogni schieramento offre un diverso stile strategico.</p></div><div class="grid" id="factionGrid">
 <button class="card" data-faction="italia"><div class="symbol">🇮🇹</div><strong>Repubblica Italiana</strong><small>Equilibrio · Tecnologia · Diplomazia</small></button>
 <button class="card" data-faction="legione"><div class="symbol">⚓</div><strong>Legione Mediterranea</strong><small>Flotta · Mobilità · Coste</small></button>
@@ -360,7 +360,9 @@ M29 119L35 123L42 122M28 126L37 128L45 126"/>
 <div id="intelStatus" class="note">Nessun rapporto d'intelligence disponibile.</div>
 </div>
 <div class="detail" id="diplomacyPanel" hidden>
-<h3>CONSIGLIO DIPLOMATICO</h3>
+<h3>CONSIGLIO DIPLOMATICO · GEOPOLITICA</h3>
+<div class="stats"><div class="stat"><b id="nationalStability">—</b><span>STABILITÀ NAZIONALE</span></div><div class="stat"><b id="unrestCount">0</b><span>PROVINCE IN TENSIONE</span></div><div class="stat"><b id="sanctionsCount">0</b><span>SANZIONI ATTIVE</span></div><div class="stat"><b id="allianceCount">0</b><span>ALLEANZE</span></div></div>
+<p class="note" id="geopoliticsStatus">La stabilità civile si aggiorna a ogni turno. Le province in crisi possono ribellarsi.</p>
 <label for="diplomacyTarget">Fazione interlocutrice</label>
 <select id="diplomacyTarget"><option value="italia">Repubblica Italiana</option><option value="legione">Legione Mediterranea</option><option value="aquila">Corporazione Aquila</option><option value="alpina">Alleanza Alpina</option></select>
 <p class="muted" id="diplomacyDetails">Relazioni e trattati della fazione selezionata.</p>
@@ -370,6 +372,8 @@ M29 119L35 123L42 122M28 126L37 128L45 126"/>
 <button id="treatyAlliance">PROPORRE ALLEANZA · 900€</button>
 <button id="treatyPeace" class="secondary">PROPORRE LA PACE · 400€</button>
 <button id="treatySurrender" class="secondary">CHIEDERE LA RESA</button>
+<button id="treatySanctions" class="secondary">IMPOSI SANZIONI · 700€</button>
+<button id="liftSanctions" class="secondary">REVOCA SANZIONI</button>
 <button id="diplomaticMission" class="secondary">MISSIONE DIPLOMATICA · 250€</button>
 </div></div>
 <div class="detail" id="battleDecision" hidden><h3>ORDINE DI BATTAGLIA · SALA TATTICA</h3><p class="muted" id="battlePreview"></p><div class="stats"><div class="stat"><b id="battleTerrain">—</b><span>TERRENO</span></div><div class="stat"><b id="battleWeather">—</b><span>METEO</span></div><div class="stat"><b id="battleCover">—</b><span>COPERTURA</span></div></div><p class="note" id="battleTacticalInfo">Analisi tattica del teatro operativo.</p><p class="note">Scegli la dottrina per questo scontro:</p><div class="actions"><button class="secondary" id="stanceAssault">ASSALTO</button><button class="secondary" id="stanceBalanced">EQUILIBRATA</button><button class="secondary" id="stanceCautious">PRUDENTE</button></div><div class="actions"><button class="secondary" id="retreatBattle">RITIRATA TATTICA</button><button id="resolveBattle">CONTINUA SCONTRO</button></div></div>
@@ -498,7 +502,7 @@ const regions=[
 {name:"Medio Campidano",regionName:"Sardegna",area:"Isole",bonus:"Materie prime",income:33,coastal:true,owner:"neutral"},
 {name:"Cagliari",regionName:"Sardegna",area:"Isole",bonus:"Materie prime",income:33,coastal:true,owner:"neutral"},
 {name:"Sulcis Iglesiente",regionName:"Sardegna",area:"Isole",bonus:"Materie prime",income:33,coastal:false,owner:"neutral"}];
-const initialRegions=regions.map(r=>({...r}));
+const initialRegions=regions.map(r=>({...r,stability:70}));
 let selected=null,player=null,difficulty="standard",turn=1,res={euros:8000,energy:100,materials:80,morale:65,fuel:140,ammo:120},units=0,tanks=0,aircraft=0,ships=0,commandos=0,buildings=0,selectedRegion=null,started=false,armyLocation=null,fleetLocation=null;
 let hp={infantry:0,tank:0,aircraft:0,ship:0,commando:0};
 const hpMax={infantry:150,tank:800,aircraft:300,ship:600,commando:100};
@@ -589,7 +593,7 @@ function processLogistics(){
  if((res.fuel||0)===0&&fuelUse>fuelMade){res.morale=Math.max(0,res.morale-1);log("CRISI LOGISTICA: carburante insufficiente. Le operazioni militari sono a rischio.");}
  if((res.ammo||0)===0&&ammoUse>ammoMade){res.morale=Math.max(0,res.morale-1);log("SCORTE ESAURITE: munizioni insufficienti per sostenere le forze.");}
 }
-function render(){ updateBattleReport();updateEventPanel();updateIntelPanel();$("euros").textContent=fmt(res.euros);$("energy").textContent=fmt(res.energy);$("materials").textContent=fmt(res.materials);$("morale").textContent=fmt(res.morale);$("fuel").textContent=fmt(res.fuel||0);$("ammo").textContent=fmt(res.ammo||0);$("supplyStatus").textContent="Carburante "+fmt(res.fuel||0)+"/300 · Munizioni "+fmt(res.ammo||0)+"/300 · Le province producono scorte a ogni turno."; $("turnLabel").textContent="TURNO "+turn;$("controlCount").textContent=regions.filter(r=>r.owner==="player").length+"/110 PROVINCE";$("playerFaction").textContent=factionData[player].icon+" "+factionData[player].name;$("difficultyLabel").textContent=({easy:"FACILE",standard:"STANDARD",hard:"DIFFICILE"}[difficulty]||"STANDARD");
+function render(){ updateBattleReport();updateEventPanel();updateIntelPanel();updateDiplomacyPanel();$("euros").textContent=fmt(res.euros);$("energy").textContent=fmt(res.energy);$("materials").textContent=fmt(res.materials);$("morale").textContent=fmt(res.morale);$("fuel").textContent=fmt(res.fuel||0);$("ammo").textContent=fmt(res.ammo||0);$("supplyStatus").textContent="Carburante "+fmt(res.fuel||0)+"/300 · Munizioni "+fmt(res.ammo||0)+"/300 · Le province producono scorte a ogni turno."; $("turnLabel").textContent="TURNO "+turn;$("controlCount").textContent=regions.filter(r=>r.owner==="player").length+"/110 PROVINCE";$("playerFaction").textContent=factionData[player].icon+" "+factionData[player].name;$("difficultyLabel").textContent=({easy:"FACILE",standard:"STANDARD",hard:"DIFFICILE"}[difficulty]||"STANDARD");
 const ownedRegions=regions.filter(r=>r.owner==="player");
 const incomeForecast=ownedRegions.reduce((sum,r)=>sum+(r.income||0),0)+seaRoutes.length*220;
 const militaryPower=units*70+tanks*180+aircraft*140+ships*100+commandos*220;
@@ -612,8 +616,8 @@ if(Number.isInteger(fleetLocation)&&regions[fleetLocation]){
 }
 const mapOwned=regions.filter(r=>r.owner==="player").length,mapEnemy=regions.filter(r=>r.owner==="enemy").length,mapNeutral=regions.filter(r=>r.owner==="neutral").length;$("mapStatus").innerHTML="<span>PROVINCE CONTROLLATE: <b>"+mapOwned+"</b> · CONTESE: <b>"+mapEnemy+"</b> · NEUTRALI: <b>"+mapNeutral+"</b></span><span>ITALIA · 110 PROVINCE · 2035</span>";
 $("units").innerHTML=[["Fanteria",units,"150 HP"],["Carro Ariete",tanks,"800 HP"],["Eurofighter",aircraft,"300 HP"],["Cacciatorpediniere",ships,"600 HP"],["Col Moschin",commandos,"100 HP"],["Presidi territoriali",regions.filter(r=>r.owner==="player").length,""],["Centrali energetiche",buildings,""]].map(x=>'<div class="unitrow"><span>'+x[0]+' <small class="muted">'+x[2]+'</small></span><b>'+x[1]+'</b></div>').join("");
-normalizeHP();$("units").insertAdjacentHTML("beforeend",Object.keys(hpMax).map(k=>"<div class='unitrow'><span>"+({infantry:"HP Fanteria",tank:"HP Ariete",aircraft:"HP Eurofighter",ship:"HP Cacciatorpediniere",commando:"HP Col Moschin"}[k])+"</span><b>"+hp[k]+"/"+(countUnit(k)*hpMax[k])+"</b></div>").join(""));$("routeStatus").textContent=seaRoutes.length?seaRoutes.map(x=>x.from+" ↔ "+x.to+" (+220€/turno)").join(" · "):"Nessuna rotta attiva.";renderMission();const rp=$("regionPanel");if(selectedRegion===null){rp.innerHTML="<h2>RAPPORTO TERRITORIALE</h2><p class='muted'>Seleziona una regione sulla mappa.</p>"}else{const r=regions[selectedRegion],own=r.owner==="player",neutral=r.owner==="neutral";const fort=r.fortification||0,development=r.development||0,frontier=(regionAdjacency[selectedRegion]||[]).map(i=>regions[i].name),armyHere=armyLocation===selectedRegion,fleetHere=fleetLocation===selectedRegion;rp.innerHTML='<h2>'+r.name.toUpperCase()+' · '+r.regionName.toUpperCase()+'</h2><p class="muted">Bonus regionale: '+r.bonus+'. Entrate: '+r.income+'€ per turno.</p><p><b>Stato:</b> '+(own?"Sotto il tuo controllo":neutral?"Neutrale":"Contesa")+'</p><p><b>Fortificazioni:</b> '+fort+'/2 · <b>Sviluppo economico:</b> '+development+'/3 · <b>Presidio nemico:</b> '+(r.owner==="enemy"?(r.garrison||0):"—")+'</p><p><b>Presenza sul campo:</b> '+(armyHere?"ESERCITO PRESENTE":fleetHere?"FLOTTA PRESENTE":"Nessuna unità schierata")+'</p><button class="wide" id="moveArmy" '+(!canMoveArmyTo(selectedRegion)?"disabled":"")+'>'+(armyHere?"ESERCITO GIÀ QUI":armyLocation===null?"SCHIERA ESERCITO QUI":"SPOSTA ESERCITO QUI")+'</button><button class="wide secondary" id="moveFleet" '+(!canMoveFleetTo(selectedRegion)?"disabled":"")+'>'+(fleetHere?"FLOTTA GIÀ QUI":fleetLocation===null?"SCHIERA FLOTTA QUI":"SPOSTA FLOTTA QUI")+'</button><button class="wide" id="claim" '+(!neutral||armyLocation===null||!(regionAdjacency[armyLocation]||[]).includes(selectedRegion)||res.euros<900||units<1?"disabled":"")+'>'+(own?"REGIONE GIÀ CONTROLLATA":neutral?"STABILISCI PRESENZA · 900€ · 1 FANTERIA":"NON DISPONIBILE")+'</button><button class="wide secondary" id="fortify" '+(!own||fort>=2||res.euros<1000||res.materials<10?"disabled":"")+'>'+(fort>=2?"FORTIFICAZIONI AL MASSIMO":"COSTRUISCI FORTIFICAZIONE · 1.000€ · 10 MAT.")+'</button><button class="wide secondary" id="developRegion" '+(!own||development>=3||res.euros<800||res.materials<8?"disabled":"")+'>'+(development>=3?"SVILUPPO ECONOMICO AL MASSIMO":"INVESTI NEL TERRITORIO · 800€ · 8 MAT. (+90€/T)")+'</button>';const ma=document.getElementById("moveArmy");if(ma)ma.addEventListener("click",moveArmyToSelected);const mf=document.getElementById("moveFleet");if(mf)mf.addEventListener("click",moveFleetToSelected);const c=$("claim");if(c)c.addEventListener("click",claimRegion);const fb=$("fortify");if(fb)fb.addEventListener("click",()=>fortifyRegion(selectedRegion));const db=$("developRegion");if(db)db.addEventListener("click",()=>developRegion(selectedRegion))}if(started)autoSave()}
-function claimRegion(){const r=regions[selectedRegion];if(!r||r.owner!=="neutral"||armyLocation===null||!(regionAdjacency[armyLocation]||[]).includes(selectedRegion)||res.euros<900||units<1){log("Espansione impossibile: scegli un territorio neutrale collegato al fronte.");return;}res.euros-=900;units--;r.owner="player";res.morale=Math.min(100,res.morale+2);log("Presenza consolidata in "+r.name+".");render()}
+normalizeHP();$("units").insertAdjacentHTML("beforeend",Object.keys(hpMax).map(k=>"<div class='unitrow'><span>"+({infantry:"HP Fanteria",tank:"HP Ariete",aircraft:"HP Eurofighter",ship:"HP Cacciatorpediniere",commando:"HP Col Moschin"}[k])+"</span><b>"+hp[k]+"/"+(countUnit(k)*hpMax[k])+"</b></div>").join(""));$("routeStatus").textContent=seaRoutes.length?seaRoutes.map(x=>x.from+" ↔ "+x.to+" (+220€/turno)").join(" · "):"Nessuna rotta attiva.";renderMission();const rp=$("regionPanel");if(selectedRegion===null){rp.innerHTML="<h2>RAPPORTO TERRITORIALE</h2><p class='muted'>Seleziona una regione sulla mappa.</p>"}else{const r=regions[selectedRegion],own=r.owner==="player",neutral=r.owner==="neutral";const fort=r.fortification||0,development=r.development||0,frontier=(regionAdjacency[selectedRegion]||[]).map(i=>regions[i].name),armyHere=armyLocation===selectedRegion,fleetHere=fleetLocation===selectedRegion;rp.innerHTML='<h2>'+r.name.toUpperCase()+' · '+r.regionName.toUpperCase()+'</h2><p class="muted">Bonus regionale: '+r.bonus+'. Entrate: '+r.income+'€ per turno.</p><p><b>Stato:</b> '+(own?"Sotto il tuo controllo":neutral?"Neutrale":"Contesa")+'</p><p><b>Stabilità civile:</b> '+Math.round(Number.isFinite(r.stability)?r.stability:70)+'/100 · <b>Fortificazioni:</b> '+fort+'/2 · <b>Sviluppo economico:</b> '+development+'/3 · <b>Presidio nemico:</b> '+(r.owner==="enemy"?(r.garrison||0):"—")+'</p><p><b>Presenza sul campo:</b> '+(armyHere?"ESERCITO PRESENTE":fleetHere?"FLOTTA PRESENTE":"Nessuna unità schierata")+'</p><button class="wide" id="moveArmy" '+(!canMoveArmyTo(selectedRegion)?"disabled":"")+'>'+(armyHere?"ESERCITO GIÀ QUI":armyLocation===null?"SCHIERA ESERCITO QUI":"SPOSTA ESERCITO QUI")+'</button><button class="wide secondary" id="moveFleet" '+(!canMoveFleetTo(selectedRegion)?"disabled":"")+'>'+(fleetHere?"FLOTTA GIÀ QUI":fleetLocation===null?"SCHIERA FLOTTA QUI":"SPOSTA FLOTTA QUI")+'</button><button class="wide" id="claim" '+(!neutral||armyLocation===null||!(regionAdjacency[armyLocation]||[]).includes(selectedRegion)||res.euros<900||units<1?"disabled":"")+'>'+(own?"REGIONE GIÀ CONTROLLATA":neutral?"STABILISCI PRESENZA · 900€ · 1 FANTERIA":"NON DISPONIBILE")+'</button><button class="wide secondary" id="fortify" '+(!own||fort>=2||res.euros<1000||res.materials<10?"disabled":"")+'>'+(fort>=2?"FORTIFICAZIONI AL MASSIMO":"COSTRUISCI FORTIFICAZIONE · 1.000€ · 10 MAT.")+'</button><button class="wide secondary" id="developRegion" '+(!own||development>=3||res.euros<800||res.materials<8?"disabled":"")+'>'+(development>=3?"SVILUPPO ECONOMICO AL MASSIMO":"INVESTI NEL TERRITORIO · 800€ · 8 MAT. (+90€/T)")+'</button><button class="wide secondary" id="stabilizeProvince" '+(!own||(r.stability||70)>=100||res.euros<450||res.materials<5?"disabled":"")+'>PROGRAMMA CIVILE · 450€ · 5 MAT. (+22 STABILITÀ)</button>';const ma=document.getElementById("moveArmy");if(ma)ma.addEventListener("click",moveArmyToSelected);const mf=document.getElementById("moveFleet");if(mf)mf.addEventListener("click",moveFleetToSelected);const c=$("claim");if(c)c.addEventListener("click",claimRegion);const fb=$("fortify");if(fb)fb.addEventListener("click",()=>fortifyRegion(selectedRegion));const db=$("developRegion");if(db)db.addEventListener("click",()=>developRegion(selectedRegion));const sb=$("stabilizeProvince");if(sb)sb.addEventListener("click",stabilizeSelectedProvince)}if(started)autoSave()}
+function claimRegion(){const r=regions[selectedRegion];if(!r||r.owner!=="neutral"||armyLocation===null||!(regionAdjacency[armyLocation]||[]).includes(selectedRegion)||res.euros<900||units<1){log("Espansione impossibile: scegli un territorio neutrale collegato al fronte.");return;}res.euros-=900;units--;r.owner="player";r.stability=65;res.morale=Math.min(100,res.morale+2);log("Presenza consolidata in "+r.name+".");render()}
 function developRegion(index){
  const r=regions[index];if(!r||r.owner!=="player")return;
  r.development=r.development||0;
@@ -686,7 +690,7 @@ $("refuel").addEventListener("click",()=>{if(res.euros<600||res.materials<10){lo
 
 /* WAR ITALY 0.4.0: combat, rival AI, diplomacy and local save */
 const rivalNames={italia:"Repubblica Italiana",legione:"Legione Mediterranea",aquila:"Corporazione Aquila",alpina:"Alleanza Alpina"};
-let rivalRelations={},rivalTruces={},rivalTreaties={};
+let rivalRelations={},rivalTruces={},rivalTreaties={},rivalSanctions={};
 let agents=0,counterIntel=0,lastIntelReport=null;
 let diplomaticPrestige=0,diplomaticMissionTurn=0;
 let lastStrategicEvent=null,eventCount=0;
@@ -699,7 +703,7 @@ function resetCampaign(){
  researchPoints=0;techs={land:false,air:false,cyber:false,logistics:false,renewables:false,shield:false};
  missionComplete=false;campaignMission=1;campaignWon=false;campaignLost=false;
  campaignStats={battles:0,wins:0,losses:0,regionsCaptured:0,retreats:0};
- pendingBattle=null;lastBattleReport=null;rivalRelations={};rivalTruces={};rivalTreaties={};
+ pendingBattle=null;lastBattleReport=null;rivalRelations={};rivalTruces={};rivalTreaties={};rivalSanctions={};
  agents=0;counterIntel=0;lastIntelReport=null;diplomaticPrestige=0;diplomaticMissionTurn=0;
  lastStrategicEvent=null;eventCount=0;seaRoutes=[];
  $("log").innerHTML="";$("confirm").disabled=true;
@@ -713,6 +717,8 @@ function setInitialRivals(){
  const starts={italia:["Milano","Palermo","Torino"],legione:["Roma","Genova","Bari"],aquila:["Roma","Venezia","Napoli"],alpina:["Roma","Palermo","Bologna"]};
  const rivals=Object.keys(rivalNames).filter(k=>k!==player);
  (starts[player]||[]).forEach((name,i)=>{const r=regions.find(x=>x.name===name);if(r&&r.owner!=="player"){r.owner="enemy";r.faction=rivalNames[rivals[i]];r.garrison=Math.round((120+i*25)*difficultyMultiplier);}});
+ const playerStart=regions.find(r=>r.owner==="player");if(playerStart)playerStart.stability=82;
+ (starts[player]||[]).forEach(name=>{const r=regions.find(x=>x.name===name&&x.owner==="enemy");if(r)r.stability=62;});
  rivals.forEach(k=>{if(rivalRelations[k]===undefined)rivalRelations[k]=0;});
 }
 function updateIntelPanel(){
@@ -724,19 +730,56 @@ function updateIntelPanel(){
  $("upgradeCounterIntel").disabled=counterIntel>=3||res.euros<600||res.materials<8;
  $("intelStatus").textContent=lastIntelReport?"T"+lastIntelReport.turn+" · "+lastIntelReport.text:"Nessun rapporto d'intelligence disponibile.";
 }
+function getNationalStability(){
+ const owned=regions.filter(r=>r.owner==="player");
+ return owned.length?Math.round(owned.reduce((sum,r)=>sum+Math.max(0,Math.min(100,Number.isFinite(r.stability)?r.stability:70)),0)/owned.length):0;
+}
+function updateGeopoliticsPanel(){
+ const owned=regions.filter(r=>r.owner==="player"),unrest=owned.filter(r=>(Number.isFinite(r.stability)?r.stability:70)<45).length;
+ const sanctions=Object.values(rivalSanctions).filter(turns=>turns>0).length;
+ const alliances=Object.values(rivalTreaties).filter(t=>t&&t.type==="alleanza"&&t.turns>0).length;
+ $("nationalStability").textContent=getNationalStability()+"%";$("unrestCount").textContent=unrest;$("sanctionsCount").textContent=sanctions;$("allianceCount").textContent=alliances;
+ $("geopoliticsStatus").textContent=unrest?unrest+" province sotto osservazione. Finanzia la stabilizzazione locale prima che il malcontento degeneri.":"Quadro civile sotto controllo. Mantieni il consenso per consolidare i territori.";
+}
 function updateDiplomacyPanel(){
- const key=$("diplomacyTarget").value;if(!key||key===player){$("diplomacyDetails").textContent="Seleziona una fazione rivale.";return;}
+ updateGeopoliticsPanel();
+ const key=$("diplomacyTarget").value;
+ if(!key||key===player){$("diplomacyDetails").textContent="Seleziona una fazione rivale.";return;}
  const owned=regions.filter(r=>r.owner==="enemy"&&r.faction===rivalNames[key]).length;
- const relation=rivalRelations[key]||0, treaty=rivalTreaties[key]||null;
+ const relation=rivalRelations[key]||0, treaty=rivalTreaties[key]||null, sanctioned=(rivalSanctions[key]||0)>0;
  const treatyText=treaty?"Trattato: "+treaty.type+" ("+treaty.turns+" turni)":"Nessun trattato attivo";
- $("diplomacyDetails").textContent="Relazioni: "+relation+" / 100 · Reputazione: "+diplomaticPrestige+" · Territori controllati: "+owned+" · "+treatyText;
+ $("diplomacyDetails").textContent="Relazioni: "+relation+" / 100 · Reputazione: "+diplomaticPrestige+" · Territori rivali: "+owned+" · "+treatyText+" · "+(sanctioned?"Sanzioni: "+rivalSanctions[key]+" turni":"Nessuna sanzione");
  $("diplomaticMission").disabled=res.euros<250||diplomaticMissionTurn===turn;
  $("treatySurrender").disabled=!(owned>0&&owned<=1&&(relation>=50||regions.filter(r=>r.owner==="player").length>=8));
- $("treatyAlliance").disabled=!!(rivalTruces[key]>0);
+ $("treatyAlliance").disabled=!!(rivalTruces[key]>0)||!(relation>=20||diplomaticPrestige>=25)||res.euros<900;
+ $("treatySanctions").disabled=sanctioned||res.euros<700;
+ $("liftSanctions").disabled=!sanctioned;
 }
 function updateDiplomacyLabel(){
  const active=Object.keys(rivalTruces).filter(k=>rivalTruces[k]>0);
- $("diplomacyStatus").textContent=active.length?active.map(k=>rivalNames[k]+": tregua per "+rivalTruces[k]+" turni").join(" · "):"Nessun accordo attivo.";updateDiplomacyPanel();updateIntelPanel();
+ const sanctioned=Object.keys(rivalSanctions).filter(k=>rivalSanctions[k]>0);
+ const alliances=Object.keys(rivalTreaties).filter(k=>rivalTreaties[k]?.type==="alleanza"&&rivalTreaties[k].turns>0);
+ const status=[...active.map(k=>rivalNames[k]+": tregua "+rivalTruces[k]+" turni"),...alliances.map(k=>"alleanza con "+rivalNames[k]),...sanctioned.map(k=>"sanzioni a "+rivalNames[k]+" ("+rivalSanctions[k]+")")];
+ $("diplomacyStatus").textContent=status.length?status.join(" · "):"Nessun accordo attivo.";updateDiplomacyPanel();updateIntelPanel();
+}
+function stabilizeSelectedProvince(){
+ const r=regions[selectedRegion];if(!r||r.owner!=="player"){log("Seleziona una provincia sotto il tuo controllo.");return;}
+ const current=Number.isFinite(r.stability)?r.stability:70;if(current>=100){log("La stabilità civile è già al massimo.");return;}
+ if(res.euros<450||res.materials<5){log("Servono 450€ e 5 materiali per il programma di stabilizzazione.");return;}
+ res.euros-=450;res.materials-=5;r.stability=Math.min(100,current+22);res.morale=Math.min(100,res.morale+1);
+ log("PATTO CIVILE: "+r.name+" stabilizzata al "+r.stability+"%.");render();
+}
+function imposeSanctions(){
+ const key=$("diplomacyTarget").value;if(!key||key===player){log("Seleziona una fazione rivale.");return;}
+ if((rivalSanctions[key]||0)>0){log("Le sanzioni contro "+rivalNames[key]+" sono già attive.");return;}
+ if(res.euros<700){log("Servono 700€ per attivare il pacchetto di sanzioni.");return;}
+ res.euros-=700;rivalSanctions[key]=3;rivalRelations[key]=Math.max(-100,(rivalRelations[key]||0)-12);diplomaticPrestige=Math.max(0,diplomaticPrestige-2);
+ if(rivalTreaties[key]?.type==="commerciale"){delete rivalTreaties[key];rivalTruces[key]=0;log("Il patto commerciale con "+rivalNames[key]+" è stato sospeso.");}
+ log("SANZIONI GEOPOLITICHE: misure economiche contro "+rivalNames[key]+" per 3 turni. Capacità offensiva e pressione espansionistica ridotte.");updateDiplomacyLabel();render();
+}
+function liftSanctions(){
+ const key=$("diplomacyTarget").value;if(!key||!(rivalSanctions[key]>0)){log("Non ci sono sanzioni da revocare contro questa fazione.");return;}
+ delete rivalSanctions[key];log("Sanzioni revocate nei confronti di "+rivalNames[key]+".");updateDiplomacyLabel();render();
 }
 function updateEventPanel(){const el=$("eventText");el.textContent=lastStrategicEvent?"T"+lastStrategicEvent.turn+" · "+lastStrategicEvent.title+" — "+lastStrategicEvent.description:"In attesa di sviluppi nazionali.";}
 function updateBattleReport(){
@@ -805,7 +848,7 @@ function finishBattle(retreat){
   details="Disimpegno ordinato; perduti "+unitDamage+" HP, nessuna conquista.";
   log("RITIRATA TATTICA da "+r.name+". Reparti preservati; danni da disimpegno: "+unitDamage+" HP.");
  }else if(b.damage>=b.defense){
-  r.owner="player";r.garrison=120;r.faction=null;r.fortification=0;
+  r.owner="player";r.garrison=120;r.faction=null;r.fortification=0;r.stability=58;
   if(b.domain==="land")armyLocation=b.regionIndex;if(b.domain==="sea")fleetLocation=b.regionIndex;
   campaignStats.wins++;campaignStats.regionsCaptured++;result="VITTORIA";
   details="Regione conquistata. Perdite proprie: nessuna perdita automatica.";
@@ -882,6 +925,7 @@ $("sabotageMission").addEventListener("click",()=>{
 function offerTreaty(type,cost,turns,relationGain){
  const key=$("diplomacyTarget").value;if(!key||key===player){log("Non puoi negoziare con la tua stessa fazione.");return;}
  if((rivalTruces[key]||0)>0){log("Esiste già una tregua con "+rivalNames[key]+".");return;}
+ if(type==="alleanza"&&(rivalRelations[key]||0)<20&&diplomaticPrestige<25){log("ALLEANZA RESPINTA: servono relazioni almeno a 20 o reputazione diplomatica a 25.");return;}
  if(res.euros<cost){log("Fondi insufficienti: servono "+cost+"€.");return;}
  res.euros-=cost;rivalRelations[key]=Math.min(100,(rivalRelations[key]||0)+relationGain);diplomaticPrestige=Math.min(100,diplomaticPrestige+Math.ceil(relationGain/5));
  rivalTruces[key]=turns;rivalTreaties[key]={type,turns};
@@ -900,6 +944,8 @@ $("diplomaticMission").addEventListener("click",()=>{
 $("treatyNonAggression").addEventListener("click",()=>offerTreaty("non aggressione",300,3,15));
 $("treatyTrade").addEventListener("click",()=>offerTreaty("commerciale",500,5,12));
 $("treatyAlliance").addEventListener("click",()=>offerTreaty("alleanza",900,5,25));
+$("treatySanctions").addEventListener("click",imposeSanctions);
+$("liftSanctions").addEventListener("click",liftSanctions);
 $("treatyPeace").addEventListener("click",()=>{
  const key=$("diplomacyTarget").value;if(!key||key===player)return;
  if((rivalTruces[key]||0)>0){log("La fazione è già vincolata da una tregua.");return;}
@@ -919,7 +965,7 @@ $("treatySurrender").addEventListener("click",()=>{
  log(rivalNames[key]+" capitola. I territori residui passano sotto il controllo del giocatore.");
  updateDiplomacyLabel();render();
 });
-function autoSave(){if(!started||!player)return;try{localStorage.setItem("warItalySave",JSON.stringify({player,difficulty,turn,res,units,tanks,aircraft,ships,commandos,hp,buildings,selectedRegion,armyLocation,fleetLocation,regions,rivalRelations,rivalTruces,rivalTreaties,agents,counterIntel,lastIntelReport,seaRoutes,started,researchPoints,techs,missionComplete,campaignMission,campaignWon,campaignLost,campaignStats,lastBattleReport,lastStrategicEvent,eventCount,diplomaticPrestige,diplomaticMissionTurn}));$("continueCampaign").hidden=false;}catch(e){}}
+function autoSave(){if(!started||!player)return;try{localStorage.setItem("warItalySave",JSON.stringify({player,difficulty,turn,res,units,tanks,aircraft,ships,commandos,hp,buildings,selectedRegion,armyLocation,fleetLocation,regions,rivalRelations,rivalTruces,rivalTreaties,rivalSanctions,agents,counterIntel,lastIntelReport,seaRoutes,started,researchPoints,techs,missionComplete,campaignMission,campaignWon,campaignLost,campaignStats,lastBattleReport,lastStrategicEvent,eventCount,diplomaticPrestige,diplomaticMissionTurn}));$("continueCampaign").hidden=false;}catch(e){}}
 $("saveGame").addEventListener("click",()=>{
  try{
   autoSave();const data=localStorage.getItem("warItalySave");
@@ -947,10 +993,10 @@ $("loadGame").addEventListener("click",()=>{
  const regionProvinceCounts=initialRegions.reduce((acc,r)=>(acc[r.regionName]=(acc[r.regionName]||0)+1,acc),{});
  regions.splice(0,regions.length,...initialRegions.map(base=>{
   const direct=savedByName.get(base.name);
-  if(direct)return {...base,...direct};
+  if(direct)return {...base,...direct,stability:Number.isFinite(direct.stability)?Math.max(0,Math.min(100,direct.stability)):(direct.owner==="player"?70:60)};
   const old=savedByRegion.get(base.regionName);
   if(!old)return {...base};
-  return {...base,owner:old.owner,faction:old.faction||null,garrison:Math.ceil((old.garrison||0)/Math.max(1,regionProvinceCounts[base.regionName]||1)),fortification:old.fortification||0,development:0};
+  return {...base,owner:old.owner,faction:old.faction||null,garrison:Math.ceil((old.garrison||0)/Math.max(1,regionProvinceCounts[base.regionName]||1)),fortification:old.fortification||0,development:0,stability:Number.isFinite(old.stability)?Math.max(0,Math.min(100,old.stability)):(old.owner==="player"?70:60)};
  }));
  const locate=(name,ownedOnly=false,coastalOnly=false)=>{
   if(name){const exact=regions.findIndex(r=>r.name===name&&(!ownedOnly||r.owner==="player")&&(!coastalOnly||r.coastal));if(exact>=0)return exact;
@@ -960,7 +1006,7 @@ $("loadGame").addEventListener("click",()=>{
  const selectedIndex=locate(selectedName,true,false),armyIndex=locate(armyName,true,false);selectedRegion=selectedIndex>=0?selectedIndex:null;
  armyLocation=armyIndex>=0?armyIndex:null;
  const fleetIndex=fleetName?locate(fleetName,true,true):-1;fleetLocation=fleetIndex>=0?fleetIndex:null;
- rivalRelations=s.rivalRelations||{};rivalTruces=s.rivalTruces||{};rivalTreaties=s.rivalTreaties||{};agents=Math.max(0,Math.min(3,s.agents||0));counterIntel=Math.max(0,Math.min(3,s.counterIntel||0));lastIntelReport=s.lastIntelReport||null;seaRoutes=s.seaRoutes||[];started=s.started;researchPoints=s.researchPoints||0;techs={land:false,air:false,cyber:false,logistics:false,renewables:false,shield:false,...(s.techs||{})};missionComplete=!!s.missionComplete;campaignMission=s.campaignMission||1;campaignWon=!!s.campaignWon;campaignLost=!!s.campaignLost;campaignStats=s.campaignStats||{battles:0,wins:0,losses:0,regionsCaptured:0,retreats:0};campaignStats.retreats=campaignStats.retreats||0;lastBattleReport=s.lastBattleReport||null;lastStrategicEvent=s.lastStrategicEvent||null;eventCount=s.eventCount||0;diplomaticPrestige=Math.max(0,Math.min(100,s.diplomaticPrestige||0));diplomaticMissionTurn=s.diplomaticMissionTurn||0;pendingBattle=null;$("battleDecision").hidden=true;updateBattleReport();
+ rivalRelations=s.rivalRelations||{};rivalTruces=s.rivalTruces||{};rivalTreaties=s.rivalTreaties||{};rivalSanctions=s.rivalSanctions||{};agents=Math.max(0,Math.min(3,s.agents||0));counterIntel=Math.max(0,Math.min(3,s.counterIntel||0));lastIntelReport=s.lastIntelReport||null;seaRoutes=s.seaRoutes||[];started=s.started;researchPoints=s.researchPoints||0;techs={land:false,air:false,cyber:false,logistics:false,renewables:false,shield:false,...(s.techs||{})};missionComplete=!!s.missionComplete;campaignMission=s.campaignMission||1;campaignWon=!!s.campaignWon;campaignLost=!!s.campaignLost;campaignStats=s.campaignStats||{battles:0,wins:0,losses:0,regionsCaptured:0,retreats:0};campaignStats.retreats=campaignStats.retreats||0;lastBattleReport=s.lastBattleReport||null;lastStrategicEvent=s.lastStrategicEvent||null;eventCount=s.eventCount||0;diplomaticPrestige=Math.max(0,Math.min(100,s.diplomaticPrestige||0));diplomaticMissionTurn=s.diplomaticMissionTurn||0;pendingBattle=null;$("battleDecision").hidden=true;updateBattleReport();
  render();updateDiplomacyLabel();$("saveSlotStatus").textContent="Slot "+slot+" caricato · Turno "+turn+" · "+factionData[player].name+".";log("Campagna caricata dallo slot "+slot+".");
  }catch(e){log("Il salvataggio non è leggibile.");}
 });
@@ -971,6 +1017,23 @@ const rivalStrategy={
  aquila:{areas:["Nord","Centro"],priority:["Finanza e industria","Industria","Produzione"],style:"industriale",strength:1.12},
  alpina:{areas:["Nord"],priority:["Difesa alpina","Energia alpina"],style:"difensiva",strength:1.18}
 };
+function processStabilityTurn(){
+ regions.forEach((r,index)=>{
+  if(r.owner!=="player")return;
+  if(!Number.isFinite(r.stability))r.stability=70;
+  const borderPressure=hasAdjacentTerritory(index,"enemy")?1:0;
+  const moraleDelta=res.morale<30?-3:res.morale<45?-2:res.morale<60?-1:res.morale>=78?1:0;
+  r.stability=Math.max(0,Math.min(100,r.stability+moraleDelta-borderPressure));
+  if(r.stability<=18&&Math.random()<(0.08+(18-r.stability)*0.025)){
+   const neighbor=(regionAdjacency[index]||[]).map(i=>regions[i]).find(n=>n&&n.owner==="enemy"&&n.faction);
+   r.owner=neighbor?"enemy":"neutral";r.faction=neighbor?neighbor.faction:null;r.garrison=neighbor?85:0;r.fortification=0;r.stability=32;
+   if(armyLocation===index)armyLocation=(regionAdjacency[index]||[]).find(i=>regions[i].owner==="player")??null;
+   if(fleetLocation===index)fleetLocation=(seaAdjacency[index]||[]).find(i=>regions[i].owner==="player")??null;
+   res.morale=Math.max(0,res.morale-4);
+   log("RIVOLTA CIVILE: "+r.name+" si è sollevata per il malcontento. "+(neighbor?"La provincia passa sotto l'influenza di "+neighbor.faction+".":"La provincia torna neutrale.")+" Consenso -4.");
+  }
+ });
+}
 function strategicEvent(){
  if(Math.random()>0.38)return;
  const events=[
@@ -1007,7 +1070,8 @@ function rivalAI(){
  });
  const canExpand=preferredFree.length>0;
  const canAttack=playerTargets.length>0;
- const roll=Math.random();
+ const sanctionPressure=(rivalSanctions[rival]||0)>0?0.18:0;
+ const roll=Math.random()+sanctionPressure;
  let action="consolidamento";
  if(strategy.style==="marittima")action=canExpand&&roll<0.62?"espansione":canAttack&&roll<0.88?"offensiva":"consolidamento";
  else if(strategy.style==="industriale")action=canExpand&&roll<0.35?"espansione":canAttack&&roll<0.55?"offensiva":"industria";
@@ -1017,15 +1081,16 @@ function rivalAI(){
  if(!canAttack&&action==="offensiva")action=canExpand?"espansione":"consolidamento";
  if(action==="espansione"){
   const chosen=preferredFree[0];
-  chosen.owner="enemy";chosen.faction=rivalNames[rival];chosen.garrison=Math.round((100+turn*9)*difficultyFactor);chosen.fortification=0;
+  chosen.owner="enemy";chosen.faction=rivalNames[rival];chosen.garrison=Math.round((100+turn*9)*difficultyFactor);chosen.fortification=0;chosen.stability=58;
   log(rivalNames[rival]+" ha ampliato il controllo su "+chosen.name+" con dottrina "+strategy.style+".");
  }else if(action==="offensiva"){
   const target=playerTargets[0];
   const domainBonus=strategy.style==="marittima"&&isCoastalRegion(target.name)?1.18:1;
-  const attack=Math.floor((78+turn*7+Math.random()*38)*strategy.strength*domainBonus*difficultyFactor);
+  const sanctionFactor=(rivalSanctions[rival]||0)>0?0.78:1;
+  const attack=Math.floor((78+turn*7+Math.random()*38)*strategy.strength*domainBonus*difficultyFactor*sanctionFactor);
   const defense=(target.garrison||90)+(target.fortification||0)*80;
   if(attack>=defense){
-   target.owner="enemy";target.faction=rivalNames[rival];target.garrison=Math.max(65,Math.floor(attack-defense+85));target.fortification=0;
+   target.owner="enemy";target.faction=rivalNames[rival];target.garrison=Math.max(65,Math.floor(attack-defense+85));target.fortification=0;target.stability=32;
    const lostIndex=regions.indexOf(target);if(armyLocation===lostIndex)armyLocation=(regionAdjacency[lostIndex]||[]).find(i=>regions[i].owner==="player")??null;if(fleetLocation===lostIndex)fleetLocation=(seaAdjacency[lostIndex]||[]).find(i=>regions[i].owner==="player")??null;
    res.morale=Math.max(0,res.morale-5);
    log("OFFENSIVA "+strategy.style.toUpperCase()+": "+rivalNames[rival]+" conquista "+target.name+".");
@@ -1041,7 +1106,7 @@ function rivalAI(){
    if(strategy.style==="difensiva")log("DOTTRINA ALPINA: "+rivalNames[rival]+" fortifica "+target.name+" e rafforza il presidio.");
    else log(rivalNames[rival]+" consolida "+target.name+" e rafforza le difese.");
   }else if(canExpand){
-   const chosen=preferredFree[0];chosen.owner="enemy";chosen.faction=rivalNames[rival];chosen.garrison=Math.round((100+turn*9)*difficultyFactor);chosen.fortification=0;
+   const chosen=preferredFree[0];chosen.owner="enemy";chosen.faction=rivalNames[rival];chosen.garrison=Math.round((100+turn*9)*difficultyFactor);chosen.fortification=0;chosen.stability=58;
    log(rivalNames[rival]+" avvia la propria espansione su "+chosen.name+".");
   }
  }else if(action==="industria"){
@@ -1050,7 +1115,7 @@ function rivalAI(){
    target.garrison=Math.min(450,(target.garrison||100)+55);
    log("DOTTRINA INDUSTRIALE: "+rivalNames[rival]+" investe nella sicurezza produttiva di "+target.name+".");
   }else if(canExpand){
-   const chosen=preferredFree[0];chosen.owner="enemy";chosen.faction=rivalNames[rival];chosen.garrison=Math.round((100+turn*9)*difficultyFactor);chosen.fortification=0;
+   const chosen=preferredFree[0];chosen.owner="enemy";chosen.faction=rivalNames[rival];chosen.garrison=Math.round((100+turn*9)*difficultyFactor);chosen.fortification=0;chosen.stability=58;
    log(rivalNames[rival]+" amplia la propria base industriale in "+chosen.name+".");
   }
  }
@@ -1064,6 +1129,8 @@ $("endTurn").addEventListener("click",()=>{
   if(treaty.type==="alleanza"){res.euros+=60;res.morale=Math.min(100,res.morale+2);}
  });
  rivalAI();
+ processStabilityTurn();
+ Object.keys(rivalSanctions).forEach(k=>{if(rivalSanctions[k]>0){rivalSanctions[k]--;if(rivalSanctions[k]===0){delete rivalSanctions[k];log("Sanzioni scadute nei confronti di "+rivalNames[k]+".");}}});
  processLogistics();
  if(techs.renewables){res.energy+=8;log("RETE ENERGETICA: +8 energia dalla produzione rinnovabile.");}
  Object.keys(rivalTruces).forEach(k=>{if(rivalTruces[k]>0)rivalTruces[k]--;if(rivalTreaties[k]&&rivalTreaties[k].turns>0){rivalTreaties[k].turns--;if(rivalTreaties[k].turns===0){delete rivalTreaties[k];log("Trattato scaduto con "+rivalNames[k]+".");}}});

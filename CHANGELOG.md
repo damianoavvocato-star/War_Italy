@@ -1,5 +1,13 @@
 # WAR ITALY — Cronologia versioni
 
+## 4.4.0 — Diplomazia, stabilità e rivolte
+- Potenziato il Consiglio diplomatico con indicatori di stabilità nazionale, province in tensione, alleanze e sanzioni attive.
+- Le alleanze richiedono relazioni positive o reputazione diplomatica; i pacchetti di sanzioni durano tre turni e riducono la pressione offensiva/espansionistica della fazione colpita.
+- Ogni provincia controllata possiede stabilità civile: il consenso e la pressione dei confini ne influenzano l’andamento turno per turno.
+- Aggiunto il programma civile provinciale per aumentare la stabilità; le province in crisi possono ribellarsi e passare a una fazione confinante o tornare neutrali.
+- Stabilità e sanzioni sono incluse nei salvataggi; i vecchi salvataggi 4.x ricevono valori iniziali compatibili.
+
+
 ## 4.3.0 — Sala tattica e battaglie ambientali
 - Nuova sala tattica con terreno, meteo e copertura per ogni offensiva.
 - Montagne e centri urbani rafforzano la difesa; pioggia e nebbia influenzano le operazioni aeree.
