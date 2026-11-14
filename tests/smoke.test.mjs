@@ -84,6 +84,8 @@ test("economia 4.5: bilancio, occupazione, energia, industria e infrastrutture",
   assert.match(script, /function buildIndustryAtSelected\(\)/);
   assert.match(script, /function upgradeInfrastructureAtSelected\(\)/);
   assert.match(script, /\(r\.industry\|\|0\)\*130/);
+  assert.match(script, /const treatyIncome=Object\.values\(rivalTreaties\)\.reduce/);
+  assert.doesNotMatch(script, /res\.euros\+=180/);
   assert.match(script, /processEconomyTurn\(\)/);
   assert.match(html, /id="buildIndustry"/);
   assert.match(html, /id="upgradeInfrastructure"/);

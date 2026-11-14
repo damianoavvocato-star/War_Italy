@@ -1,7 +1,7 @@
 # WAR ITALY — Cronologia versioni
 
 ## 4.5.0 — Economia nazionale, industria e infrastrutture
-- Aggiunto un bilancio di turno con entrate territoriali e commerciali, spese militari e civili, saldo, PIL annualizzato e occupazione stimata.
+- Aggiunto un bilancio di turno con entrate territoriali, rotte e contributi dei patti, spese militari e civili, saldo, PIL annualizzato e occupazione stimata.
 - L’energia viene prodotta e consumata in base a centrali, tecnologie, infrastrutture e forze schierate; le carenze prolungate incidono sul consenso.
 - Ogni provincia controllata può ospitare fino a tre livelli di distretto industriale e infrastrutture.
 - I distretti aumentano le entrate e i posti di lavoro; le infrastrutture migliorano redditività e stabilità locale.

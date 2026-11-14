@@ -598,7 +598,8 @@ function calculateEconomySnapshot(){
  const owned=regions.filter(r=>r.owner==="player");
  const industryLevels=owned.reduce((sum,r)=>sum+(r.industry||0),0),infrastructureLevels=owned.reduce((sum,r)=>sum+(r.infrastructure||0),0);
  const territorialIncome=owned.reduce((sum,r)=>sum+(r.income||0)*(1+(r.infrastructure||0)*0.12)+(r.infrastructure||0)*35+(r.industry||0)*130,0);
- const income=Math.round(territorialIncome+seaRoutes.length*220);
+ const treatyIncome=Object.values(rivalTreaties).reduce((sum,t)=>sum+(t&&t.turns>0?(t.type==="commerciale"?180:t.type==="alleanza"?60:0):0),0);
+ const income=Math.round(territorialIncome+seaRoutes.length*220+treatyIncome);
  const militaryUpkeep=units*18+tanks*42+aircraft*48+ships*40+commandos*32;
  const civicUpkeep=buildings*18+industryLevels*35+infrastructureLevels*8;
  const expenses=Math.round(militaryUpkeep+civicUpkeep);
@@ -607,7 +608,7 @@ function calculateEconomySnapshot(){
  const jobs=industryLevels*85+infrastructureLevels*25+owned.length*15;
  const laborForce=Math.max(1,owned.length*140);
  const employment=Math.max(45,Math.min(99,Math.round(78+(jobs/laborForce)*18-(res.morale<45?15:res.morale<60?7:0))));
- const gdp=Math.round((income+industryLevels*90)*12);
+ const gdp=Math.round(income*12);
  return {income,expenses,balance:income-expenses,energyProduction,energyUse,energyBalance:energyProduction-energyUse,jobs,employment,gdp};
 }
 function processEconomyTurn(){
@@ -1171,8 +1172,8 @@ $("endTurn").addEventListener("click",()=>{
  Object.keys(rivalTreaties).forEach(k=>{
   const treaty=rivalTreaties[k];
   if(!treaty||treaty.turns<=0)return;
-  if(treaty.type==="commerciale"){res.euros+=180;log("PATTO COMMERCIALE: +180€ dalle relazioni con "+rivalNames[k]+".");}
-  if(treaty.type==="alleanza"){res.euros+=60;res.morale=Math.min(100,res.morale+2);}
+  if(treaty.type==="commerciale"){log("PATTO COMMERCIALE: +180€ inclusi nel bilancio nazionale dalle relazioni con "+rivalNames[k]+".");}
+  if(treaty.type==="alleanza"){res.morale=Math.min(100,res.morale+2);}
  });
  rivalAI();
  processStabilityTurn();
