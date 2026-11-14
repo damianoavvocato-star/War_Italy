@@ -1,5 +1,14 @@
 # WAR ITALY — Cronologia versioni
 
+## 4.6.0 — Ricerca avanzata, droni, satelliti e difesa integrata
+- Ampliato l’albero tecnologico da sei a dieci ricerche, con droni tattici, satelliti ISR, guerra elettronica e difesa aerea integrata.
+- I punti ricerca vengono generati a ogni turno in base ai territori controllati; la rete satellitare accelera ulteriormente la ricerca.
+- I droni aumentano la potenza degli attacchi terrestri e aerei; i satelliti migliorano la ricognizione e riducono la difesa effettiva avversaria.
+- La guerra elettronica e lo scudo antiaereo riducono la pressione offensiva nemica e le perdite dei reparti.
+- Le nuove tecnologie sono retrocompatibili: i salvataggi 4.x caricano le quattro ricerche aggiuntive come non ancora sviluppate.
+- Aggiornato l’obiettivo finale della campagna: controllo delle 110 province e completamento di tutte le dieci tecnologie.
+
+
 ## 4.5.0 — Economia nazionale, industria e infrastrutture
 - Aggiunto un bilancio di turno con entrate territoriali, rotte e contributi dei patti, spese militari e civili, saldo, PIL annualizzato e occupazione stimata.
 - L’energia viene prodotta e consumata in base a centrali, tecnologie, infrastrutture e forze schierate; le carenze prolungate incidono sul consenso.

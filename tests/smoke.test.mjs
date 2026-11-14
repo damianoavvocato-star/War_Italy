@@ -25,11 +25,11 @@ test("una sola azione per avvio campagna e fine turno", () => {
   assert.equal((script.match(/\$\(["']enterGame["']\)\.(?:onclick|addEventListener)/g) || []).length, 1);
 });
 
-test("quattro fazioni, 110 province e sei tecnologie", () => {
+test("quattro fazioni, 110 province e dieci tecnologie", () => {
   assert.equal((script.match(/name:"(?:Repubblica Italiana|Legione Mediterranea|Corporazione Aquila|Alleanza Alpina)"/g) || []).length, 4);
   const regionBlock=script.slice(script.indexOf("const regions=["),script.indexOf("const initialRegions"));
   assert.equal((regionBlock.match(/\{name:/g) || []).length, 110);
-  for (const key of ["land", "air", "cyber", "logistics", "renewables", "shield"]) assert.match(script, new RegExp(key + ":false"));
+  for (const key of ["land", "air", "cyber", "logistics", "renewables", "shield", "drones", "satellites", "electronicWarfare", "airDefense"]) assert.match(script, new RegExp(key + ":false"));
 });
 
 test("difficoltà campagna configurabile, bilanciata e salvata", () => {
@@ -68,12 +68,32 @@ test("mappa strategica dell'Italia presente e interattiva", () => {
   assert.match(script, /const strategicMapPositions=\[\[/);
 });
 
-test("versione 4.5.0 coerente tra app e pacchetto", () => {
-  assert.match(html, /BUILD 4\.5\.0/);
-  assert.equal(packageJson.version, "4.5.0");
+test("versione 4.6.0 coerente tra app e pacchetto", () => {
+  assert.match(html, /BUILD 4\.6\.0/);
+  assert.equal(packageJson.version, "4.6.0");
 });
 
 
+
+
+test("ricerca 4.6: droni, satelliti, guerra elettronica e difesa aerea", () => {
+  for (const id of ["techDrones", "techSatellites", "techEW", "techAirDefense", "droneBonus", "satelliteBonus", "ewStatus", "airDefenseBonus"]) {
+    assert.match(html, new RegExp('id="' + id + '"'));
+  }
+  assert.match(script, /researchGain=1\+Math\.floor\(ownedForResearch\/5\)\+\(techs\.satellites\?1:0\)/);
+  assert.match(script, /techs\.drones&&domain!=="sea"/);
+  assert.match(script, /techs\.satellites\?0\.92:1/);
+  assert.match(script, /techs\.electronicWarfare\?0\.88:1/);
+  assert.match(script, /techs\.airDefense\?0\.90:1/);
+  assert.match(script, /techs=\{land:false,air:false,cyber:false,logistics:false,renewables:false,shield:false,drones:false,satellites:false,electronicWarfare:false,airDefense:false/);
+  assert.match(script, /Province \\\\"/);
+});
+
+test("obiettivo finale aggiornato a 110 province e dieci tecnologie", () => {
+  assert.match(script, /Unifica tutte le 110 province/);
+  assert.match(script, /\\.length\\/10/);
+  assert.match(script, /length\\+"\\/110/);
+});
 
 test("economia 4.5: bilancio, occupazione, energia, industria e infrastrutture", () => {
   for (const id of ["nationalGDP", "budgetIncome", "budgetExpenses", "budgetBalance", "employmentRate", "energyBalance", "economyStatus"]) {
